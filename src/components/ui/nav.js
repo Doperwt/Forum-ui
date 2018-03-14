@@ -27,7 +27,7 @@ class Nav extends PureComponent {
 
   render(){
     return(
-      <div>
+      <div className='navi'>
         <p>test</p>
       </div>
     )

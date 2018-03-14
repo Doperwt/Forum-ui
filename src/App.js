@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import logo from './logo.svg'
 import './App.css'
-import Nav from './components/ui/nav'
+
+import logo     from './logo.svg'
+import Nav      from './components/ui/nav'
+import Sidebar  from './components/ui/sidebar'
 
 class App extends Component {
   render() {
@@ -15,6 +17,7 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
         <Nav />
+        <Sidebar />
       </div>
     )
   }
