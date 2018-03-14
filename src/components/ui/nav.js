@@ -1,6 +1,9 @@
 import React, { PureComponent } from 'react'
 import { push } from 'react-router-redux'
 import PropTypes from 'prop-types'
+import signOut from '../../actions/user/signOut'
+import { connect } from 'react-redux'
+
 
 class Nav extends PureComponent {
   static propTypes = {
@@ -25,7 +28,7 @@ class Nav extends PureComponent {
   render(){
     return(
       <div>
-
+        <p>test</p>
       </div>
     )
   }
