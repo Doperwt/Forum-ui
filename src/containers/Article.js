@@ -4,7 +4,9 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 class Article extends PureComponent {
-
+  static propTypes = {
+    push = PropTypes.func.isRequired
+  }
 
   render(){
     return(
