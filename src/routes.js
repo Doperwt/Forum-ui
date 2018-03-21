@@ -16,8 +16,7 @@ export default article Routes extends Component {
         <Route exact path='/article/:articleId' component={Article} />
         // <Route path='/article/:articleId/students/:studentId' component={Student} />
         <Route path='/sign-in' component={SignIn} />
-        <Route path="/sign-up" component={SignUp} />
-
+        <Route path='/sign-up' component={SignUp} />
       </div>
     )
   }

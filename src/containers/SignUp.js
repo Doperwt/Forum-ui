@@ -2,10 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import Paper from 'material-ui/Paper'
-import TextField from 'material-ui/TextField'
-import RaisedButton from 'material-ui/RaisedButton'
-import FlatButton from 'material-ui/FlatButton'
+
 import signUp from '../actions/user/sign-up'
 import Title from '../components/UI/Title'
 
@@ -132,27 +129,27 @@ export class SignUp extends PureComponent {
 
   render() {
     return (
-      <div style={ dialogStyle }>
-        <Title content="Sign Up" level={2} />
+      <div className='dialogStyle'>
+        <Title content='Sign Up' level={2} />
 
         <form onSubmit={this.submitForm.bind(this)}>
-          <div className="input">
-            <TextField ref="name" type="text" hintText="Your name"
+          <div className='input'>
+              <input type='text' name='name'  placeholder='Your name'
               onChange={this.validateName.bind(this)}
               errorText={ this.state.nameError} />
           </div>
-          <div className="input">
-            <TextField ref="email" type="email" hintText="Email address"
+          <div className='input'>
+            <input type='text'  name='email' placeholder='Email address'
               onChange={this.validateEmail.bind(this)}
               errorText={ this.state.emailError} />
           </div>
-          <div className="input">
-            <TextField ref="password" type="password" hintText="Password"
+          <div className='input'>
+            <input type='password' name='password'  placeholder='Password'
               onChange={this.validatePassword.bind(this)}
               errorText={ this.state.passwordError} />
           </div>
-          <div className="input">
-            <TextField ref="passwordConfirmation" type="password" hintText="Repeat Password"
+          <div className='input'>
+            <input type='password' ref='passwordConfirmation'  placeholder='Repeat Password'
               onKeyUp={this.validatePasswordConfirmation.bind(this)}
               onChange={this.validatePasswordConfirmation.bind(this)}
               errorText={ this.state.passwordConfirmationError} />

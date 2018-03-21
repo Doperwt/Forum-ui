@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 class Overview extends PureComponent {
   static propTypes = {
-    push = PropTypes.func.isRequired
+    push: PropTypes.func.isRequired
   }
 
   render(){

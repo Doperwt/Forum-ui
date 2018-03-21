@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import './App.css'
-
+import Overview from './containers/Overview'
 // import logo     from './logo.svg'
-import Nav      from './components/ui/nav'
-import Sidebar  from './components/ui/sidebar'
+import Nav      from './components/UI/Nav'
+import Sidebar  from './components/UI/Sidebar'
 
 class App extends Component {
   render() {
@@ -11,6 +11,9 @@ class App extends Component {
       <div className="App">
         <Nav />
         <Sidebar />
+        <div className='content'>
+          <Overview />
+        </div>
       </div>
     )
   }

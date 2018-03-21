@@ -17,7 +17,7 @@ export default () => {
       })
       .catch((error) => {
         dispatch({
-          type: "LOAD_ERROR",
+          type: 'LOAD_ERROR',
           payload: error.message
         })
       })
@@ -35,7 +35,7 @@ export const fetchOneArticle = (ArticleId) => {
       })
       .catch((error) => {
         dispatch({
-          type: "LOAD_ERROR",
+          type: 'LOAD_ERROR',
           payload: error.message
         })
       })

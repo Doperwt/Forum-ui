@@ -1,7 +1,11 @@
 const Overview = require('./Overview')
 const Article = require('./Article')
+const SignIn = require('./SignIn')
+const SignUp = require('./SignUp')
 
-export default = {
+export default  {
   Overview,
-  Article
+  Article,
+  SignIn,
+  SignUp
 }
