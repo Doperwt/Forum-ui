@@ -132,7 +132,7 @@ export class SignUp extends PureComponent {
 
   render() {
     return (
-      <Paper style={ dialogStyle }>
+      <div style={ dialogStyle }>
         <Title content="Sign Up" level={2} />
 
         <form onSubmit={this.submitForm.bind(this)}>
@@ -158,15 +158,9 @@ export class SignUp extends PureComponent {
               errorText={ this.state.passwordConfirmationError} />
           </div>
         </form>
-        <FlatButton
-          onClick={ this.signIn.bind(this) }
-          label="Sign in" />
-        <RaisedButton
-          style={ buttonStyle }
-          onClick={ this.submitForm.bind(this) }
-          label="Sign up"
-          primary={true} />
-      </Paper>
+        <button onClick={ this.signIn.bind(this) } >Sign in</button>
+        <button onClick={ this.submitForm.bind(this) }>SIgn up</button>
+      </div>
     )
   }
 }

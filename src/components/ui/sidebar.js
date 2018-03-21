@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { push } from 'react-router-redux'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import './UI.css'
 
 const clickRedirect = (id) => event => push(`/category/${id}`)
 class Sidebar extends PureComponent {
@@ -11,7 +12,7 @@ class Sidebar extends PureComponent {
 
   showElement(element){
     return(
-      <div key={element.id}><p onClick={clickRedirect(element.id)}>{element.title}</p></div>
+      <div key={element.id}><span onClick={clickRedirect(element.id)}>{element.title}</span></div>
     )
   }
 

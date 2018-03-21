@@ -3,7 +3,7 @@ import { push } from 'react-router-redux'
 import PropTypes from 'prop-types'
 import signOut from '../../actions/user/sign-out'
 import { connect } from 'react-redux'
-
+import './UI.css'
 
 class Nav extends PureComponent {
   static propTypes = {
@@ -22,13 +22,39 @@ class Nav extends PureComponent {
   }
 
   signIn = () => {
+    console.log('/sign-in')
     this.props.push('/sign-in')
   }
 
+  signUp = () => {
+    console.log('/sign-up')
+    this.props.push('/sign-up')
+  }
+
+  dropDown = () => {
+    if(this.props.signedIn){
+      return(
+        <span className="dropdown">
+          <button className="dropbtn">Dropdown</button>
+          <div className="dropdown-content">
+            <button onClick={this.signIn}>Log in</button><hr />
+            <button onClick={this.signUp}>Sign up</button>
+          </div>
+        </span>
+      )
+    } else {
+      return(
+        <div className='dropdown'>
+          <span>Profile</span>
+        </div>
+      )
+    }
+
+  }
   render(){
     return(
       <div className='navi'>
-        <p>test</p>
+        <span className='nav'>test</span> {this.dropDown()}
       </div>
     )
   }
