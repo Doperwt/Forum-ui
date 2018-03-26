@@ -7,6 +7,7 @@ import './index.css'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
 
+console.log(ConnectedRouter)
 ReactDOM.render(
   <Provider store={ store }>
     <ConnectedRouter history={ history }>

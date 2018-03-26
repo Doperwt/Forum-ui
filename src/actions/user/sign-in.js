@@ -18,7 +18,6 @@ export default ({ email, password}) => {
 
         api.storeToken(jwt)
 
-        // Redirect programatically to the Lobby
         dispatch(replace('/'))
 
         dispatch(websocket.connect())

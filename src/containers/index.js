@@ -1,11 +1,11 @@
-const Overview = require('./Overview')
-const Article = require('./Article')
-const SignIn = require('./SignIn')
-const SignUp = require('./SignUp')
+import Overview from './Overview'
+import Article from './Article'
+import SignIn from './SignIn'
+import SignUp from './SignUp'
 
-export  {
+export {
   Overview,
   Article,
   SignIn,
-  SignUp
+  SignUp,
 }

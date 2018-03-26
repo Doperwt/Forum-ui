@@ -38,7 +38,7 @@ class Nav extends PureComponent {
   }
 
   dropDown = () => {
-    if(this.props.signedIn){
+    if(!this.props.signedIn){
       return(
         <span className='dropdown'>
           <button className='dropbtn'>Dropdown</button>

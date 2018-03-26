@@ -26,7 +26,7 @@ class Sidebar extends PureComponent {
   }
 
   render(){
-    console.log(this.props,this)
+    console.log(this.props.signedIn)
     const array = [{title:'stuff',_id:'1'},{title:'things',_id:'2'},{title:'other things',_id:'3'},{title:'etc',_id:'4'}]
     return(
       <div className='sidebar'><hr />{array.map(this.showElement)}</div>
