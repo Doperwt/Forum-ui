@@ -5,6 +5,8 @@ import signOut from '../../actions/user/sign-out'
 import { connect } from 'react-redux'
 import './UI.css'
 import logo from '../../logo.svg'
+
+
 class Nav extends PureComponent {
   static propTypes = {
     signedIn: PropTypes.bool.isRequired,
@@ -23,14 +25,16 @@ class Nav extends PureComponent {
 
   signIn = (event) => {
     event.preventDefault()
-    console.log('/sign-in')
     this.props.push('/sign-in')
   }
 
   signUp = (event) => {
     event.preventDefault()
-    console.log('/sign-up')
     this.props.push('/sign-up')
+  }
+  profile = (event) => {
+    event.preventDefault()
+    this.props.push('/profile')
   }
 
   dropDown = () => {
@@ -39,16 +43,20 @@ class Nav extends PureComponent {
         <span className='dropdown'>
           <button className='dropbtn'>Dropdown</button>
           <div className='dropdown-content'>
-            <button className='dropbtn' onClick={this.signIn}>Log in</button><hr />
+            <button className='dropbtn' onClick={this.signIn}>Sign in</button><hr />
             <button className='dropbtn' onClick={this.signUp}>Sign up</button>
           </div>
         </span>
       )
     } else {
       return(
-        <div className='dropdown'>
-          <span>Profile</span>
-        </div>
+        <span className='dropdown'>
+          <button className='dropbtn'>Dropdown</button>
+          <div className='dropdown-content'>
+            <button className='dropbtn' onClick={this.signIn}>Profile</button><hr />
+            <button className='dropbtn' onClick={this.signOut}>Sign out</button>
+          </div>
+        </span>
       )
     }
   }
@@ -56,7 +64,7 @@ class Nav extends PureComponent {
   render(){
     return(
       <div className='navi'>
-        <img src={logo} className='logo' /> 
+        <img src={logo} className='logo' onClick={this.goHome} alt='somealt'/>
         <span className='navText'>test</span> {this.dropDown()}
       </div>
     )

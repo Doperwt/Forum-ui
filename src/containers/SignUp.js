@@ -12,11 +12,6 @@ const dialogStyle = {
   padding: '2rem',
 }
 
-const buttonStyle = {
-  float: 'right',
-  marginLeft: '2rem',
-}
-
 export class SignUp extends PureComponent {
   static propTypes = {
     push: PropTypes.func.isRequired,
@@ -129,7 +124,7 @@ export class SignUp extends PureComponent {
 
   render() {
     return (
-      <div className='dialogStyle'>
+      <div style={dialogStyle}>
         <Title content='Sign Up' level={2} />
 
         <form onSubmit={this.submitForm.bind(this)}>

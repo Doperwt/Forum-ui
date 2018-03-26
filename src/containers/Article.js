@@ -10,7 +10,7 @@ class Article extends PureComponent {
 
   render(){
     return(
-      <div><p>side</p></div>
+      <div><p>article</p></div>
     )
   }
 }

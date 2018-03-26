@@ -43,7 +43,7 @@ export class SignIn extends PureComponent {
 
   render() {
     return (
-      <div className='dialogStyle'>
+      <div style={dialogStyle}>
         <Title content='Sign In' level={2} />
 
         <form onSubmit={this.submitForm.bind(this)}>
@@ -54,10 +54,10 @@ export class SignIn extends PureComponent {
             <input type='text'  name='password' placeholder='Password'  />
           </div>
         </form>
-        <button className='buttonStyle'
+        <button style={buttonStyle}
           onClick={ this.signUp.bind(this) }
           >Sign up</button>
-        <button className='buttonStyle'
+        <button style={buttonStyle}
           onClick={ this.submitForm.bind(this) }
           >Sign in</button>
       </div>

@@ -3,7 +3,7 @@ const Article = require('./Article')
 const SignIn = require('./SignIn')
 const SignUp = require('./SignUp')
 
-export default  {
+export  {
   Overview,
   Article,
   SignIn,
