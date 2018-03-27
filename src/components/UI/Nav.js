@@ -53,7 +53,7 @@ class Nav extends PureComponent {
         <span className='dropdown'>
           <button className='dropbtn'>Dropdown</button>
           <div className='dropdown-content'>
-            <button className='dropbtn' onClick={this.signIn}>Profile</button><hr />
+            <button className='dropbtn' onClick={this.profile}>Profile</button><hr />
             <button className='dropbtn' onClick={this.signOut}>Sign out</button>
           </div>
         </span>

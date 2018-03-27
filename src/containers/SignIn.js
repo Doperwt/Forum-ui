@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { replace, push } from 'react-router-redux'
 import signIn from '../actions/user/sign-in'
 import Title from '../components/UI/Title'
-
+import './container.css'
 
 export class SignIn extends PureComponent {
   static propTypes = {
@@ -19,11 +19,10 @@ export class SignIn extends PureComponent {
   }
 
   constructor(props) {
-    super(props);
-    this.state = {email: ''};
-    this.state = {password: ''};
+    super(props)
+    this.state = {email: '',password: ''}
   }
-  
+
   submitForm(event) {
     event.preventDefault()
     const user = {
@@ -33,8 +32,27 @@ export class SignIn extends PureComponent {
     this.props.signIn(user)
   }
 
-  handleChangeEmail(event){
+  validateEmail(event) {
     this.setState({email: event.target.value})
+    const email  = this.state.email
+    if (email.match(/^[a-z0-9._-]+@[a-z0-9._-]+.[a-z0-9._-]+$/)) {
+      this.setState({
+        emailError: null
+      })
+      return true
+    }
+
+    if (email.value === '') {
+      this.setState({
+        emailError: 'Please provide your email address'
+      })
+      return false
+    }
+
+    this.setState({
+      emailError: 'Please provide a valid email address'
+    })
+    return false
   }
 
   handleChangePassword(event){
@@ -47,12 +65,13 @@ export class SignIn extends PureComponent {
 
   render() {
     return (
-      <div>
+      <div className='sign_up'>
         <Title content='Sign In' level={2} />
         <form onSubmit={this.submitForm.bind(this)}>
           <div className='input'>
-            <input type='text'  value={this.props.email}
-            placeholder='Email address' onChange={this.handleChangeEmail.bind(this)}/>
+          <input type='text'  name='email' placeholder='Email address'
+            onChange={this.validateEmail.bind(this)} />
+            <p>{ this.state.emailError}</p>
           </div>
           <div className='input'>
             <input type='password'  value={this.props.password}

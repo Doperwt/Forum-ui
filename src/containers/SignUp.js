@@ -5,12 +5,8 @@ import { push } from 'react-router-redux'
 
 import signUp from '../actions/user/sign-up'
 import Title from '../components/UI/Title'
+import './container.css'
 
-const dialogStyle = {
-  width: '400px',
-  margin: '50px auto',
-  padding: '2rem',
-}
 
 export class SignUp extends PureComponent {
   static propTypes = {
@@ -127,7 +123,7 @@ export class SignUp extends PureComponent {
 
   render() {
     return (
-      <div style={dialogStyle}>
+      <div className='sign_up'>
         <Title content='Sign Up' level={2} />
 
         <form onSubmit={this.submitForm.bind(this)}>
@@ -157,7 +153,7 @@ export class SignUp extends PureComponent {
           </div>
         </form>
         <button onClick={ this.signIn.bind(this) } >Sign in</button>
-        <button onClick={ this.submitForm.bind(this) }>SIgn up</button>
+        <button onClick={ this.submitForm.bind(this) }>Sign up</button>
       </div>
     )
   }
