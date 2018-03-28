@@ -22,7 +22,7 @@ export default class Routes extends Component {
         <Route path='/class/:classId' component={Article} />
         <Route path='/sign-in' component={SignIn} />
         <Route path='/sign-up' component={SignUp} />
-        <Route path='./profile' component={Profile} />
+        <Route path='/profile' component={Profile} />
       </div>
     )
   }

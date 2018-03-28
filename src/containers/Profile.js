@@ -4,14 +4,21 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Title from '../components/UI/Title'
 import updateProfile from '../actions/user/update-profile'
+import getProfile from '../actions/user/get-profile'
+import { connect as subscribeToWebsocket } from '../actions/websocket'
 
 class Profile extends PureComponent {
   static propTypes = {
-    push: PropTypes.func.isRequired
+    push: PropTypes.func.isRequired,
+    getProfile: PropTypes.func.isRequired,
+    updateProfile: PropTypes.func.isRequired
   }
   componentWillMount() {
-    const { push, signedIn } = this.props
+    const { push, signedIn, getProfile } = this.props
     if (!signedIn) push('/sign-in')
+    console.log('test')
+    getProfile(this.props.userId)
+    subscribeToWebsocket()
   }
 
   constructor(props) {
@@ -27,13 +34,15 @@ class Profile extends PureComponent {
   submitForm(event) {
     event.preventDefault()
     const fullName = `${this.state.firstName} ${this.state.lastName}`
+    const id = this.props.userId
     if (this.validateAll()) {
       const profile = {
         fullName: fullName,
         bio: this.state.bio,
         picture: this.state.picture
       }
-      this.props.updateProfile(profile)
+      console.log(id,' - ',profile,'updateProfile')
+      this.props.updateProfile(id,profile)
     }
     return false
   }
@@ -48,6 +57,7 @@ class Profile extends PureComponent {
   validateFirstName(event) {
     this.setState({firstName: event.target.value})
     const firstName  = this.state.firstName
+    console.log(firstName)
     if (firstName.length > 1) {
       this.setState({
         firstNameError: null
@@ -106,13 +116,14 @@ class Profile extends PureComponent {
   }
 
   render(){
+    console.log(this.props)
     return(
       <div>
         <Title content='Profile' level={2} />
 
         <form onSubmit={this.submitForm.bind(this)}>
           <div className='input'>
-              <input type='text' name='first_name'  placeholder='Your name first name'
+              <input type='text' name='first_name'  placeholder='Your first name'
               onChange={this.validateFirstName.bind(this)} />
               <p>{ this.state.firstNameError}</p>
           </div>
@@ -142,7 +153,8 @@ class Profile extends PureComponent {
 }
 
 const mapStateToProps = ({ currentUser }) => ({
-  signedIn: (!!currentUser && !!currentUser._id)
+  signedIn: (!!currentUser && !!currentUser._id),
+  userId: currentUser._id
 })
 
-export default connect(mapStateToProps, { push })(Profile)
+export default connect(mapStateToProps, { push,getProfile,updateProfile })(Profile)

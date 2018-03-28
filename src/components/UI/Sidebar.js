@@ -12,13 +12,13 @@ class Sidebar extends PureComponent {
   }
   componentWillMount() {
     const { subscribeToWebsocket } = this.props
-    console.log(this.props)
     subscribeToWebsocket()
   }
 
-
   showElement(element){
-    const clickRedirect = (id) => event => push(`/category/${id}`)
+    const clickRedirect = (id) => event => {
+      push(`/category/${id}`)
+      console.log(element)}
 
     return(
       <div key={element._id}><a onClick={clickRedirect(element._id)}>{element.title}</a><hr /></div>
