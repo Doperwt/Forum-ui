@@ -1,4 +1,5 @@
-import { GOT_PROFILE, UPDATED_PROFILE } from '../actions/user/get-profile'
+import { GOT_PROFILE } from '../actions/user/get-profile'
+import { UPDATED_PROFILE } from '../actions/user/update-profile'
 
 export default ( state = [], { type , payload } = { } ) => {
   switch (type) {

@@ -5,13 +5,14 @@ import signOut from '../../actions/user/sign-out'
 import { connect } from 'react-redux'
 import './UI.css'
 import logo from '../../logo.svg'
-
+import getProfile from '../../actions/user/get-profile'
 
 class Nav extends PureComponent {
   static propTypes = {
     signedIn: PropTypes.bool.isRequired,
     push: PropTypes.func.isRequired,
     signOut: PropTypes.func.isRequired,
+    getProfile: PropTypes.func.isRequired,
   }
 
   goHome = () => {
@@ -41,7 +42,7 @@ class Nav extends PureComponent {
     if(!this.props.signedIn){
       return(
         <span className='dropdown'>
-          <button className='dropbtn'>Dropdown</button>
+          <button className='dropbtn'>Sign in/up</button>
           <div className='dropdown-content'>
             <button className='dropbtn' onClick={this.signIn}>Sign in</button><hr />
             <button className='dropbtn' onClick={this.signUp}>Sign up</button>
@@ -51,7 +52,7 @@ class Nav extends PureComponent {
     } else {
       return(
         <span className='dropdown'>
-          <button className='dropbtn'>Dropdown</button>
+          <button className='dropbtn'>{this.props.displayName}</button>
           <div className='dropdown-content'>
             <button className='dropbtn' onClick={this.profile}>Profile</button><hr />
             <button className='dropbtn' onClick={this.signOut}>Sign out</button>
@@ -71,8 +72,10 @@ class Nav extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ currentUser }) => ({
-  signedIn: (!!currentUser && !!currentUser._id)
+const mapStateToProps = ({ currentUser,profile }) => ({
+  signedIn: (!!currentUser && !!currentUser._id),
+  displayName: (!currentUser? null:(!!profile? currentUser.email:profile.fullName)),
+  userId: (!currentUser? null:currentUser._id)
 })
 
-export default connect(mapStateToProps, { push, signOut })(Nav)
+export default connect(mapStateToProps, { push, signOut, getProfile })(Nav)

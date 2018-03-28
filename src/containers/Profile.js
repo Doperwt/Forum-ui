@@ -11,22 +11,34 @@ class Profile extends PureComponent {
   static propTypes = {
     push: PropTypes.func.isRequired,
     getProfile: PropTypes.func.isRequired,
-    updateProfile: PropTypes.func.isRequired
+    updateProfile: PropTypes.func.isRequired,
+    signedIn: PropTypes.bool
   }
   componentWillMount() {
-    const { push, signedIn, getProfile } = this.props
+    const { push, signedIn,profile,userId,getProfile } = this.props
     if (!signedIn) push('/sign-in')
-    console.log('test')
-    getProfile(this.props.userId)
+    if(!profile){
+      getProfile(userId)
+    } else {
+      this.setState({
+        firstName: profile.fullName.split(' ')[0],
+        lastName:profile.fullName.split(' ')[1],
+        bio: profile.bio,
+        picture:profile.picture,
+      })
+    }
+    console.log(profile,'mount')
+
     subscribeToWebsocket()
   }
 
   constructor(props) {
+    console.log('constructor')
     super(props)
     this.state = {
       firstName: '',
       lastName:'',
-      bio: '',
+      bio: "Write something 'interesting' about yourself ",
       picture:'',
     }
   }
@@ -43,6 +55,7 @@ class Profile extends PureComponent {
       }
       console.log(id,' - ',profile,'updateProfile')
       this.props.updateProfile(id,profile)
+      console.log(this.state);
     }
     return false
   }
@@ -95,7 +108,7 @@ class Profile extends PureComponent {
       return true
     }
     this.setState({
-      bioError: 'Please provide your last name'
+      bioError: 'Too short'
     })
     return false
   }
@@ -116,25 +129,26 @@ class Profile extends PureComponent {
   }
 
   render(){
-    console.log(this.props)
+    const profile = this.props.profile
+    console.log(profile)
     return(
       <div>
         <Title content='Profile' level={2} />
 
-        <form onSubmit={this.submitForm.bind(this)}>
+        <form >
           <div className='input'>
-              <input type='text' name='first_name'  placeholder='Your first name'
+              <input type='text' name='first_name'  placeholder={!!profile ? profile.fullName.split(' ')[0]:'Your first name'}
               onChange={this.validateFirstName.bind(this)} />
               <p>{ this.state.firstNameError}</p>
           </div>
           <div className='input'>
-            <input type='text'  name='last_name' placeholder='Your last name'
+            <input type='text'  name='last_name' placeholder={!!profile ? profile.fullName.split(' ')[1]:'Your last name'}
               onChange={this.validateLastName.bind(this)} />
               <p>{ this.state.lastNameError}</p>
 
           </div>
           <div className='input'>
-            <input type='text' name='bio'  placeholder="Write something 'interesting' about yourself "
+            <input type='text' name='bio'  placeholder={!!profile ? profile.bio:this.state.bio}
                           onChange={this.validateBio.bind(this)} />
               <p>{ this.state.bioError}</p>
 
@@ -152,9 +166,12 @@ class Profile extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ currentUser }) => ({
-  signedIn: (!!currentUser && !!currentUser._id),
-  userId: currentUser._id
-})
+const mapStateToProps = ({ currentUser, profile }) => {
+  return {
+    signedIn: (!!currentUser && !!currentUser._id),
+    userId: currentUser._id,
+    profile: profile[0]
+  }
+}
 
 export default connect(mapStateToProps, { push,getProfile,updateProfile })(Profile)

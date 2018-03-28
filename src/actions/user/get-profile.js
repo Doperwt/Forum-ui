@@ -6,6 +6,7 @@ const api = new API()
 
 export default (userId) => {
   return dispatch => {
+    dispatch({ type: 'APP_LOADINK' })
     api.get(`/profile/${userId}`)
     .then((result) => {
       dispatch({ type: 'LOAD_SUCCESS' })

@@ -23,7 +23,7 @@ export class SignUp extends PureComponent {
     event.preventDefault()
     if (this.validateAll()) {
       const user = {
-        name: this.state.name,
+        // name: this.state.name,
         email: this.state.email,
         password: this.state.password
       }
@@ -44,18 +44,19 @@ export class SignUp extends PureComponent {
   }
 
   validateName(event) {
-    this.setState({name: event.target.value})
-    const name  = this.state.name
-    if (name.length > 1) {
-      this.setState({
-        nameError: null
-      })
-      return true
-    }
-    this.setState({
-      nameError: 'Please provide your name'
-    })
-    return false
+    return true
+    // this.setState({name: event.target.value})
+    // const name  = this.state.name
+    // if (name.length > 1) {
+    //   this.setState({
+    //     nameError: null
+    //   })
+    //   return true
+    // }
+    // this.setState({
+    //   nameError: 'Please provide your name'
+    // })
+    // return false
   }
 
   validateEmail(event) {
@@ -107,7 +108,6 @@ export class SignUp extends PureComponent {
   validatePasswordConfirmation(event) {
     this.setState({passwordConfirmation: event.target.value})
     const { password, passwordConfirmation } = this.state
-    console.log(password, passwordConfirmation )
     if (password === passwordConfirmation && passwordConfirmation) {
       this.setState({
         passwordConfirmationError: null
@@ -127,11 +127,7 @@ export class SignUp extends PureComponent {
         <Title content='Sign Up' level={2} />
 
         <form onSubmit={this.submitForm.bind(this)}>
-          <div className='input'>
-              <input type='text' name='name'  placeholder='Your name'
-              onChange={this.validateName.bind(this)} />
-              <p>{ this.state.nameError}</p>
-          </div>
+
           <div className='input'>
             <input type='text'  name='email' placeholder='Email address'
               onChange={this.validateEmail.bind(this)} />
