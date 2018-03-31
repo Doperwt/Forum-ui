@@ -1,4 +1,5 @@
 import { FETCHED_ARTICLES, FETCHED_ONE_ARTICLE } from '../actions/articles/fetch'
+import { NEW_ARTICLE } from '../actions/articles/newArticle'
 
 export default ( state = [], { type , payload } = { } ) => {
   switch (type) {
@@ -16,6 +17,9 @@ export default ( state = [], { type , payload } = { } ) => {
         }
         return article
       })
+
+    case NEW_ARTICLE :
+      return [{ ...payload }].concat(state)
 
     default :
       return state

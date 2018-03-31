@@ -20,7 +20,6 @@ class Sidebar extends PureComponent {
       event.preventDefault()
       push(element._id)
     }
-
     return(
       <div key={element._id}><a onClick={clickRedirect(element._id,push)}>{element.title}</a><hr /></div>
     )
