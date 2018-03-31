@@ -23,6 +23,7 @@ export default class Routes extends Component {
         <Route path='/sign-in' component={SignIn} />
         <Route path='/sign-up' component={SignUp} />
         <Route path='/profile' component={Profile} />
+        <Route path='/articles' component={Article} />
       </div>
     )
   }

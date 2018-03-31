@@ -14,7 +14,13 @@ class Nav extends PureComponent {
     signOut: PropTypes.func.isRequired,
     getProfile: PropTypes.func.isRequired,
   }
-
+  componentWillMount() {
+    const { profile,userId,getProfile } = this.props
+    if(!profile){
+      getProfile(userId)
+    } else {
+    }
+  }
   goHome = () => {
     this.props.push('/')
   }
@@ -39,6 +45,12 @@ class Nav extends PureComponent {
   }
 
   dropDown = () => {
+    let profile = this.props.profile
+    let displayName = this.props.email
+    // console.log(!!profile)
+    if(!!profile){
+      displayName = profile.fullName
+    }
     if(!this.props.signedIn){
       return(
         <span className='dropdown'>
@@ -52,7 +64,7 @@ class Nav extends PureComponent {
     } else {
       return(
         <span className='dropdown'>
-          <button className='dropbtn'>{this.props.displayName}</button>
+          <button className='dropbtn'>{displayName}</button>
           <div className='dropdown-content'>
             <button className='dropbtn' onClick={this.profile}>Profile</button><hr />
             <button className='dropbtn' onClick={this.signOut}>Sign out</button>
@@ -63,6 +75,9 @@ class Nav extends PureComponent {
   }
 
   render(){
+    let profile = this.props.profile
+    console.log(profile,'mount profile')
+
     return(
       <div className='navi'>
         <img src={logo} className='logo' onClick={this.goHome} alt='somealt'/>
@@ -74,8 +89,9 @@ class Nav extends PureComponent {
 
 const mapStateToProps = ({ currentUser,profile }) => ({
   signedIn: (!!currentUser && !!currentUser._id),
-  displayName: (!currentUser? null:(!!profile? currentUser.email:profile.fullName)),
-  userId: (!currentUser? null:currentUser._id)
+  userId: (!currentUser? null:currentUser._id),
+  profile: profile[0],
+  email: (!currentUser? null:currentUser.email),
 })
 
 export default connect(mapStateToProps, { push, signOut, getProfile })(Nav)

@@ -14,20 +14,22 @@ class Profile extends PureComponent {
     updateProfile: PropTypes.func.isRequired,
     signedIn: PropTypes.bool
   }
+
   componentWillMount() {
     const { push, signedIn,profile,userId,getProfile } = this.props
     if (!signedIn) push('/sign-in')
     if(!profile){
       getProfile(userId)
     } else {
+      console.log(profile.fullName.split(' ').splice(1).join(' '),'profilename')
       this.setState({
         firstName: profile.fullName.split(' ')[0],
-        lastName:profile.fullName.split(' ')[1],
+        lastName:profile.fullName.split(' ').splice(1).join(' '),
         bio: profile.bio,
         picture:profile.picture,
       })
     }
-    console.log(profile,'mount')
+    // console.log(profile,'mount')
 
     subscribeToWebsocket()
   }
@@ -44,6 +46,7 @@ class Profile extends PureComponent {
   }
 
   submitForm(event) {
+    const { updateProfile } = this.props
     event.preventDefault()
     const fullName = `${this.state.firstName} ${this.state.lastName}`
     const id = this.props.userId
@@ -54,9 +57,8 @@ class Profile extends PureComponent {
         picture: this.state.picture
       }
       console.log(id,' - ',profile,'updateProfile')
-      this.props.updateProfile(id,profile)
-      console.log(this.state);
-    }
+      updateProfile(id,profile)
+      }
     return false
   }
 
@@ -71,11 +73,13 @@ class Profile extends PureComponent {
     this.setState({firstName: event.target.value})
     const firstName  = this.state.firstName
     console.log(firstName)
-    if (firstName.length > 1) {
-      this.setState({
-        firstNameError: null
-      })
-      return true
+    if(!!firstName){
+      if (firstName.length > 1) {
+        this.setState({
+          firstNameError: null
+        })
+        return true
+      }
     }
     this.setState({
       firstNameError: 'Please provide your first name'
@@ -86,11 +90,13 @@ class Profile extends PureComponent {
   validateLastName(event) {
     this.setState({lastName: event.target.value})
     const lastName  = this.state.lastName
-    if (lastName.length > 1) {
-      this.setState({
-        lastNameError: null
-      })
-      return true
+    if(!!lastName){
+      if (lastName.length > 1) {
+        this.setState({
+          lastNameError: null
+        })
+        return true
+      }
     }
     this.setState({
       lastNameError: 'Please provide your last name'
@@ -101,11 +107,13 @@ class Profile extends PureComponent {
   validateBio(event) {
     this.setState({bio: event.target.value})
     const bio  = this.state.bio
-    if (bio.length > 1) {
-      this.setState({
-        bioError: null
-      })
-      return true
+    if(!!bio){
+      if (bio.length > 1) {
+        this.setState({
+          bioError: null
+        })
+        return true
+      }
     }
     this.setState({
       bioError: 'Too short'
@@ -116,11 +124,13 @@ class Profile extends PureComponent {
   validatePicture(event) {
     this.setState({picture: event.target.value})
     const picture  = this.state.picture
-    if (picture.length > 1) {
-      this.setState({
-        pictureError: null
-      })
-      return true
+    if(!!picture){
+      if (picture.length > 1) {
+        this.setState({
+          pictureError: null
+        })
+        return true
+      }
     }
     this.setState({
       pictureError: 'Please provide your last name'
@@ -130,11 +140,9 @@ class Profile extends PureComponent {
 
   render(){
     const profile = this.props.profile
-    console.log(profile)
     return(
       <div>
         <Title content='Profile' level={2} />
-
         <form >
           <div className='input'>
               <input type='text' name='first_name'  placeholder={!!profile ? profile.fullName.split(' ')[0]:'Your first name'}
@@ -142,7 +150,7 @@ class Profile extends PureComponent {
               <p>{ this.state.firstNameError}</p>
           </div>
           <div className='input'>
-            <input type='text'  name='last_name' placeholder={!!profile ? profile.fullName.split(' ')[1]:'Your last name'}
+            <input type='text'  name='last_name' placeholder={!!profile ? profile.fullName.split(' ').splice(1).join(' '):'Your last name'}
               onChange={this.validateLastName.bind(this)} />
               <p>{ this.state.lastNameError}</p>
 

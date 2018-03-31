@@ -15,20 +15,21 @@ class Sidebar extends PureComponent {
     subscribeToWebsocket()
   }
 
-  showElement(element){
-    const clickRedirect = (id) => event => {
-      push(`/category/${id}`)
-      console.log(element)}
+  showElement(element,push){
+    const clickRedirect = (id,push) => event => {
+      event.preventDefault()
+      push(element._id)
+    }
 
     return(
-      <div key={element._id}><a onClick={clickRedirect(element._id)}>{element.title}</a><hr /></div>
+      <div key={element._id}><a onClick={clickRedirect(element._id,push)}>{element.title}</a><hr /></div>
     )
   }
 
   render(){
-    const array = [{title:'stuff',_id:'1'},{title:'things',_id:'2'},{title:'other things',_id:'3'},{title:'etc',_id:'4'}]
+    const array = [{title:'articles',_id:'/articles'},{title:'things',_id:'2'},{title:'other things',_id:'3'},{title:'etc',_id:'4'}]
     return(
-      <div className='sidebar'><hr />{array.map(this.showElement)}</div>
+      <div className='sidebar'><hr />{array.map(element => this.showElement(element,this.props.push))}</div>
     )
   }
 }

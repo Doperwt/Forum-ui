@@ -79,9 +79,11 @@ export class SignIn extends PureComponent {
           </div>
         </form>
         <button
+          className='sign_in selected_button'
           onClick={ this.signUp.bind(this) }
           >Sign up</button>
         <button
+          className='sign_up'
           onClick={ this.submitForm.bind(this) }
           >Sign in</button>
       </div>
