@@ -68,16 +68,20 @@
 }
 
 .sidebar {
-  top: 10%;
   position: sticky;
+  top: 20%;
+  left:5%;
   width: 10%;
   min-width: 100px;
   max-width: 300px;
   height: auto;
   background-color: grey;
   color: black;
+  border: 1px solid black;
   margin: 0px;
   padding: 10px;
+  border-radius: 5px;
+  /* box-shadow: 5px 5px lightgrey; */
 }
 
 .logo{

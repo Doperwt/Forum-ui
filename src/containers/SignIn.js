@@ -20,7 +20,7 @@ export class SignIn extends PureComponent {
 
   constructor(props) {
     super(props)
-    this.state = {content: '',title: '',category:''}
+    this.state = {email: '',password: ''}
   }
 
   submitForm(event) {

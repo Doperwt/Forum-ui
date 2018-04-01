@@ -3,7 +3,6 @@ import { push } from 'react-router-redux'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import NewArticle from '../components/Articles/NewArticle'
-import Categories from '../actions/articles/categories'
 import getArticles from '../actions/articles/fetch'
 import { connect as subscribeToWebsocket } from '../actions/websocket'
 
@@ -12,8 +11,7 @@ class Article extends PureComponent {
     push: PropTypes.func.isRequired,
   }
   componentWillMount() {
-    const { Categories, getArticles } = this.props
-    Categories()
+    const {  getArticles } = this.props
     getArticles()
     subscribeToWebsocket()
   }
@@ -28,7 +26,7 @@ class Article extends PureComponent {
   }
 
   render(){
-    console.log(this.props.categories)
+    console.log(this.props.articles)
     const articles = this.props.articles
     return(
       <div>
@@ -39,10 +37,9 @@ class Article extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ currentUser, categories, articles }) => ({
+const mapStateToProps = ({ currentUser, articles }) => ({
   signedIn: (!!currentUser && !!currentUser._id),
-  categories: categories,
   articles:articles
 })
 
-export default connect(mapStateToProps, { push, Categories, getArticles })(Article)
+export default connect(mapStateToProps, { push, getArticles })(Article)

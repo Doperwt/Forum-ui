@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
-
+import './App.css'
 import {
   Overview,
   Article,
@@ -17,7 +17,7 @@ export default class Routes extends Component {
 
   render() {
     return (
-      <div>
+      <div className='main'>
         <Route exact path='/' component={Overview} />
         <Route path='/class/:classId' component={Article} />
         <Route path='/sign-in' component={SignIn} />

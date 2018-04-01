@@ -27,6 +27,7 @@ class Profile extends PureComponent {
         lastName:profile.fullName.split(' ').splice(1).join(' '),
         bio: profile.bio,
         picture:profile.picture,
+        editHidden:true,
       })
     }
     // console.log(profile,'mount')
@@ -42,6 +43,7 @@ class Profile extends PureComponent {
       lastName:'',
       bio: "Write something 'interesting' about yourself ",
       picture:'',
+      editHidden:true,
     }
   }
 
@@ -138,37 +140,46 @@ class Profile extends PureComponent {
     return false
   }
 
+  toggleEdit(event){
+    event.preventDefault()
+    console.log(this.state)
+    this.setState({editHidden: !this.state.editHidden})
+  }
+
   render(){
     const profile = this.props.profile
+    let hidden = this.state.editHidden
+    if(!profile){hidden=false}
     return(
       <div>
         <Title content='Profile' level={2} />
         <form >
-          <div className='input'>
+          <div className='input' hidden={hidden}>
               <input type='text' name='first_name'  placeholder={!!profile ? profile.fullName.split(' ')[0]:'Your first name'}
               onChange={this.validateFirstName.bind(this)} />
               <p>{ this.state.firstNameError}</p>
           </div>
-          <div className='input'>
+          <div className='input' hidden={hidden}>
             <input type='text'  name='last_name' placeholder={!!profile ? profile.fullName.split(' ').splice(1).join(' '):'Your last name'}
               onChange={this.validateLastName.bind(this)} />
               <p>{ this.state.lastNameError}</p>
 
           </div>
-          <div className='input'>
+          <div className='input' hidden={hidden}>
             <input type='text' name='bio'  placeholder={!!profile ? profile.bio:this.state.bio}
                           onChange={this.validateBio.bind(this)} />
               <p>{ this.state.bioError}</p>
 
           </div>
-          <div className='input'>
-            <input type='text' ref='picture'  placeholder='Picture here'
+          <div className='input' hidden={hidden}>
+            <input type='file' ref='picture'  placeholder='Picture here'
               onChange={this.validatePicture.bind(this)} />
               <p>{ this.state.pictureError}</p>
 
           </div>
         </form>
-        <button onClick={ this.submitForm.bind(this) }>Update Profile</button>
+        <button onClick={ this.toggleEdit.bind(this)} > Edit profile</button>
+        <button onClick={ this.submitForm.bind(this) } hidden={hidden}>Update Profile</button>
       </div>
     )
   }
