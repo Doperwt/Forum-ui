@@ -1,41 +1,41 @@
 import API from '../../api/client'
-
-export const FETCHED_ARTICLES = 'FETCHED_ARTICLES'
-export const FETCHED_ONE_ARTICLE = 'FETCHED_ONE_ARTICLE'
+import { LOAD_ERROR } from '../loading'
+export const FETCHED_REPLIES = 'FETCHED_REPLIES'
+export const FETCHED_ONE_REPLY = 'FETCHED_ONE_REPLY'
 
 
 const api = new API()
 
-export default () => {
+export default (ArticleId) => {
   return (dispatch) => {
-    api.get('/articles')
+    api.get(`/articles/${ArticleId}/replies`)
       .then((result) => {
         dispatch({
-          type: FETCHED_ARTICLES,
+          type: FETCHED_REPLIES,
           payload: result.body
         })
       })
       .catch((error) => {
         dispatch({
-          type: 'LOAD_ERROR',
+          type: LOAD_ERROR,
           payload: error.message
         })
       })
   }
 }
 
-export const fetchOneArticle = (ArticleId) => {
+export const fetchOneReply = (ArticleId,ReplyId) => {
   return dispatch => {
-    api.get(`/articles/${ArticleId}`)
+    api.get(`/articles/${ArticleId}/replies/${ReplyId}`)
       .then((result) => {
         dispatch({
-          type: FETCHED_ONE_ARTICLE,
+          type: FETCHED_ONE_REPLY,
           payload: result.body
         })
       })
       .catch((error) => {
         dispatch({
-          type: 'LOAD_ERROR',
+          type: LOAD_ERROR,
           payload: error.message
         })
       })

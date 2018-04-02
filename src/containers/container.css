@@ -21,3 +21,8 @@ button.sign_up{
 button.selected_button{
   background-color: lightgrey;
 }
+
+.article{
+  border: 1px solid black;
+  background-color: white;
+}

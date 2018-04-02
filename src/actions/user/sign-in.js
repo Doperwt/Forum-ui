@@ -1,5 +1,6 @@
 import { replace } from 'react-router-redux'
 import API from '../../api/client'
+import { LOAD_ERROR, LOAD_SUCCESS, APP_DONE_LOADING } from '../loading'
 
 import websocket from '../websocket'
 
@@ -12,7 +13,7 @@ export default ({ email, password}) => {
 
     api.authenticate(email, password)
       .then((res) => {
-        dispatch({ type: 'LOAD_SUCCESS' })
+        dispatch({ type: LOAD_SUCCESS })
 
         const jwt = res.body.token
 
@@ -31,9 +32,9 @@ export default ({ email, password}) => {
         })
       })
       .catch((error) => {
-        dispatch({ type: 'APP_DONE_LOADING' })
+        dispatch({ type: APP_DONE_LOADING })
         dispatch({
-          type: 'LOAD_ERROR',
+          type: LOAD_ERROR,
           payload: error.message
         })
       })

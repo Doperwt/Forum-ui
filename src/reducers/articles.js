@@ -1,4 +1,4 @@
-import { FETCHED_ARTICLES, FETCHED_ONE_ARTICLE } from '../actions/articles/fetch'
+import { FETCHED_ARTICLES, FETCHED_ONE_ARTICLE } from '../actions/articles/fetchArticles'
 import { NEW_ARTICLE } from '../actions/articles/newArticle'
 
 export default ( state = [], { type , payload } = { } ) => {

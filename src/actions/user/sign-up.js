@@ -1,4 +1,5 @@
 import API from '../../api/client'
+import { LOAD_ERROR, LOAD_SUCCESS } from '../loading'
 
 import signIn from './sign-in'
 
@@ -11,12 +12,12 @@ export default (user) => {
 
     api.post('/users', user)
       .then((result) => {
-        dispatch({ type: 'LOAD_SUCCESS' })
+        dispatch({ type: LOAD_SUCCESS })
         dispatch(signIn(user)) // Sign in when sign up succeeded
       })
       .catch((error) => {
         dispatch({
-          type: 'LOAD_ERROR',
+          type: LOAD_ERROR,
           payload: error.message
         })
       })

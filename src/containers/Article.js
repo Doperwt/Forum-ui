@@ -3,8 +3,10 @@ import { push } from 'react-router-redux'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import NewArticle from '../components/Articles/NewArticle'
-import getArticles from '../actions/articles/fetch'
+import getArticles from '../actions/articles/fetchArticles'
 import { connect as subscribeToWebsocket } from '../actions/websocket'
+import NewReply from '../components/Articles/NewReply'
+import './container.css'
 
 class Article extends PureComponent {
   static propTypes = {
@@ -18,9 +20,10 @@ class Article extends PureComponent {
 
   showArticle(article) {
     return(
-      <div key={article._id}>
+      <div key={article._id} className='article'>
         <h4>{article.title}</h4>
         <p>{article.content}</p>
+        <NewReply ArticleId={article._id}/>
       </div>
     )
   }

@@ -21,7 +21,7 @@ class Sidebar extends PureComponent {
   showElement(element,push){
     const clickRedirect = (id,push) => event => {
       event.preventDefault()
-      push(element._id)
+      push(`/articles/${element._id}`)
     }
     return(
       <div key={element._id}><a onClick={clickRedirect(element._id,push)}>{element.title}</a><hr /></div>
@@ -30,7 +30,7 @@ class Sidebar extends PureComponent {
 
   render(){
     const categories = this.props.categories.map(category =>  {
-      let item = {title:category , _id:`/${category}`}
+      let item = {title:category , _id:category}
       return item
     })
     console.log(categories)
