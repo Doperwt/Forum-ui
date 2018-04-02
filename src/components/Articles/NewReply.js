@@ -33,14 +33,14 @@ class NewReply extends PureComponent {
   }
 
   submitForm(event) {
-    const {newReply} = this.props
+    const {newReply,articleId} = this.props
     event.preventDefault()
     const reply = {
       content: this.state.content,
       author: this.props.userId,
       replyTo: this.props.articleId,
     }
-    newReply(reply)
+    newReply(articleId,reply)
   }
 
   handleContent(event){
@@ -70,7 +70,7 @@ class NewReply extends PureComponent {
     return(
       <div className='new_article'>
           <form onSubmit={this.submitForm.bind(this)}>
-          <div className='input' hidden={hidden}>
+          <div className='input' hidden={hidden}><hr />
           <p>Reply</p>
           <input type='text'  name='content' placeholder='Content'
             onChange={this.handleContent.bind(this)} />

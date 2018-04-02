@@ -1,4 +1,5 @@
 import API from '../../api/client'
+import { LOAD_ERROR } from '../loading'
 
 export const NEW_ARTICLE = 'NEW_ARTICLE'
 
@@ -15,7 +16,7 @@ export default (article) => {
       })
       .catch((error) => {
         dispatch({
-          type: 'LOAD_ERRORR',
+          type: LOAD_ERROR,
           payload: error.message
         })
       })

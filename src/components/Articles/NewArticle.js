@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import newArticle from '../../actions/articles/newArticle'
 import Title from '../../components/UI/Title'
 
-
 class NewArticle extends PureComponent {
   static propTypes = {
     push: PropTypes.func.isRequired,
@@ -47,6 +46,7 @@ class NewArticle extends PureComponent {
     })
     return false
   }
+
   handleContent(event){
     this.setState({content: event.target.value})
     const content  = this.state.content
@@ -63,6 +63,7 @@ class NewArticle extends PureComponent {
     })
     return false
   }
+
   handleCategory(event){
     this.setState({category: event.target.value})
     const category  = this.state.category
@@ -79,6 +80,7 @@ class NewArticle extends PureComponent {
     })
     return false
   }
+
   render(){
     return(
       <div className='new_article'>
@@ -100,7 +102,6 @@ class NewArticle extends PureComponent {
             <p>{ this.state.categoryError}</p>
           </div>
         </form>
-
         <button
           className='sign_up'
           onClick={ this.submitForm.bind(this) }

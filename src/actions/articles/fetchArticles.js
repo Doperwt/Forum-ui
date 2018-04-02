@@ -4,7 +4,6 @@ import { LOAD_ERROR } from '../loading'
 export const FETCHED_ARTICLES = 'FETCHED_ARTICLES'
 export const FETCHED_ONE_ARTICLE = 'FETCHED_ONE_ARTICLE'
 
-
 const api = new API()
 
 export default () => {
