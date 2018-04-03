@@ -24,9 +24,9 @@
 }
 
 .main{
-  position: absolute;
-  top:40%;
-  left:40%;
+  position: relative;
+  top:-150px;
+  left: 30%;
 }
 
 @keyframes App-logo-spin {

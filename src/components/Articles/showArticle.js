@@ -26,8 +26,8 @@ class ShowArticle extends PureComponent {
 
   render() {
     const replies = this.props.replies
-    console.log(replies)
     const article = this.props.article
+    const userId = this.props.userId
     const repliesHidden = this.state.repliesHidden
     const articleReplies = replies.filter((r) => r.articleId === article._id)
     return(
@@ -35,7 +35,7 @@ class ShowArticle extends PureComponent {
         <h4>{article.title}</h4>
         <p>{article.content}</p>
         <div hidden={repliesHidden}>
-          <Reply replies={articleReplies} />
+          <Reply replies={articleReplies} userId={userId}/>
           <NewReply ArticleId={article._id}/>
         </div>
         <button className='button' onClick={this.toggleReplies.bind(this)}>

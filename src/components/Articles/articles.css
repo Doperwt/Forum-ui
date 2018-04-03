@@ -1,11 +1,14 @@
 .reply{
   border: 1px solid black;
-  margin: 1px;
+  margin: 5px;
+
 }
 
 .replies{
   border: 1px solid black;
-  margin: 1px;
+  margin: 5px;
+  padding-left: 30px;
+  margin-left: 30px;
 }
 .reply_button{
   border: 1px solid darkgrey;

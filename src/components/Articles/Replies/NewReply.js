@@ -21,6 +21,7 @@ class NewReply extends PureComponent {
       hidden:true,
     }
   }
+
   componentWillMount() {
     const { article,fetchOneArticle, subscribeToWebsocket,articleId } = this.props
     if (!article) { fetchOneArticle(articleId) }
