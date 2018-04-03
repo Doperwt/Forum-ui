@@ -32,7 +32,7 @@ class Sidebar extends PureComponent {
       let item = {title:category , _id:category}
       return item
     })
-    const array = [{title:'all articles',_id:'/articles'}].concat(...categories)
+    const array = [{title:'all articles',_id:'all'}].concat(...categories)
     return(
       <div className='sidebar'><hr />{array.map(element => this.showElement(element,this.props.push))}</div>
     )

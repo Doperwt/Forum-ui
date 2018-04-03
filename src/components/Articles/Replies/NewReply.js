@@ -3,9 +3,9 @@ import { push } from 'react-router-redux'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import newReply from '../../actions/articles/newReply'
-import { fetchOneArticle } from '../../actions/articles/fetchArticles'
-import { connect as subscribeToWebsocket } from '../../actions/websocket'
+import newReply from '../../../actions/articles/newReply'
+import { fetchOneArticle } from '../../../actions/articles/fetchArticles'
+import { connect as subscribeToWebsocket } from '../../../actions/websocket'
 
 class NewReply extends PureComponent {
   static propTypes = {
@@ -15,7 +15,6 @@ class NewReply extends PureComponent {
   }
 
   constructor(props) {
-    console.log('constructor')
     super(props)
     this.state = {
       content: '',
@@ -24,8 +23,6 @@ class NewReply extends PureComponent {
   }
   componentWillMount() {
     const { article,fetchOneArticle, subscribeToWebsocket,articleId } = this.props
-    console.log(this.props)
-    // const { articleId } = this.props.match.params
     if (!article) { fetchOneArticle(articleId) }
     subscribeToWebsocket()
   }
@@ -51,7 +48,7 @@ class NewReply extends PureComponent {
         })
         return true
       }
-    }    console.log(this.state)
+    }
 
     this.setState({
       contentError: 'Please provide your first name'
@@ -66,7 +63,7 @@ class NewReply extends PureComponent {
   render(){
     let hidden = this.state.hidden
     return(
-      <div className='new_article'>
+      <div className='new_reply'>
           <form onSubmit={this.submitForm.bind(this)}>
           <div className='input' hidden={hidden}><hr />
           <p>Reply</p>
@@ -76,12 +73,12 @@ class NewReply extends PureComponent {
           </div>
         </form>
         <button
-          className='sign_up'
+          className='reply_button'
           onClick={ this.toggleHidden.bind(this) }
 
           >{hidden? 'Reply':'Cancel'}</button>
           <button
-          className='sign_up'
+          className='reply_button'
           onClick={ this.submitForm.bind(this) }
           hidden={hidden}
           >Submit</button>

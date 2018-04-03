@@ -1,0 +1,13 @@
+.reply{
+  border: 1px solid black;
+  margin: 1px;
+}
+
+.replies{
+  border: 1px solid black;
+  margin: 1px;
+}
+.reply_button{
+  border: 1px solid darkgrey;
+  margin: 5px;
+}

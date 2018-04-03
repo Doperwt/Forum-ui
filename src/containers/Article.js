@@ -5,26 +5,26 @@ import { connect } from 'react-redux'
 import NewArticle from '../components/Articles/NewArticle'
 import getArticles from '../actions/articles/fetchArticles'
 import { connect as subscribeToWebsocket } from '../actions/websocket'
-import NewReply from '../components/Articles/NewReply'
+import ShowArticle from '../components/Articles/showArticle'
+import { clearReplies } from '../actions/articles/fetchReplies'
 import './container.css'
 
 class Article extends PureComponent {
   static propTypes = {
     push: PropTypes.func.isRequired,
+    getArticles: PropTypes.func.isRequired,
   }
+
   componentWillMount() {
-    const {  getArticles } = this.props
+    const {  getArticles,clearReplies } = this.props
+    clearReplies()
     getArticles()
     subscribeToWebsocket()
   }
 
   showArticle(article) {
     return(
-      <div key={article._id} className='article'>
-        <h4>{article.title}</h4>
-        <p>{article.content}</p>
-        <NewReply ArticleId={article._id}/>
-      </div>
+      <ShowArticle article={article} key={article._id}/>
     )
   }
 
@@ -39,9 +39,16 @@ class Article extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ currentUser, articles }) => ({
-  signedIn: (!!currentUser && !!currentUser._id),
-  articles:articles
-})
+const mapStateToProps = ({ currentUser, articles }, match ) => {
+  const category = match.match.params.category
+  let filteredArticles
+  if(category!=='all'){
+     filteredArticles = articles.filter(article => article.category===category )
+  } else { filteredArticles = articles }
+  return {
+    signedIn: (!!currentUser && !!currentUser._id),
+    articles:filteredArticles,
+  }
+}
 
-export default connect(mapStateToProps, { push, getArticles })(Article)
+export default connect(mapStateToProps, { push, getArticles,clearReplies })(Article)

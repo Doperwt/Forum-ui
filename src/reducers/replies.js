@@ -1,10 +1,10 @@
-import { FETCHED_REPLIES, FETCHED_ONE_REPLY } from '../actions/articles/fetchReplies'
+import { FETCHED_REPLIES, FETCHED_ONE_REPLY,CLEAR_REPLIES } from '../actions/articles/fetchReplies'
 import { NEW_REPLY,UPDATED_REPLY } from '../actions/articles/newReply'
 
 export default ( state = [], { type , payload } = { } ) => {
   switch (type) {
     case FETCHED_REPLIES :
-      return [ ...payload ]
+      return [ ...payload ].concat(state)
 
     case FETCHED_ONE_REPLY :
     const replyIds = state.map(g => g._id)
@@ -23,7 +23,9 @@ export default ( state = [], { type , payload } = { } ) => {
 
     case UPDATED_REPLY :
       return [{ ...payload }].concat(state)
-      
+    case CLEAR_REPLIES :
+      return [payload]
+
     default :
       return state
   }

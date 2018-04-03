@@ -2,7 +2,7 @@ import API from '../../api/client'
 import { LOAD_ERROR } from '../loading'
 export const FETCHED_REPLIES = 'FETCHED_REPLIES'
 export const FETCHED_ONE_REPLY = 'FETCHED_ONE_REPLY'
-
+export const CLEAR_REPLIES = 'CLEAR_REPLIES'
 
 const api = new API()
 
@@ -39,5 +39,13 @@ export const fetchOneReply = (ArticleId,ReplyId) => {
           payload: error.message
         })
       })
+  }
+}
+export const clearReplies = () => {
+  return dispatch => {
+    dispatch({
+      type:CLEAR_REPLIES,
+      payload:[]
+    })
   }
 }
