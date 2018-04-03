@@ -29,7 +29,6 @@ class Article extends PureComponent {
   }
 
   render(){
-    console.log(this.props.articles)
     const articles = this.props.articles
     return(
       <div>

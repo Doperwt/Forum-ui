@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 
-import signUp from '../actions/user/sign-up'
+import { signUp } from '../actions/user'
 import Title from '../components/UI/Title'
 import './container.css'
 
@@ -37,45 +37,30 @@ export class SignUp extends PureComponent {
   }
 
   validateAll() {
-    return this.validateName({target:this.state.name}) &&
-      this.validateEmail({target:this.state.email}) &&
+    return this.validateEmail({target:this.state.email}) &&
       this.validatePassword({target:this.state.password}) &&
       this.validatePasswordConfirmation({target:this.state.passwordConfirmation})
   }
 
-  validateName(event) {
-    return true
-    // this.setState({name: event.target.value})
-    // const name  = this.state.name
-    // if (name.length > 1) {
-    //   this.setState({
-    //     nameError: null
-    //   })
-    //   return true
-    // }
-    // this.setState({
-    //   nameError: 'Please provide your name'
-    // })
-    // return false
-  }
 
   validateEmail(event) {
     this.setState({email: event.target.value})
     const email  = this.state.email
-    if (email.match(/^[a-z0-9._-]+@[a-z0-9._-]+.[a-z0-9._-]+$/)) {
-      this.setState({
-        emailError: null
-      })
-      return true
-    }
+    if(!!email){
+      if (email.match(/^[a-z0-9._-]+@[a-z0-9._-]+.[a-z0-9._-]+$/)) {
+        this.setState({
+          emailError: null
+        })
+        return true
+      }
 
-    if (email.value === '') {
-      this.setState({
-        emailError: 'Please provide your email address'
-      })
-      return false
+      if (email.value === '') {
+        this.setState({
+          emailError: 'Please provide your email address'
+        })
+        return false
+      }
     }
-
     this.setState({
       emailError: 'Please provide a valid email address'
     })
@@ -85,20 +70,21 @@ export class SignUp extends PureComponent {
   validatePassword(event) {
     this.setState({password: event.target.value})
     const password  = this.state.password
-    if (password.length < 6) {
-      this.setState({
-        passwordError: 'Password is too short'
-      })
-      return false
-    }
+    if(!!password){ 
+      if (password.length < 6) {
+        this.setState({
+          passwordError: 'Password is too short'
+        })
+        return false
+      }
 
-    if (password.match(/[a-zA-Z]+/) && password.match(/[0-9]+/)) {
-      this.setState({
-        passwordError: null
-      })
-      return true
+      if (password.match(/[a-zA-Z]+/) && password.match(/[0-9]+/)) {
+        this.setState({
+          passwordError: null
+        })
+        return true
+      }
     }
-
     this.setState({
       passwordError: 'Password should contain both letters and numbers'
     })

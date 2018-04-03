@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { replace, push } from 'react-router-redux'
-import signIn from '../actions/user/sign-in'
+import { signIn } from '../actions/user'
 import Title from '../components/UI/Title'
 import './container.css'
 

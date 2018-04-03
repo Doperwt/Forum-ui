@@ -75,9 +75,6 @@ class Nav extends PureComponent {
   }
 
   render(){
-    let profile = this.props.profile
-    console.log(profile,'mount profile')
-
     return(
       <div className='navi'>
         <img src={logo} className='logo' onClick={this.goHome} alt='somealt'/>

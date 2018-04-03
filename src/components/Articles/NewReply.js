@@ -4,9 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import newReply from '../../actions/articles/newReply'
-import Title from '../../components/UI/Title'
 import { fetchOneArticle } from '../../actions/articles/fetchArticles'
-import fetchReplies from '../../actions/articles/fetchReplies'
 import { connect as subscribeToWebsocket } from '../../actions/websocket'
 
 class NewReply extends PureComponent {
@@ -79,14 +77,14 @@ class NewReply extends PureComponent {
         </form>
         <button
           className='sign_up'
+          onClick={ this.toggleHidden.bind(this) }
+
+          >{hidden? 'Reply':'Cancel'}</button>
+          <button
+          className='sign_up'
           onClick={ this.submitForm.bind(this) }
           hidden={hidden}
           >Submit</button>
-        <button
-          className='sign_up'
-          onClick={ this.toggleHidden.bind(this) }
-          hidden={!hidden}
-          >Reply</button>
       </div>
     )
   }

@@ -14,7 +14,6 @@ class Sidebar extends PureComponent {
   componentWillMount() {
     const { Categories,subscribeToWebsocket } = this.props
     Categories()
-    console.log('mount')
     subscribeToWebsocket()
   }
 
@@ -33,9 +32,7 @@ class Sidebar extends PureComponent {
       let item = {title:category , _id:category}
       return item
     })
-    console.log(categories)
     const array = [{title:'all articles',_id:'/articles'}].concat(...categories)
-    console.log(array)
     return(
       <div className='sidebar'><hr />{array.map(element => this.showElement(element,this.props.push))}</div>
     )
