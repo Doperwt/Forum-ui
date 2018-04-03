@@ -4,7 +4,9 @@ import { NEW_REPLY,UPDATED_REPLY } from '../actions/articles/newReply'
 export default ( state = [], { type , payload } = { } ) => {
   switch (type) {
     case FETCHED_REPLIES :
-      return [ ...payload ].concat(state)
+      let uniqueReplies
+      uniqueReplies = payload.filter(r => !state.filter(a=> a._id===r._id)[0])
+      return [ ...state ].concat(uniqueReplies)
 
     case FETCHED_ONE_REPLY :
     const replyIds = state.map(g => g._id)
