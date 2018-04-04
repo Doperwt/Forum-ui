@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import newReply from '../../../actions/articles/newReply'
-import { fetchOneArticle } from '../../../actions/articles/fetchArticles'
 import { connect as subscribeToWebsocket } from '../../../actions/websocket'
 import './replies.css'
 
@@ -12,7 +11,6 @@ class NewReply extends PureComponent {
   static propTypes = {
     push: PropTypes.func.isRequired,
     newReply: PropTypes.func.isRequired,
-    fetchOneArticle: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -24,8 +22,7 @@ class NewReply extends PureComponent {
   }
 
   componentWillMount() {
-    const { article,fetchOneArticle, subscribeToWebsocket,articleId } = this.props
-    // if (!article) { fetchOneArticle(articleId) }
+    const { subscribeToWebsocket } = this.props
     subscribeToWebsocket()
   }
 
@@ -98,4 +95,4 @@ const mapStateToProps = ({ currentUser,articles }, match) => {
   }
 }
 
-export default connect(mapStateToProps,{ push,newReply,fetchOneArticle,subscribeToWebsocket })(NewReply)
+export default connect(mapStateToProps,{ push,newReply,subscribeToWebsocket })(NewReply)

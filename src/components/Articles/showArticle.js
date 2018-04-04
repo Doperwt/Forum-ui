@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import NewReply from './Replies/NewReply'
 import Reply from './Replies/Replies'
 import getReplies from '../../actions/articles/fetchReplies'
-import { specificProfiles } from '../../actions/user/get-profile'
 import './articles.css'
 
 class ShowArticle extends PureComponent {
@@ -14,25 +13,11 @@ class ShowArticle extends PureComponent {
   constructor(){
     super()
     this.state = { repliesHidden: true }
-    console.log('constructor',this)
-    // console.log(replies,)
   }
 
   componentWillMount(){
-    const { replies,specificProfiles } = this.props
     const { article,getReplies } = this.props
     getReplies(article._id)
-    const repliesIds = replies.map(r => r._id)
-    console.log('did update',this)
-  }
-  componentWillReceiveProps (){
-
-  }
-  componentDidUpdate(){
-    const { replies,specificProfiles } = this.props
-    const repliesIds = replies.map(r => r.author)
-
-    // specificProfiles(repliesIds)
 
   }
 
@@ -77,4 +62,4 @@ const mapStateToProps = ({ currentUser,replies },match) => {
   }
 }
 
-export default connect(mapStateToProps,{getReplies,specificProfiles})(ShowArticle)
+export default connect(mapStateToProps,{getReplies})(ShowArticle)

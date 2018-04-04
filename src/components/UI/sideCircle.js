@@ -21,7 +21,7 @@ class Sidecircle extends PureComponent {
   }
 
   showElement(element){
-    const {push,clickRedirect} = this.props
+    const {clickRedirect} = this.props
     return(
       <div key={element._id} className='side'><a onClick={clickRedirect(element._id)}>{element.title}</a></div>
     )
