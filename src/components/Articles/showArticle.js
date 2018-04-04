@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import NewReply from './Replies/NewReply'
 import Reply from './Replies/Replies'
 import getReplies from '../../actions/articles/fetchReplies'
+import { specificProfiles } from '../../actions/user/get-profile'
 import './articles.css'
 
 class ShowArticle extends PureComponent {
@@ -12,12 +13,27 @@ class ShowArticle extends PureComponent {
   }
   constructor(){
     super()
-    this.state = {repliesHidden: true}
+    this.state = { repliesHidden: true }
+    console.log('constructor',this)
+    // console.log(replies,)
   }
 
   componentWillMount(){
-    const { getReplies } = this.props
-    getReplies(this.props.article._id)
+    const { replies,specificProfiles } = this.props
+    const { article,getReplies } = this.props
+    getReplies(article._id)
+    const repliesIds = replies.map(r => r._id)
+    console.log('did update',this)
+  }
+  componentWillReceiveProps (){
+
+  }
+  componentDidUpdate(){
+    const { replies,specificProfiles } = this.props
+    const repliesIds = replies.map(r => r.author)
+
+    // specificProfiles(repliesIds)
+
   }
 
   toggleReplies(){
@@ -46,7 +62,10 @@ class ShowArticle extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ currentUser,replies }) => {
+const mapStateToProps = ({ currentUser,replies },match) => {
+  console.log('map',replies )
+  const article = match.article
+  getReplies(article._id)
   return {
     signedIn: (!!currentUser && !!currentUser._id),
     userId: currentUser._id,
@@ -54,4 +73,4 @@ const mapStateToProps = ({ currentUser,replies }) => {
   }
 }
 
-export default connect(mapStateToProps,{getReplies})(ShowArticle)
+export default connect(mapStateToProps,{getReplies,specificProfiles})(ShowArticle)
