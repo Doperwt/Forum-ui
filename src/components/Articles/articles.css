@@ -14,3 +14,12 @@
   border: 1px solid darkgrey;
   margin: 5px;
 }
+.article_header{
+  border: 1px solid black;
+  background: lightgrey;
+  width:100%;
+  min-width: 100%;
+}
+span.article_header{
+  border: 1px solid black;
+}

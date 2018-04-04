@@ -1,0 +1,12 @@
+.textinput{
+  width:80%;
+  height: 300px;
+}
+.reply_header{
+  border: 1px solid black;
+  background: lightgrey;
+  width:100%;
+}
+span.reply_header{
+  border: 1px solid black;
+}

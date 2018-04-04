@@ -51,7 +51,7 @@ class ShowArticle extends PureComponent {
     let author = article.author
     return(
       <div className='article'>
-      <span className='reply_header'><span>{author} </span><span>posted on { day } at {time}</span></span>
+      <span className='article_header'><span>{author} </span><span>posted on { day } at {time}</span></span>
         <h4>{article.title}</h4>
         <p>{article.content}</p>
         <div hidden={repliesHidden}>

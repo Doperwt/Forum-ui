@@ -83,7 +83,24 @@
   margin: 0px;
   padding: 10px;
   border-radius: 5px;
-  /* box-shadow: 5px 5px lightgrey; */
+  box-shadow: 5px 5px 5px 1px lightgrey;
+}
+
+.sidecircle {
+  position: sticky;
+  top: 80%;
+  left:5%;
+  width: 10%;
+  min-width: 100px;
+  max-width: 300px;
+  height: auto;
+  background-color: grey;
+  color: black;
+  border: 1px solid black;
+  margin: 0px;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px 1px lightgrey;
 }
 
 .logo{

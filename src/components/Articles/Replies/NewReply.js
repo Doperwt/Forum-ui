@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import newReply from '../../../actions/articles/newReply'
 import { fetchOneArticle } from '../../../actions/articles/fetchArticles'
 import { connect as subscribeToWebsocket } from '../../../actions/websocket'
+import './replies.css'
 
 class NewReply extends PureComponent {
   static propTypes = {
@@ -68,7 +69,7 @@ class NewReply extends PureComponent {
           <form onSubmit={this.submitForm.bind(this)}>
           <div className='input' hidden={hidden}><hr />
           <p>Reply</p>
-          <input type='text'  name='content' placeholder='Content'
+          <input type='text'  name='content' className='textinput'placeholder='Content'
             onChange={this.handleContent.bind(this)} />
             <p>{ this.state.contentError}</p>
           </div>
