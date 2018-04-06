@@ -22,8 +22,6 @@ export default class ApiClient {
   //
   // Returns: Promise
   authenticate(email, password) {
-    console.log(email,password)
-
     return this.post('/sessions', { email, password })
   }
 

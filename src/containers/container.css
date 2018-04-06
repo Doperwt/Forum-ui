@@ -1,6 +1,4 @@
-.profile{
-  position: relative;
-}
+
 
 
 .sign_up{
@@ -28,4 +26,7 @@ button.selected_button{
   max-width: 1200px;
   border: 1px solid black;
   background-color: white;
+}
+.profile{
+  left: 10% !important;
 }

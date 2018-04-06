@@ -9,8 +9,10 @@ const api = new API()
 export default (userId) => {
   return dispatch => {
     dispatch({ type: APP_LOADING })
+    console.log(userId,'USER ID')
     api.get(`/profile/${userId}`)
     .then((result) => {
+      console.log(result.body,userId,'RESULT')
       dispatch({ type: LOAD_SUCCESS })
       dispatch({type:GOT_PROFILE,payload:result.body})
     })

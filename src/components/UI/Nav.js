@@ -16,9 +16,10 @@ class Nav extends PureComponent {
   }
   componentWillMount() {
     const { profile,userId,getProfile } = this.props
-    if(!profile){
+    if(userId!==null){
       getProfile(userId)
     } else {
+      console.log('wat')
     }
   }
   goHome = () => {
@@ -87,7 +88,7 @@ class Nav extends PureComponent {
 const mapStateToProps = ({ currentUser,profile }) => ({
   signedIn: (!!currentUser && !!currentUser._id),
   userId: (!currentUser? null:currentUser._id),
-  profile: profile[0],
+  profile: profile,
   email: (!currentUser? null:currentUser.email),
 })
 

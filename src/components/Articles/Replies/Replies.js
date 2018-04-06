@@ -8,30 +8,29 @@ class Replies extends PureComponent {
     this.state = { }
   }
 
-  toggleEdit(reply,event){
-    const replyId = reply._id
-    this.setState({[replyId]:!this.state[replyId]})
+  toggleEdit(_id,event){
+    this.setState({[_id]:!this.state[_id]})
   }
 
   showReply(reply){
     const isAuthor = (this.props.userId===reply.author)
-    let replyId = reply._id
-    let editHidden = this.state[replyId]
+    let { _id,author } = reply
+    let editHidden = this.state[_id]
     let day = reply.createdAt.slice(0,10)
     let time = reply.createdAt.slice(11,16)
-    let author = reply.author
+    console.log(isAuthor,author,this.props.userId,'is author')
     return(
-      <div className='reply' key={ reply._id }>
+      <div className='reply' key={ _id }>
         <span className='reply_header'><span>{author} </span><span>was posted on { day } at {time}</span></span>
         <p>{ reply.content } </p>
         <p hidden={ !editHidden }>test</p>
-        <button hidden={ !isAuthor } onClick={ this.toggleEdit.bind(this,reply) }>Edit</button>
+        <button hidden={ !isAuthor } onClick={ this.toggleEdit.bind(this,_id) }>Edit</button>
       </div>
     )
   }
 
   render() {
-    const replies = this.props.replies
+    const {replies } = this.props
     return(
       <div className='replies' >{ replies.map(this.showReply.bind(this)) }</div>
     )

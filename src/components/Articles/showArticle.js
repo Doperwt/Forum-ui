@@ -28,12 +28,13 @@ class ShowArticle extends PureComponent {
   render() {
     const replies = this.props.replies
     const article = this.props.article
-    const userId = this.props.userId
+    const userId = this.props.authorId
     const repliesHidden = this.state.repliesHidden
     const articleReplies = replies.filter((r) => r.articleId === article._id)
     let day = article.createdAt.slice(0,10)
     let time = article.createdAt.slice(11,16)
     let author = article.author
+    console.log(userId)
     return(
       <div className='article'>
       <span className='article_header'><span>{author} </span><span>posted on { day } at {time}</span></span>
@@ -51,14 +52,15 @@ class ShowArticle extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ currentUser,replies },match) => {
-  console.log('map',replies )
+const mapStateToProps = ({ currentUser,replies,profile },match) => {
   const article = match.article
+  console.log(profile)
   getReplies(article._id)
   return {
     signedIn: (!!currentUser && !!currentUser._id),
     userId: currentUser._id,
     replies: replies,
+    authorId: (!!profile.fullName?profile.fullName:currentUser.email)
   }
 }
 

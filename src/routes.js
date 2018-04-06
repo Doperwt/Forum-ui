@@ -17,7 +17,7 @@ export default class Routes extends Component {
 
   render() {
     return (
-      <div className='main'>
+      <div >
         <Route exact path='/' component={Overview} />
         <Route path='/class/:classId' component={Article} />
         <Route path='/sign-in' component={SignIn} />

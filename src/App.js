@@ -13,11 +13,13 @@ class App extends Component {
       <div className='App'>
         <Nav />
         <Sidebar />
-        <Sidecircle />
-        <Routes />
+        <div className='main'>
+          <Routes />
+        </div>
       </div>
     )
   }
 }
+
 
 export default App

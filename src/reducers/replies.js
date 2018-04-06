@@ -6,7 +6,6 @@ export default ( state = [], { type , payload } = { } ) => {
     case FETCHED_REPLIES :
       let uniqueReplies
       uniqueReplies = payload.filter(r => !state.filter(a=> a._id===r._id)[0])
-      console.log(uniqueReplies)
       if( !!state[0]._id){
         return [ ...state ].concat(uniqueReplies)
       } else {

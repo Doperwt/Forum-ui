@@ -7,7 +7,7 @@ export default ( state = [], { type , payload } = { } ) => {
       return payload
 
     case UPDATED_PROFILE :
-      return [payload]
+      return payload
 
     case COLLECTED_PROFILES :
       return payload

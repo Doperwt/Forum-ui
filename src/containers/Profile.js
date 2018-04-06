@@ -7,6 +7,7 @@ import { connect as subscribeToWebsocket } from '../actions/websocket'
 import EditProfile from '../components/Profiles/editProfile'
 import ShowProfile from '../components/Profiles/showProfile'
 import { getProfile } from '../actions/user'
+import './container.css'
 
 class Profile extends PureComponent {
   static propTypes = {
@@ -43,9 +44,10 @@ class Profile extends PureComponent {
   render(){
     const profile = this.props.profile
     let hidden = this.state.editHidden
+    console.log(profile)
     if(!profile){hidden=false}
     return(
-      <div>
+      <div className='profile'>
         <Title content='Profile' level={2} />
         {hidden?<ShowProfile />:<EditProfile  />}
         <button onClick={ this.toggleEdit.bind(this)} >{hidden? 'Edit profile':'Cancel'}</button>
@@ -58,7 +60,7 @@ const mapStateToProps = ({ currentUser, profile }) => {
   return {
     signedIn: (!!currentUser && !!currentUser._id),
     userId: currentUser._id,
-    profile: profile[0]
+    profile: profile
   }
 }
 
