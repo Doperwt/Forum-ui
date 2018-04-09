@@ -18,10 +18,15 @@ class Replies extends PureComponent {
     let editHidden = this.state[_id]
     let day = reply.createdAt.slice(0,10)
     let time = reply.createdAt.slice(11,16)
+    let updated
     console.log(isAuthor,author,this.props.userId,'is author')
+    if(reply.createdAt!==reply.updatedAt){
+      updated = `Edited on:${reply.updatedAt.slice(0,10)},${reply.updatedAt.slice(11,16)}`
+    }
+
     return(
       <div className='reply' key={ _id }>
-        <span className='reply_header'><span>{author} </span><span>was posted on { day } at {time}</span></span>
+        <span className='reply_header'><span>{author} </span><span>posted on { day } at { time}</span><span>{!updated?updated:null}</span></span>
         <p>{ reply.content } </p>
         <p hidden={ !editHidden }>test</p>
         <button hidden={ !isAuthor } onClick={ this.toggleEdit.bind(this,_id) }>Edit</button>

@@ -83,7 +83,7 @@ class NewArticle extends PureComponent {
 
   render(){
     return(
-      <div className='new_article'>
+      <div className='new_article article'>
         <Title content='New Article' level={4} />
         <form onSubmit={this.submitForm.bind(this)}>
           <div className='input'>
@@ -92,7 +92,7 @@ class NewArticle extends PureComponent {
             <p>{ this.state.titleError}</p>
           </div>
           <div className='input'>
-          <input type='text'  name='content' placeholder='Content'
+          <textarea type='textarea'  name='content' placeholder='Content' rows='6' cols='50'
             onChange={this.handleContent.bind(this)} />
             <p>{ this.state.contentError}</p>
           </div>

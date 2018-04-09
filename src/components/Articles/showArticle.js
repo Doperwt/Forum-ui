@@ -54,7 +54,6 @@ class ShowArticle extends PureComponent {
 
 const mapStateToProps = ({ currentUser,replies,profile },match) => {
   const article = match.article
-  console.log(profile)
   getReplies(article._id)
   return {
     signedIn: (!!currentUser && !!currentUser._id),

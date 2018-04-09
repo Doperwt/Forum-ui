@@ -66,7 +66,7 @@ class NewReply extends PureComponent {
           <form onSubmit={this.submitForm.bind(this)}>
           <div className='input' hidden={hidden}><hr />
           <p>Reply</p>
-          <input type='text'  name='content' className='textinput'placeholder='Content'
+          <textarea type='text'  name='content' rows='5' cols='60' placeholder='Content'
             onChange={this.handleContent.bind(this)} />
             <p>{ this.state.contentError}</p>
           </div>

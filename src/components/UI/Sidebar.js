@@ -23,7 +23,7 @@ class Sidebar extends PureComponent {
       push(`/articles/${element._id}`)
     }
     return(
-      <div key={element._id}><a onClick={clickRedirect(element._id,push)}>{element.title}</a><hr /></div>
+      <div className='single_article' key={element._id}><a onClick={clickRedirect(element._id,push)}>{element.title}</a><hr /></div>
     )
   }
 
