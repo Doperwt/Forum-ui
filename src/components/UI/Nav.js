@@ -51,11 +51,11 @@ class Nav extends PureComponent {
     let email = this.props.email
     let displayName = 'Welcome'
     // console.log(!!profile)
-    if(!!profile){
-      displayName = profile.fullName
-    }
     if (!!email) {
       displayName = email
+    }
+    if(!!profile){
+      displayName = profile.fullName
     }
     console.log(displayName,email,profile)
     if(!this.props.signedIn){

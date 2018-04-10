@@ -49,7 +49,7 @@ class Profile extends PureComponent {
     return(
       <div className='profile'>
         <Title content='Profile' level={2} />
-        {hidden?<ShowProfile />:<EditProfile  />}
+        {hidden?<ShowProfile profile={profile}/>:<EditProfile profile={profile} />}
         <button onClick={ this.toggleEdit.bind(this)} >{hidden? 'Edit profile':'Cancel'}</button>
       </div>
     )

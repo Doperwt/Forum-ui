@@ -1,6 +1,6 @@
 import { FETCHED_ARTICLES, FETCHED_ONE_ARTICLE } from '../actions/articles/fetchArticles'
 import { NEW_ARTICLE } from '../actions/articles/newArticle'
-
+import { ARTICLE_UPDATED } from '../actions/articles/editArticle'
 export default ( state = [], { type , payload } = { } ) => {
   switch (type) {
     case FETCHED_ARTICLES :
@@ -20,6 +20,10 @@ export default ( state = [], { type , payload } = { } ) => {
 
     case NEW_ARTICLE :
       return [{ ...payload }].concat(state)
+
+    case ARTICLE_UPDATED :
+      let updatedState = state
+      return updatedState
 
     default :
       return state

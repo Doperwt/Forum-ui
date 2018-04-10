@@ -4,15 +4,16 @@ import { connect } from 'react-redux'
 import NewReply from './Replies/NewReply'
 import Reply from './Replies/Replies'
 import getReplies from '../../actions/articles/fetchReplies'
+import EditArticle from './editArticle'
 import './articles.css'
 
 class ShowArticle extends PureComponent {
   static propTypes = {
     replies: PropTypes.array
-  }
+    }
   constructor(){
     super()
-    this.state = { repliesHidden: true }
+    this.state = { repliesHidden: true,editArticleHidden:true }
   }
 
   componentWillMount(){
@@ -24,28 +25,44 @@ class ShowArticle extends PureComponent {
   toggleReplies(){
     this.setState({repliesHidden:!this.state.repliesHidden})
   }
+  toggleEditArticle(){
+    this.setState({editArticleHidden:!this.state.editArticleHidden})
+  }
+  showArticle(article){
+    return(
+      <div>
+        <h4>{article.title}</h4>
+        <p>{article.content}</p>
+      </div>
+    )
+  }
 
   render() {
     const replies = this.props.replies
     const article = this.props.article
     const userId = this.props.authorId
     const repliesHidden = this.state.repliesHidden
+    let editArticleHidden = this.state.editArticleHidden
     const articleReplies = replies.filter((r) => r.articleId === article._id)
     let day = article.createdAt.slice(0,10)
     let time = article.createdAt.slice(11,16)
     let author = article.author
-    console.log(userId)
+    let isAuthor = userId===author
+    console.log(userId,author)
     return(
       <div className='article'>
       <span className='article_header'><span>{author} </span><span>posted on { day } at {time}</span></span>
-        <h4>{article.title}</h4>
-        <p>{article.content}</p>
+        {editArticleHidden?this.showArticle(article):<EditArticle article={article} />  }
+
+        <button className='button' onClick={this.toggleEditArticle.bind(this)} hidden={!isAuthor}>
+          {editArticleHidden?'Edit article':'Cancel'}
+        </button>
         <div hidden={repliesHidden}>
           <Reply replies={articleReplies} userId={userId}/>
           <NewReply ArticleId={article._id}/>
         </div>
         <button className='button' onClick={this.toggleReplies.bind(this)}>
-          {repliesHidden?'show replies':'hide replies  '}
+          {repliesHidden?'show replies':'hide replies'}
         </button>
       </div>
     )
