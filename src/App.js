@@ -3,7 +3,7 @@ import './App.css'
 // import logo     from './logo.svg'
 import Nav      from './components/UI/Nav'
 import Sidebar  from './components/UI/Sidebar'
-import Sidecircle  from './components/UI/sideCircle'
+// import Sidecircle  from './components/UI/sideCircle'
 
 import Routes from './routes'
 

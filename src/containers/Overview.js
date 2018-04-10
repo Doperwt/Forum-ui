@@ -10,7 +10,7 @@ class Overview extends PureComponent {
   }
 
   componentWillMount() {
-    const { profile,userId,getProfile } = this.props
+    const { userId,getProfile } = this.props
     if(userId!==null){
       getProfile(userId)
     } else {

@@ -15,15 +15,16 @@ class Nav extends PureComponent {
     getProfile: PropTypes.func.isRequired,
   }
   componentWillMount() {
-    const { profile,userId,getProfile } = this.props
+    const { userId,getProfile } = this.props
     if(userId!==null){
       getProfile(userId)
     } else {
       console.log('wat')
     }
   }
-  goHome = () => {
-    this.props.push('/')
+  goRoute = (route,event) => {
+    console.log(route)
+    this.props.push(route)
   }
 
   signOut = (event) => {
@@ -47,11 +48,16 @@ class Nav extends PureComponent {
 
   dropDown = () => {
     let profile = this.props.profile
-    let displayName = this.props.email
+    let email = this.props.email
+    let displayName = 'Welcome'
     // console.log(!!profile)
     if(!!profile){
       displayName = profile.fullName
     }
+    if (!!email) {
+      displayName = email
+    }
+    console.log(displayName,email,profile)
     if(!this.props.signedIn){
       return(
         <span className='dropdown'>
@@ -67,7 +73,7 @@ class Nav extends PureComponent {
         <span className='dropdown'>
           <button className='dropbtn'>{displayName}</button>
           <div className='dropdown-content'>
-            <button className='dropbtn' onClick={this.profile}>Profile</button><hr />
+            <button className='dropbtn' onClick={this.profile}>Profile</button>
             <button className='dropbtn' onClick={this.signOut}>Sign out</button>
           </div>
         </span>
@@ -78,8 +84,11 @@ class Nav extends PureComponent {
   render(){
     return(
       <div className='navi'>
-        <img src={logo} className='logo' onClick={this.goHome} alt='somealt'/>
-        <span className='navText'>test</span> {this.dropDown()}
+        <img src={logo} className='logo' onClick={this.goRoute.bind(this,'/')} alt='somealt'/>
+        <span className='navText navTitle'>The Forum Site </span>
+        <a className='navText' onClick={ this.goRoute.bind(this,'/contact') }>contact </a>
+        <a className='navText' onClick={ this.goRoute.bind(this,'/contact') }>contact </a>
+        {this.dropDown()}
       </div>
     )
   }
