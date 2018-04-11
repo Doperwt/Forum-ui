@@ -19,7 +19,7 @@ class ShowArticle extends PureComponent {
   componentWillMount(){
     const { article,getReplies } = this.props
     getReplies(article._id)
-
+    console.log('mount article')
   }
 
   toggleReplies(){
@@ -38,6 +38,7 @@ class ShowArticle extends PureComponent {
   }
 
   render() {
+    const signedIn = this.props.signedIn
     const replies = this.props.replies
     const article = this.props.article
     const userId = this.props.authorId
@@ -48,7 +49,6 @@ class ShowArticle extends PureComponent {
     let time = article.createdAt.slice(11,16)
     let author = article.author
     let isAuthor = userId===author
-    console.log(userId,author)
     return(
       <div className='article'>
       <span className='article_header'><span>{author} </span><span>posted on { day } at {time}</span></span>
@@ -59,7 +59,7 @@ class ShowArticle extends PureComponent {
         </button>
         <div hidden={repliesHidden}>
           <Reply replies={articleReplies} userId={userId}/>
-          <NewReply ArticleId={article._id}/>
+          {signedIn?<NewReply ArticleId={article._id}/>:null}
         </div>
         <button className='button' onClick={this.toggleReplies.bind(this)}>
           {repliesHidden?'show replies':'hide replies'}
@@ -72,11 +72,12 @@ class ShowArticle extends PureComponent {
 const mapStateToProps = ({ currentUser,replies,profile },match) => {
   const article = match.article
   getReplies(article._id)
+  console.log('map article')
   return {
     signedIn: (!!currentUser && !!currentUser._id),
-    userId: currentUser._id,
+    userId: (!!currentUser?currentUser._id:null),
     replies: replies,
-    authorId: (!!profile.fullName?profile.fullName:currentUser.email)
+    authorId: (!!currentUser?(!!profile.fullName?profile.fullName:currentUser.email):null)
   }
 }
 

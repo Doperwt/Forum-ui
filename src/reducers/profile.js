@@ -1,4 +1,4 @@
-import { GOT_PROFILE,COLLECTED_PROFILES } from '../actions/user/get-profile'
+import { GOT_PROFILE,COLLECTED_PROFILES,NO_PROFILE } from '../actions/user/get-profile'
 import { UPDATED_PROFILE } from '../actions/user/update-profile'
 
 export default ( state = [], { type , payload } = { } ) => {
@@ -13,6 +13,8 @@ export default ( state = [], { type , payload } = { } ) => {
       return payload
     // case 'PROFILE_CREATED' :
     //   return [ ...payload ]
+    case NO_PROFILE :
+      return []
 
     default :
       return state

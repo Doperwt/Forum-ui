@@ -33,7 +33,7 @@ class ShowProfile extends PureComponent {
   }
   componentWillReceiveProps(){
     const { profile } = this.props
-    console.log('props',this.props)
+    console.log('props',profile, !!profile.fullName)
     if(!!profile&&!!profile.fullName){
       this.setState({
         firstName: profile.fullName.split(' ')[0],

@@ -17,7 +17,7 @@ export default (ArticleId) => {
       })
       .catch((error) => {
         dispatch({
-          type: LOAD_ERROR,
+          type: 'LOAD_ERRORr',
           payload: error.message
         })
       })

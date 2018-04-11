@@ -18,13 +18,14 @@ class Profile extends PureComponent {
   componentWillMount() {
     const { push, signedIn,profile,userId,getProfile } = this.props
     if (!signedIn) push('/sign-in')
-    if(!profile){
+    console.log(!profile)
+    if(!!profile){
       getProfile(userId)
     } else {
-      this.setState({
-        editHidden:true,
-      })
     }
+    this.setState({
+      editHidden:true,
+    })
     subscribeToWebsocket()
   }
 
@@ -37,14 +38,13 @@ class Profile extends PureComponent {
 
   toggleEdit(event){
     event.preventDefault()
-    console.log(this.state)
     this.setState({editHidden: !this.state.editHidden})
   }
 
   render(){
     const profile = this.props.profile
     let hidden = this.state.editHidden
-    console.log(profile)
+    console.log('render',profile)
     if(!profile){hidden=false}
     return(
       <div className='profile'>

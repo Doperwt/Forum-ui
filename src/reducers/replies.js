@@ -6,23 +6,23 @@ export default ( state = [], { type , payload } = { } ) => {
     case FETCHED_REPLIES :
       let uniqueReplies
       uniqueReplies = payload.filter(r => !state.filter(a=> a._id===r._id)[0])
-      if( !!state[0]._id){
+      if( state.length!==0){
         return [ ...state ].concat(uniqueReplies)
       } else {
         return [ ...uniqueReplies ]
       }
 
     case FETCHED_ONE_REPLY :
-    const replyIds = state.map(g => g._id)
-      if (replyIds.indexOf(payload._id) < 0) {
-        return [{ ...payload }].concat(state)
-      }
-      return state.map((reply) => {
-        if (reply._id === payload._id) {
-          return { ...payload }
+      const replyIds = state.map(g => g._id)
+        if (replyIds.indexOf(payload._id) < 0) {
+          return [{ ...payload }].concat(state)
         }
-        return reply
-      })
+        return state.map((reply) => {
+          if (reply._id === payload._id) {
+            return { ...payload }
+          }
+          return reply
+        })
 
     case NEW_REPLY :
       return [{ ...payload }].concat(state)

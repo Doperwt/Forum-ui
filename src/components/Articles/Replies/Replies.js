@@ -35,7 +35,7 @@ class Replies extends PureComponent {
   }
 
   render() {
-    const {replies } = this.props
+    const { replies } = this.props
     return(
       <div className='replies' >{ replies.map(this.showReply.bind(this)) }</div>
     )

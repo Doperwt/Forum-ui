@@ -22,7 +22,13 @@ export default ( state = [], { type , payload } = { } ) => {
       return [{ ...payload }].concat(state)
 
     case ARTICLE_UPDATED :
-      let updatedState = state
+      let updatedState = state.map((article) => {
+        if(article._id===payload._id){
+          return payload
+        } else {
+          return article
+        }
+      })
       return updatedState
 
     default :

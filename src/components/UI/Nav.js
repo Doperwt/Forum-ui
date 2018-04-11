@@ -16,14 +16,24 @@ class Nav extends PureComponent {
   }
   componentWillMount() {
     const { userId,getProfile } = this.props
+    console.log('mount',userId)
     if(userId!==null){
       getProfile(userId)
     } else {
       console.log('wat')
     }
   }
+  constructor(props){
+    super(props)
+    console.log('constructor',this.props)
+  }
+  componentDidMount(){
+    console.log('didmount',this.props)
+  }
+  componentDidUpdate(){
+    console.log('didupdate',this.props)
+  }
   goRoute = (route,event) => {
-    console.log(route)
     this.props.push(route)
   }
 
@@ -54,7 +64,7 @@ class Nav extends PureComponent {
     if (!!email) {
       displayName = email
     }
-    if(!!profile){
+    if(!!profile.fullName){
       displayName = profile.fullName
     }
     console.log(displayName,email,profile)
@@ -85,8 +95,8 @@ class Nav extends PureComponent {
     return(
       <div className='navi'>
         <img src={logo} className='logo' onClick={this.goRoute.bind(this,'/')} alt='somealt'/>
-        <span className='navText navTitle'>The Forum Site </span>
-        <a className='navText' onClick={ this.goRoute.bind(this,'/contact') }>contact </a>
+        <div className='navText navTitle'>The Forum Site </div>
+        <a className='navText' onClick={ this.goRoute.bind(this,'/about') }>about </a>
         <a className='navText' onClick={ this.goRoute.bind(this,'/contact') }>contact </a>
         {this.dropDown()}
       </div>

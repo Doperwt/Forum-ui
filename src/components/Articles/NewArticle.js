@@ -113,7 +113,7 @@ class NewArticle extends PureComponent {
 
 const mapStateToProps = ({ currentUser }) => ({
   signedIn: (!!currentUser && !!currentUser._id),
-  userId: currentUser._id
+  userId: (!!currentUser?currentUser._id:null)
 })
 
 export default connect(mapStateToProps,{ push,newArticle })(NewArticle)

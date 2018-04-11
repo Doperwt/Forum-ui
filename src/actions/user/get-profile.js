@@ -3,6 +3,7 @@ import { LOAD_ERROR, LOAD_SUCCESS, APP_LOADING } from '../loading'
 
 export const COLLECTED_PROFILES = 'COLLECTED_PROFILES'
 export const GOT_PROFILE = 'GOT_PROFILE'
+export const NO_PROFILE = 'NO_PROFILE'
 const api = new API()
 
 
@@ -11,8 +12,12 @@ export default (userId) => {
     dispatch({ type: APP_LOADING })
     api.get(`/profile/${userId}`)
     .then((result) => {
-      dispatch({ type: LOAD_SUCCESS })
-      dispatch({type:GOT_PROFILE,payload:result.body})
+      if(result.body==='not found'){
+        dispatch({type: NO_PROFILE })
+      } else {
+        dispatch({ type: LOAD_SUCCESS })
+        dispatch({type:GOT_PROFILE,payload:result.body})
+      }
     })
     .catch((error) => {
       dispatch({

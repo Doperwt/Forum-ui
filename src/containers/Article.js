@@ -29,11 +29,12 @@ class Article extends PureComponent {
   }
 
   render(){
+    const signedIn = this.props.signedIn
     const articles = this.props.articles
     return(
       <div>
         {articles.map(this.showArticle)}
-        <NewArticle />
+        {signedIn?<NewArticle />:null}
       </div>
     )
   }
