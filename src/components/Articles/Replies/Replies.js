@@ -37,6 +37,7 @@ class Replies extends PureComponent {
           articleId:reply.articleId,
           _id:reply._id
         }
+        this.setState({[_id]:!this.state[_id]})
         editReply(newReply)
       }
       return(
