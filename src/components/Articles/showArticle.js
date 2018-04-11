@@ -41,14 +41,14 @@ class ShowArticle extends PureComponent {
     const signedIn = this.props.signedIn
     const replies = this.props.replies
     const article = this.props.article
-    const userId = this.props.authorId
+    const authorId = this.props.authorId
     const repliesHidden = this.state.repliesHidden
     let editArticleHidden = this.state.editArticleHidden
     const articleReplies = replies.filter((r) => r.articleId === article._id)
     let day = article.createdAt.slice(0,10)
     let time = article.createdAt.slice(11,16)
     let author = article.author
-    let isAuthor = userId===author
+    let isAuthor = authorId===author
     return(
       <div className='article'>
       <span className='article_header'><span>{author} </span><span>posted on { day } at {time}</span></span>
@@ -58,7 +58,7 @@ class ShowArticle extends PureComponent {
           {editArticleHidden?'Edit article':'Cancel'}
         </button>
         <div hidden={repliesHidden}>
-          <Reply replies={articleReplies} userId={userId}/>
+          <Reply replies={articleReplies} authorId={authorId} userId={this.props.userId}/>
           {signedIn?<NewReply ArticleId={article._id}/>:null}
         </div>
         <button className='button' onClick={this.toggleReplies.bind(this)}>
@@ -77,7 +77,7 @@ const mapStateToProps = ({ currentUser,replies,profile },match) => {
     signedIn: (!!currentUser && !!currentUser._id),
     userId: (!!currentUser?currentUser._id:null),
     replies: replies,
-    authorId: (!!currentUser?(!!profile.fullName?profile.fullName:currentUser.email):null)
+    authorId: (!!currentUser?(!!profile.fullName?profile.fullName:currentUser.email.split('@')[0]):null)
   }
 }
 
