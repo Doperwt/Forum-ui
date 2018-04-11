@@ -42,15 +42,17 @@ class Profile extends PureComponent {
   }
 
   render(){
-    const profile = this.props.profile
+    const { profile,userId } = this.props
     let hidden = this.state.editHidden
-    console.log('render',profile)
+    let ownProfile = profile.userId===userId
+
+    console.log('render',ownProfile)
     if(!profile){hidden=false}
     return(
       <div className='profile'>
         <Title content='Profile' level={2} />
         {hidden?<ShowProfile profile={profile}/>:<EditProfile profile={profile} />}
-        <button onClick={ this.toggleEdit.bind(this)} >{hidden? 'Edit profile':'Cancel'}</button>
+        <button onClick={ this.toggleEdit.bind(this)} hidden={!ownProfile}>{hidden? 'Edit profile':'Cancel'}</button>
       </div>
     )
   }
