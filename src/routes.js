@@ -17,7 +17,6 @@ import {
 // import SignUp from './containers/SignUp'
 
 export default class Routes extends Component {
-
   render() {
     return (
       <div >
