@@ -16,23 +16,14 @@ class Nav extends PureComponent {
   }
   componentWillMount() {
     const { userId,getProfile } = this.props
-    console.log('mount',userId)
     if(userId!==null){
       getProfile(userId)
     } else {
       console.log('wat')
     }
   }
-  constructor(props){
-    super(props)
-    console.log('constructor',this.props)
-  }
-  componentDidMount(){
-    console.log('didmount',this.props)
-  }
-  componentDidUpdate(){
-    console.log('didupdate',this.props)
-  }
+
+
   goRoute = (route,event) => {
     this.props.push(route)
   }
@@ -67,7 +58,6 @@ class Nav extends PureComponent {
     if(!!profile.fullName){
       displayName = profile.fullName
     }
-    console.log(displayName,email,profile)
     if(!this.props.signedIn){
       return(
         <span className='dropdown'>

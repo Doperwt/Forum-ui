@@ -19,7 +19,6 @@ class ShowArticle extends PureComponent {
   componentWillMount(){
     const { article,getReplies } = this.props
     getReplies(article._id)
-    console.log('mount article')
   }
 
   toggleReplies(){
@@ -75,7 +74,6 @@ class ShowArticle extends PureComponent {
 const mapStateToProps = ({ currentUser,replies,profile },match) => {
   const article = match.article
   getReplies(article._id)
-  console.log('map article')
   return {
     signedIn: (!!currentUser && !!currentUser._id),
     userId: (!!currentUser?currentUser._id:null),

@@ -11,7 +11,6 @@ class NewArticle extends PureComponent {
     newArticle: PropTypes.func.isRequired
   }
   constructor(props) {
-    console.log('constructor')
     super(props)
     this.state = {
       content: '',
