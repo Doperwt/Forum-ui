@@ -50,7 +50,6 @@ class EditProfile extends PureComponent {
         bio: this.state.bio,
         picture: this.state.picture
       }
-      console.log(id,' - ',profile,'updateProfile')
       updateProfile(id,profile)
     }
     return false
@@ -65,7 +64,6 @@ class EditProfile extends PureComponent {
   validateFirstName(event) {
     this.setState({firstName: event.target.value})
     const firstName  = this.state.firstName
-    console.log(firstName)
     if(!!firstName){
       if (firstName.length > 1) {
         this.setState({

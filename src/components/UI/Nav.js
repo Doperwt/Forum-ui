@@ -16,23 +16,14 @@ class Nav extends PureComponent {
   }
   componentWillMount() {
     const { userId,getProfile } = this.props
-    console.log('mount',userId)
     if(userId!==null){
       getProfile(userId)
     } else {
       console.log('wat')
     }
   }
-  constructor(props){
-    super(props)
-    console.log('constructor',this.props)
-  }
-  componentDidMount(){
-    console.log('didmount',this.props)
-  }
-  componentDidUpdate(){
-    console.log('didupdate',this.props)
-  }
+
+
   goRoute = (route,event) => {
     this.props.push(route)
   }
@@ -67,7 +58,6 @@ class Nav extends PureComponent {
     if(!!profile.fullName){
       displayName = profile.fullName
     }
-    console.log(displayName,email,profile)
     if(!this.props.signedIn){
       return(
         <span className='dropdown'>
@@ -81,7 +71,7 @@ class Nav extends PureComponent {
     } else {
       return(
         <span className='dropdown'>
-          <button className='dropbtn'>{displayName}</button>
+          <button className='dropbtn topbtn'>{displayName}</button>
           <div className='dropdown-content'>
             <button className='dropbtn' onClick={this.profile}>Profile</button>
             <button className='dropbtn' onClick={this.signOut}>Sign out</button>
@@ -95,7 +85,7 @@ class Nav extends PureComponent {
     return(
       <div className='navi'>
         <img src={logo} className='logo' onClick={this.goRoute.bind(this,'/')} alt='somealt'/>
-        <div className='navText navTitle'>The Forum Site </div>
+        <div className='navText navTitle' onClick={this.goRoute.bind(this,'/')} >The Forum Site </div>
         <a className='navText' onClick={ this.goRoute.bind(this,'/about') }>about </a>
         <a className='navText' onClick={ this.goRoute.bind(this,'/contact') }>contact </a>
         {this.dropDown()}

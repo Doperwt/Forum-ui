@@ -19,7 +19,6 @@ class ShowArticle extends PureComponent {
   componentWillMount(){
     const { article,getReplies } = this.props
     getReplies(article._id)
-    console.log('mount article')
   }
 
   toggleReplies(){
@@ -36,22 +35,25 @@ class ShowArticle extends PureComponent {
       </div>
     )
   }
+  redirectProfile(){
 
+  }
   render() {
-    const signedIn = this.props.signedIn
-    const replies = this.props.replies
-    const article = this.props.article
-    const userId = this.props.authorId
+    const { signedIn,replies,article,userId } = this.props
     const repliesHidden = this.state.repliesHidden
     let editArticleHidden = this.state.editArticleHidden
     const articleReplies = replies.filter((r) => r.articleId === article._id)
     let day = article.createdAt.slice(0,10)
     let time = article.createdAt.slice(11,16)
-    let author = article.author
+    let updated
+    let { createdAt,updatedAt,authorName,author,_id } = article
+    if(createdAt!==updatedAt){
+      updated = `  Edited on ${updatedAt.slice(0,10)}, ${updatedAt.slice(11,16)}`
+    }
     let isAuthor = userId===author
     return(
       <div className='article'>
-      <span className='article_header'><span>{author} </span><span>posted on { day } at {time}</span></span>
+      <span className='article_header'><span onClick={this.redirectProfile.bind(this)}>{authorName} </span><span>posted on { day } at {time}</span><span>{updated}</span></span>
         {editArticleHidden?this.showArticle(article):<EditArticle article={article} />  }
 
         <button className='button' onClick={this.toggleEditArticle.bind(this)} hidden={!isAuthor}>
@@ -59,7 +61,7 @@ class ShowArticle extends PureComponent {
         </button>
         <div hidden={repliesHidden}>
           <Reply replies={articleReplies} userId={userId}/>
-          {signedIn?<NewReply ArticleId={article._id}/>:null}
+          {signedIn?<NewReply ArticleId={_id}/>:null}
         </div>
         <button className='button' onClick={this.toggleReplies.bind(this)}>
           {repliesHidden?'show replies':'hide replies'}
@@ -72,12 +74,11 @@ class ShowArticle extends PureComponent {
 const mapStateToProps = ({ currentUser,replies,profile },match) => {
   const article = match.article
   getReplies(article._id)
-  console.log('map article')
   return {
     signedIn: (!!currentUser && !!currentUser._id),
     userId: (!!currentUser?currentUser._id:null),
     replies: replies,
-    authorId: (!!currentUser?(!!profile.fullName?profile.fullName:currentUser.email):null)
+    authorId: (!!currentUser?(!!profile.fullName?profile.fullName:currentUser.email.split('@')[0]):null)
   }
 }
 

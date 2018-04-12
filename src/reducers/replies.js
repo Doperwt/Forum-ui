@@ -25,10 +25,11 @@ export default ( state = [], { type , payload } = { } ) => {
         })
 
     case NEW_REPLY :
-      return [{ ...payload }].concat(state)
+      return [...state].concat(payload)
 
     case UPDATED_REPLY :
-      return [{ ...payload }].concat(state)
+      return [ ...state ].concat(payload)
+      
     case CLEAR_REPLIES :
       return [payload]
 

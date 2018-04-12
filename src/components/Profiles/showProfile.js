@@ -15,7 +15,6 @@ class ShowProfile extends PureComponent {
   }
   componentWillMount() {
     const { push, signedIn,profile,userId,getProfile } = this.props
-    console.log(profile)
     if (!signedIn) push('/sign-in')
     if(!profile){
       getProfile(userId)
@@ -33,7 +32,6 @@ class ShowProfile extends PureComponent {
   }
   componentWillReceiveProps(){
     const { profile } = this.props
-    console.log('props',profile, !!profile.fullName)
     if(!!profile&&!!profile.fullName){
       this.setState({
         firstName: profile.fullName.split(' ')[0],
@@ -56,8 +54,6 @@ class ShowProfile extends PureComponent {
 
   render(){
     const profile = this.props.profile
-    console.log(this.props)
-    console.log(!!profile)
     return(
       <div>
         <img src={!!profile? (!!profile.picture?profile.picture:noPic):noPic} alt={!!profile?profile.fullName:'no name'} />
