@@ -7,6 +7,11 @@
     border: none;
     width: 90%;
     margin:5px;
+    cursor: pointer;
+}
+.topbtn{
+  border:1px black solid !important;
+
 }
 .dropbtn:hover{
   animation: dropbtnhover;
@@ -25,7 +30,7 @@
 .dropdown {
     position: relative;
     display: inline-block;
-    right:-15%;
+    right:-25%;
     z-index: -1;
 }
 
@@ -61,6 +66,7 @@
 /* Change the background color of the dropdown button when the dropdown content is shown */
 
 .navi {
+  border: darkgrey solid 1px;
   position: sticky;
   align-items: stretch;
   top: 0px;
@@ -68,7 +74,7 @@
   min-height: 50px;
   max-height: 200px;
   width: 100%;
-  background-color: grey;
+  background-color: lightgrey;
   color: black;
   margin: 0px;
   padding: 0px;
@@ -78,19 +84,27 @@
 .navText{
   position: relative;
   text-align: center;
+  cursor: pointer;
+  left: 25%;
+}
+.navText:hover{
+  color:darkgrey;
 }
 .logo{
-  position: relative;
-  width:7%;
-  left:-15%;
+  position: absolute;
+  width:10%;
+  left:0px;
+  cursor: pointer;
+  max-height: 100%;
 }
 .navTitle{
-  left: -10%;
+  left: 10%;
   font-size: 250%;
-  border:1px solid black;
   background-color: lightgrey;
   display: inline-block;
-  min-height: 100%;
+  height: 100%;
+  position: absolute;
+  max-width: 50%;
 }
 
 @keyframes fadein {
@@ -106,7 +120,7 @@
   min-width: 100px;
   max-width: 30%;
   height: auto;
-  background-color: grey;
+  background-color: lightgrey;
   color: black;
   border: 1px solid black;
   margin: 0px;
@@ -121,6 +135,7 @@
   animation-duration: 1s;
   background-color: white;
   color: black;
+  cursor: pointer;
 }
 
 .sidecircle {

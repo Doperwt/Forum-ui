@@ -71,7 +71,7 @@ class Nav extends PureComponent {
     } else {
       return(
         <span className='dropdown'>
-          <button className='dropbtn'>{displayName}</button>
+          <button className='dropbtn topbtn'>{displayName}</button>
           <div className='dropdown-content'>
             <button className='dropbtn' onClick={this.profile}>Profile</button>
             <button className='dropbtn' onClick={this.signOut}>Sign out</button>
@@ -85,7 +85,7 @@ class Nav extends PureComponent {
     return(
       <div className='navi'>
         <img src={logo} className='logo' onClick={this.goRoute.bind(this,'/')} alt='somealt'/>
-        <div className='navText navTitle'>The Forum Site </div>
+        <div className='navText navTitle' onClick={this.goRoute.bind(this,'/')} >The Forum Site </div>
         <a className='navText' onClick={ this.goRoute.bind(this,'/about') }>about </a>
         <a className='navText' onClick={ this.goRoute.bind(this,'/contact') }>contact </a>
         {this.dropDown()}

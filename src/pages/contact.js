@@ -2,7 +2,9 @@ import React, { PureComponent } from 'react'
 import { push } from 'react-router-redux'
 import PropTypes from 'prop-types'
 import Title from '../components/UI/Title'
+import { connect } from 'react-redux'
 import './pages.css'
+
 class Contact extends PureComponent {
   static propTypes = {
     push: PropTypes.func.isRequired
@@ -19,4 +21,4 @@ class Contact extends PureComponent {
   }
 }
 
-export default Contact
+export default connect(null,{push})(Contact)
