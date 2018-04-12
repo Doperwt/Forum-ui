@@ -34,7 +34,7 @@ export class SignIn extends PureComponent {
 
   validateEmail(event) {
     this.setState({email: event.target.value})
-    const email  = this.state.email
+    const email  = event.target.value
     if (email.match(/^[a-z0-9._-]+@[a-z0-9._-]+.[a-z0-9._-]+$/)) {
       this.setState({
         emailError: null

@@ -21,6 +21,7 @@ export class SignUp extends PureComponent {
 
   submitForm(event) {
     event.preventDefault()
+    console.log(this.state)
     if (this.validateAll()) {
       const user = {
         // name: this.state.name,
@@ -37,15 +38,16 @@ export class SignUp extends PureComponent {
   }
 
   validateAll() {
-    return this.validateEmail({target:this.state.email}) &&
-      this.validatePassword({target:this.state.password}) &&
-      this.validatePasswordConfirmation({target:this.state.passwordConfirmation})
+    const {email,password,passwordConfirmation} = this.state
+    return this.validateEmail({target:{value:email}}) &&
+      this.validatePassword({target:{value:password}}) &&
+      this.validatePasswordConfirmation({target:{value:passwordConfirmation}})
   }
 
 
   validateEmail(event) {
     this.setState({email: event.target.value})
-    const email  = this.state.email
+    const email  = event.target.value
     if(!!email){
       if (email.match(/^[a-z0-9._-]+@[a-z0-9._-]+.[a-z0-9._-]+$/)) {
         this.setState({
@@ -69,8 +71,8 @@ export class SignUp extends PureComponent {
 
   validatePassword(event) {
     this.setState({password: event.target.value})
-    const password  = this.state.password
-    if(!!password){ 
+    const password  = event.target.value
+    if(!!password){
       if (password.length < 6) {
         this.setState({
           passwordError: 'Password is too short'

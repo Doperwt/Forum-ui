@@ -6,7 +6,6 @@ export default class ApiClient {
   }
 
   constructor(host, options = {}) {
-    console.log(process.env.REACT_APP_BACKEND_URL,process.env.REACT_APP_ON_HEROKU)
     this.host = process.env.REACT_APP_ON_HEROKU === 'yes'
       ? process.env.REACT_APP_BACKEND_URL // WITHOUT the / !!!
       : (host || 'http://localhost:3030')

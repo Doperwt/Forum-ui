@@ -18,7 +18,6 @@ class Profile extends PureComponent {
   componentWillMount() {
     const { push, signedIn,profile,userId,getProfile } = this.props
     if (!signedIn) push('/sign-in')
-    console.log(!profile)
     if(!!profile){
       getProfile(userId)
     } else {
@@ -45,8 +44,7 @@ class Profile extends PureComponent {
     const { profile,userId } = this.props
     let hidden = this.state.editHidden
     let ownProfile = profile.userId===userId
-
-    console.log('render',ownProfile)
+    if(!profile.userId){ ownProfile=true}
     if(!profile){hidden=false}
     return(
       <div className='profile'>
