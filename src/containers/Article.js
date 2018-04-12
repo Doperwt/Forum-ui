@@ -32,7 +32,7 @@ class Article extends PureComponent {
     const signedIn = this.props.signedIn
     const articles = this.props.articles
     return(
-      <div>
+      <div className='main'>
         {articles.map(this.showArticle)}
         {signedIn?<NewArticle />:null}
       </div>

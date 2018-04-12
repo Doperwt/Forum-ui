@@ -6,9 +6,9 @@ export default class ApiClient {
   }
 
   constructor(host, options = {}) {
-    console.log(process.env.NODE_ENV,process.env.ON_HEROKU)
-    this.host = process.env.ON_HEROKU === 'yes'
-      ? "https://forumbackend.herokuapp.com" // WITHOUT the / !!!
+    console.log(process.env.REACT_APP_BACKEND_URL,process.env.REACT_APP_ON_HEROKU)
+    this.host = process.env.REACT_APP_ON_HEROKU === 'yes'
+      ? process.env.REACT_APP_BACKEND_URL // WITHOUT the / !!!
       : (host || 'http://localhost:3030')
 
     this.options = { ...this.defaultOptions, ...options }

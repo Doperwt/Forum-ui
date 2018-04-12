@@ -19,7 +19,7 @@ class Overview extends PureComponent {
   }
   render(){
     return(
-      <div className='article'><p>Overview</p></div>
+      <div className='article main'><p>Overview</p></div>
     )
   }
 }

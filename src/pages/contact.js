@@ -13,7 +13,7 @@ class Contact extends PureComponent {
 
   render(){
     return(
-      <div className='article'>
+      <div className='article main'>
         <Title content='Contact' level={2} />
         <p>Overview</p>
       </div>
