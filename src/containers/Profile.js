@@ -43,8 +43,8 @@ class Profile extends PureComponent {
   render(){
     const { profile,userId } = this.props
     let hidden = this.state.editHidden
-    let ownProfile = profile.userId===userId
-    if(!profile.userId){ ownProfile=true}
+    let ownProfile
+    if(profile === null){ ownProfile=true} else { ownProfile = profile.userId===userId }
     if(!profile){hidden=false}
     return(
       <div className='profile'>

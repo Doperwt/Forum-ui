@@ -130,34 +130,43 @@ class EditProfile extends PureComponent {
   }
 
   render(){
-    const profile = this.props.profile
+    const hasProfile = !!this.props.profile
+    let firstName,lastName,fullName,bio
+    if(hasProfile){
+       bio = this.props.profile.bio
+       fullName = this.props.profile.fullName
+       firstName = fullName.split(' ')[0]
+       lastName = fullName.split(' ').splice(1).join(' ')
+    }
+    console.log(hasProfile)
     return(
       <div>
         <form >
         <div className='input'>
           <p>First name</p>
-          <input type='text' name='first_name'  placeholder={!!profile ? profile.fullName.split(' ')[0]:'Your first name'}
-          onChange={this.validateFirstName.bind(this)} />
-          <p>{ this.state.firstNameError}</p>
+          <input type='text' name='first_name'
+            placeholder={hasProfile ? firstName:'Your first name'}
+            onChange={ this.validateFirstName.bind(this) } />
+          <p>{ this.state.firstNameError }</p>
         </div>
         <div className='input' >
           <p>Last name</p>
-          <input type='text'  name='last_name' placeholder={!!profile ? profile.fullName.split(' ').splice(1).join(' '):'Your last name'}
-          onChange={this.validateLastName.bind(this)} />
-          <p>{ this.state.lastNameError}</p>
-
+          <input type='text'  name='last_name'
+            placeholder={hasProfile ? lastName:'Your last name'}
+            onChange={ this.validateLastName.bind(this) } />
+          <p>{ this.state.lastNameError }</p>
         </div>
         <div className='input' >
           <p>Bio</p>
-          <input type='text' name='bio'  placeholder={!!profile ? profile.bio:this.state.bio}
-          onChange={this.validateBio.bind(this)} />
-          <p>{ this.state.bioError}</p>
-
+          <textarea type='textarea'  name='bio' defaultValue={hasProfile ? bio:this.state.bio }
+            rows='6' cols='50'
+            onChange={ this.validateBio.bind(this) } />
+          <p>{ this.state.bioError }</p>
         </div>
         <div className='input' >
           <p>Profile picture</p>
           <input type='file' ref='picture'  placeholder='Picture here'
-          onChange={this.validatePicture.bind(this)} />
+            onChange={ this.validatePicture.bind(this) } />
         <p>{ this.state.pictureError }</p>
         </div>
       </form>
@@ -172,7 +181,7 @@ const mapStateToProps = ({ currentUser, profile }) => {
   return {
     signedIn: (!!currentUser && !!currentUser._id),
     userId: currentUser._id,
-    profile: profile[0]
+    profile: profile,
   }
 }
 

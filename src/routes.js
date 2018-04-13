@@ -9,7 +9,8 @@ import {
   Profile,
 } from './containers'
 import {
-  Contact
+  Contact,
+  About
 } from './pages'
 // import Overview from './containers/Overview'
 // import Article from './containers/Article'
@@ -29,6 +30,7 @@ export default class Routes extends Component {
         <Route exact path='/articles' component={Article} />
         <Route path='/articles/:category' component={Article} />
         <Route exact path='/contact' component={Contact} />
+        <Route exact path='/about' component={About} />
       </div>
     )
   }

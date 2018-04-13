@@ -14,7 +14,7 @@ export default ( state = [], { type , payload } = { } ) => {
     // case 'PROFILE_CREATED' :
     //   return [ ...payload ]
     case NO_PROFILE :
-      return []
+      return null
 
     default :
       return state
