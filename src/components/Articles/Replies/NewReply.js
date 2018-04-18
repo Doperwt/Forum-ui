@@ -90,7 +90,7 @@ const mapStateToProps = ({ currentUser,articles }, match) => {
   const article = articles.filter((a) => (a._id === match.ArticleId))[0]
   return {
     signedIn: (!!currentUser && !!currentUser._id),
-    userId: currentUser._id,
+    userId: (!!currentUser?currentUser._id:null),
     articleId: article._id,
   }
 }
