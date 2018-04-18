@@ -7,11 +7,13 @@ import {
   SignIn,
   SignUp,
   Profile,
+  Messages,
 } from './containers'
 import {
   Contact,
   About
 } from './pages'
+import ShowMessage from './components/Messages/showMessage'
 // import Overview from './containers/Overview'
 // import Article from './containers/Article'
 // import SignIn from './containers/SignIn'
@@ -31,6 +33,8 @@ export default class Routes extends Component {
         <Route path='/articles/:category' component={Article} />
         <Route exact path='/contact' component={Contact} />
         <Route exact path='/about' component={About} />
+        <Route exact path='/messages' component={Messages} />
+        <Route path='/messages/:messageId' component={ShowMessage} />
       </div>
     )
   }

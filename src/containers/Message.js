@@ -2,11 +2,9 @@ import React, { PureComponent } from 'react'
 import { push } from 'react-router-redux'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import NewMessage from '../components/Articles/NewMessage'
-import getMessages from '../actions/articles/getMessages'
+import SendMessage from '../components/Messages/sendMessage'
 import { connect as subscribeToWebsocket } from '../actions/websocket'
-import ShowMessage from '../components/Articles/showMessage'
-import { clearMessages } from '../actions/articles/getMessages'
+import getMessages,{ clearMessages } from '../actions/messages/fetchMessage'
 import './container.css'
 
 class Message extends PureComponent {
@@ -16,25 +14,33 @@ class Message extends PureComponent {
   }
 
   componentWillMount() {
-    const {  getMessages,clearMessages } = this.props
+    const {  getMessages,clearMessages,userId } = this.props
     clearMessages()
-    getMessages()
+    console.log(userId)
+    getMessages(userId)
     subscribeToWebsocket()
   }
 
-  showArticle(message) {
+  showMessage(message) {
+    const clicky = (id) => {
+      this.push(`/messages/${id}`)
+    }
     return(
-      <ShowMessage article={message} key={message._id}/>
+      <div><p onClick={clicky(message.id)}>From {message.author} on {message.createdAt.slice(0,10)},{message.createdAt.slice(11,16)}</p></div>
     )
   }
 
   render(){
     const signedIn = this.props.signedIn
-    const recievedMessages = this.props.recievedMessages
+    const {recievedMessages,sentMessages} = this.props
+
     return(
       <div className='main'>
+        <p>Messages sent to you:</p>
         {recievedMessages.map(this.showMessage)}
-        {signedIn?<NewMessage />:null}
+        <p>Messages sent by you</p>
+        {sentMessages.map(this.showMessage)}
+        {signedIn?<SendMessage />:null}
       </div>
     )
   }
@@ -46,8 +52,10 @@ const mapStateToProps = ({ currentUser,messages } ) => {
   filteredSentMessages = messages.filter(message => message.author===currentUser._id)
   return {
     signedIn: (!!currentUser && !!currentUser._id),
+    userId: (!!currentUser?currentUser._id:null),
     recievedMessages:filteredRecievedMessages,
-    sentMessages:filteredSentMessages
+    sentMessages:filteredSentMessages,
+
   }
 }
 

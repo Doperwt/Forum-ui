@@ -25,6 +25,7 @@ class Nav extends PureComponent {
 
 
   goRoute = (route,event) => {
+    event.preventDefault()
     this.props.push(route)
   }
 
@@ -43,10 +44,8 @@ class Nav extends PureComponent {
     this.props.push('/sign-up')
   }
   profile = (event) => {
-    event.preventDefault()
     this.props.push('/profile')
   }
-
   dropDown = () => {
     let profile = this.props.profile
     let email = this.props.email
@@ -63,8 +62,8 @@ class Nav extends PureComponent {
         <span className='dropdown'>
           <button className='dropbtn'>Sign in/up</button>
           <div className='dropdown-content'>
-            <button className='dropbtn' onClick={this.signIn}>Sign in</button><hr />
-            <button className='dropbtn' onClick={this.signUp}>Sign up</button>
+            <button className='dropbtn' onClick={this.goRoute.bind(this,'/sign-in')}>Sign in</button><hr />
+            <button className='dropbtn' onClick={this.goRoute.bind(this,'/sign-up')}>Sign up</button>
           </div>
         </span>
       )
@@ -73,7 +72,8 @@ class Nav extends PureComponent {
         <span className='dropdown'>
           <button className='dropbtn topbtn'>{displayName}</button>
           <div className='dropdown-content'>
-            <button className='dropbtn' onClick={this.profile}>Profile</button>
+            <button className='dropbtn' onClick={this.goRoute.bind(this,'/profile')}>Profile</button>
+            <button className='dropbtn' onClick={this.goRoute.bind(this,'/messages')}>Messages</button>
             <button className='dropbtn' onClick={this.signOut}>Sign out</button>
           </div>
         </span>
@@ -94,7 +94,7 @@ class Nav extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ currentUser,profile }) => ({
+const mapStateToProps = ({ currentUser,profile,messages }) => ({
   signedIn: (!!currentUser && !!currentUser._id),
   userId: (!currentUser? null:currentUser._id),
   profile: profile,
