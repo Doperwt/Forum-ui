@@ -16,10 +16,11 @@ class SendMessage extends PureComponent {
     this.setState({reciever: event.target.value})
   }
   submitForm(event){
-    const userId = this.props.userId
+    event.preventDefault()
+    const {userId,newMessage} = this.props
     const { content,reciever } = this.state
     const message = {
-      constent:content,
+      content:content,
       reciever:reciever,
       author:userId
     }

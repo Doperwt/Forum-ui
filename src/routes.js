@@ -34,7 +34,7 @@ export default class Routes extends Component {
         <Route exact path='/contact' component={Contact} />
         <Route exact path='/about' component={About} />
         <Route exact path='/messages' component={Messages} />
-        <Route path='/messages/:messageId' component={ShowMessage} />
+        <Route path='/message/:messageId' component={ShowMessage} />
       </div>
     )
   }
