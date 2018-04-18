@@ -1,10 +1,10 @@
-import { FETCHED_REPLIES, FETCHED_ONE_REPLY,CLEAR_REPLIES } from '../actions/articles/fetchReplies'
-import { NEW_REPLY } from '../actions/articles/newReply'
-import { REPLY_UPDATED } from '../actions/articles/editReply'
+import { FETCHED_MESSAGE, FETCHED_ONE_MESSAGE,CLEAR_MESSAGE } from '../actions/Messages/fetchMessage'
+import { NEW_MESSAGE } from '../actions/Messages/newMessage'
+import { MESSAGE_UPDATED } from '../actions/Messages/editMessage'
 
 export default ( state = [], { type , payload } = { } ) => {
   switch (type) {
-    case FETCHED_REPLIES :
+    case FETCHED_MESSAGE :
       let uniqueReplies
       uniqueReplies = payload.filter(r => !state.filter(a=> a._id===r._id)[0])
       if( state.length!==0){
@@ -13,7 +13,7 @@ export default ( state = [], { type , payload } = { } ) => {
         return [ ...uniqueReplies ]
       }
 
-    case FETCHED_ONE_REPLY :
+    case FETCHED_ONE_MESSAGE :
       const replyIds = state.map(g => g._id)
         if (replyIds.indexOf(payload._id) < 0) {
           return [{ ...payload }].concat(state)
@@ -25,10 +25,10 @@ export default ( state = [], { type , payload } = { } ) => {
           return reply
         })
 
-    case NEW_REPLY :
+    case NEW_MESSAGE :
       return [...state].concat(payload)
 
-    case REPLY_UPDATED :
+    case MESSAGE_UPDATED :
       let newState = state.map((reply) => {
         if(payload._id===reply._id){
           return payload[0]
@@ -38,7 +38,7 @@ export default ( state = [], { type , payload } = { } ) => {
       })
       return newState
 
-    case CLEAR_REPLIES :
+    case CLEAR_MESSAGE :
       return [payload]
 
     default :

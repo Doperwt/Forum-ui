@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { updateProfile,getProfile } from '../../actions/user'
 import { connect as subscribeToWebsocket } from '../../actions/websocket'
+import  { post } from 'axios'
 
 class EditProfile extends PureComponent {
   static propTypes = {
@@ -37,6 +38,11 @@ class EditProfile extends PureComponent {
       picture:'',
       editHidden:true,
     }
+    this.validateFirstName = this.validateFirstName.bind(this)
+    this.validateLastName = this.validateLastName.bind(this)
+    this.validateBio = this.validateBio.bind(this)
+    this.validatePicture = this.validatePicture.bind(this)
+    this.submitForm = this.submitForm.bind(this)
   }
 
   submitForm(event) {
@@ -53,6 +59,21 @@ class EditProfile extends PureComponent {
       updateProfile(id,profile)
     }
     return false
+  }
+
+  fileUpload(file){
+    const url = process.env.REACT_APP_FILEHOST
+    const unsignedUploadPreset = process.env.REACT_APP_UNSIGNEDPRESET
+    const formData = new FormData()
+    formData.append('file',file)
+    formData.append('upload_preset', unsignedUploadPreset)
+    formData.append('sources',['local','url','camera'])
+    const config = {
+        headers: {
+            'content-type': 'multipart/form-data'
+                  }
+    }
+    return  post(url, formData,config)
   }
 
   validateAll() {
@@ -113,20 +134,33 @@ class EditProfile extends PureComponent {
   }
 
   validatePicture(event) {
-    this.setState({picture: event.target.value})
-    const picture  = this.state.picture
+    // this.setState({picture: event.target.value})
+    const picture  = event.target.files[0]
+    const fileType = picture.name.split('.').splice(1)[0]
+    console.log(event)
+    console.log(picture)
     if(!!picture){
-      if (picture.length > 1) {
+      if (picture.name.length > 1 && (fileType==='jpg'||fileType==='png'||fileType==='bmp') ) {
         this.setState({
           pictureError: null
         })
-        return true
+        this.fileUpload(picture)
+          .then((result) => {
+            console.log(result,'URL=',result.data.url)
+            this.setState({picture:result.data.url})
+            return true
+          })
+      } else {
+        this.setState({
+          pictureError: 'Please provide a proper picture'
+        })
+        return false
       }
     }
     this.setState({
-      pictureError: 'Please provide a proper picture'
+      pictureError: null
     })
-    return false
+    return true
   }
 
   render(){
@@ -138,7 +172,6 @@ class EditProfile extends PureComponent {
        firstName = fullName.split(' ')[0]
        lastName = fullName.split(' ').splice(1).join(' ')
     }
-    console.log(hasProfile)
     return(
       <div>
         <form >
@@ -146,31 +179,31 @@ class EditProfile extends PureComponent {
           <p>First name</p>
           <input type='text' name='first_name'
             placeholder={hasProfile ? firstName:'Your first name'}
-            onChange={ this.validateFirstName.bind(this) } />
+            onChange={ this.validateFirstName } />
           <p>{ this.state.firstNameError }</p>
         </div>
         <div className='input' >
           <p>Last name</p>
           <input type='text'  name='last_name'
             placeholder={hasProfile ? lastName:'Your last name'}
-            onChange={ this.validateLastName.bind(this) } />
+            onChange={ this.validateLastName } />
           <p>{ this.state.lastNameError }</p>
         </div>
         <div className='input' >
           <p>Bio</p>
           <textarea type='textarea'  name='bio' defaultValue={hasProfile ? bio:this.state.bio }
             rows='6' cols='50'
-            onChange={ this.validateBio.bind(this) } />
+            onChange={ this.validateBio } />
           <p>{ this.state.bioError }</p>
         </div>
         <div className='input' >
           <p>Profile picture</p>
-          <input type='file' ref='picture'  placeholder='Picture here'
+          <input type='file' ref='picture' multiple accept="image/*"  placeholder='Picture here'
             onChange={ this.validatePicture.bind(this) } />
         <p>{ this.state.pictureError }</p>
         </div>
       </form>
-      <button onClick={ this.submitForm.bind(this) } >Update Profile</button>
+      <button onClick={ this.submitForm } >Update Profile</button>
     </div>
     )
   }
