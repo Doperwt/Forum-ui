@@ -22,13 +22,11 @@ class Message extends PureComponent {
   }
 
   showMessage(message) {
-    console.log(this)
     const clicky = (id,event) => {
-      console.log(id)
       this.props.push(`/message/${id}`)
     }
     return(
-      <div><p onClick={clicky.bind(this,message._id)}>From {message.author} on {message.createdAt.slice(0,10)},{message.createdAt.slice(11,16)}</p></div>
+      <div key={message._id}><p onClick={clicky.bind(this,message._id)}>From {message.author} on {message.createdAt.slice(0,10)},{message.createdAt.slice(11,16)}</p></div>
     )
   }
 
@@ -37,7 +35,7 @@ class Message extends PureComponent {
     const {recievedMessages,sentMessages} = this.props
 
     return(
-      <div className='main'>
+      <div className='profile'>
         <p>Messages sent to you:</p>
         {recievedMessages.map(this.showMessage.bind(this))}
         <p>Messages sent by you</p>
