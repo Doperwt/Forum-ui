@@ -11,7 +11,6 @@ class ShowMessage extends PureComponent {
   componentWillMount(){
     const {messageId,getSingleMessage } = this.props
     getSingleMessage(messageId)
-    console.log('mount')
   }
   render(){
     let message = this.props.message
@@ -26,9 +25,7 @@ class ShowMessage extends PureComponent {
 
 const mapStateToProps = ({ currentUser,messages },match) => {
   let id = match.match.params.messageId
-  console.log(id)
   let message = messages.filter(message => message._id===id)[0]
-  console.log(message)
   return{
     signedIn: (!!currentUser && !!currentUser._id),
     userId: (!!currentUser?currentUser._id:null),

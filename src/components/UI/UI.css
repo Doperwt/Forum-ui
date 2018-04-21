@@ -129,6 +129,8 @@
   border-radius: 5px;
   box-shadow: 5px 5px 5px 1px lightgrey;
   z-index: 1;
+  /* border-right: 30px solid lightgrey;
+  border-top: 50px solid lightgrey; */
 }
 
 .single_article:hover{

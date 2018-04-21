@@ -78,7 +78,7 @@ const mapStateToProps = ({ currentUser,replies,profile },match) => {
     signedIn: (!!currentUser && !!currentUser._id),
     userId: (!!currentUser?currentUser._id:null),
     replies: replies,
-    authorId: (!!currentUser?(!!profile.fullName?profile.fullName:currentUser.email.split('@')[0]):null)
+    authorId: (!!currentUser?(!!profile?profile.fullName:currentUser.email.split('@')[0]):null)
   }
 }
 
