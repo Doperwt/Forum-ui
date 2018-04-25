@@ -19,7 +19,7 @@
   background-color: lightgrey;
 }
 @keyframes dropbtnhover {
-  from { background-color: inherit;
+  from { background-color: grey;
   }
   to {
     background-color: lightgrey;
@@ -58,11 +58,11 @@
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
     display: block;
-    animation: droppingdown 1s  ;
+    /* animation: droppingdown 1s  ; */
 }
 @keyframes droppingdown {
-  from { height: 0%; }
-  to  { height:auto; }
+  from { height: 0px; }
+  to  { height:200px; }
 }
 /* Change the background color of the dropdown button when the dropdown content is shown */
 

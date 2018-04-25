@@ -31,14 +31,14 @@ class SendMessage extends PureComponent {
     return(
       <div>
         <form>
-        <h4>New message:</h4>
-        <input type='text' name='reciever' placeholder='Reciever' onChange={this.handleReciever.bind(this)}/><br/>
-        <textarea type='text'  name='content' rows='5' cols='60' placeholder='Content'
-          onChange={this.handleContent.bind(this)} /><br/>
+          <h4>New message:</h4>
+          <input type='text' name='reciever' placeholder='Reciever' onChange={this.handleReciever.bind(this)}/><br/>
+          <textarea type='text'  name='content' rows='5' cols='60' placeholder='Content'
+            onChange={this.handleContent.bind(this)} /><br/>
           <button
-          className='reply_button'
-          onClick={ this.submitForm.bind(this) }
-          >Submit</button>
+            className='reply_button'
+            onClick={ this.submitForm.bind(this) }
+            >Submit</button>
         </form>
       </div>
     )

@@ -1,7 +1,7 @@
 import { replace } from 'react-router-redux'
 import API from '../../api/client'
 import { LOAD_ERROR, LOAD_SUCCESS, APP_DONE_LOADING } from '../loading'
-
+import getProfile from './get-profile'
 import websocket from '../websocket'
 
 export const USER_SIGNED_IN = 'USER_SIGNED_IN'
@@ -26,6 +26,7 @@ export default ({ email, password}) => {
         return api.get('/users/me')
       })
       .then((res) => {
+        getProfile(res.body._id)
         dispatch({
           type: USER_SIGNED_IN,
           payload: res.body
