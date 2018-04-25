@@ -26,11 +26,11 @@ export default ({ email, password}) => {
         return api.get('/users/me')
       })
       .then((res) => {
-        getProfile(res.body._id)
         dispatch({
           type: USER_SIGNED_IN,
           payload: res.body
         })
+        dispatch(getProfile(res.body._id))
       })
       .catch((error) => {
         dispatch({ type: APP_DONE_LOADING })

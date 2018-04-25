@@ -39,19 +39,7 @@ class Nav extends PureComponent {
   event.preventDefault()
   this.props.signOut()
   }
-
-  signIn = (event) => {
-    event.preventDefault()
-    this.props.push('/sign-in')
-  }
-
-  signUp = (event) => {
-    event.preventDefault()
-    this.props.push('/sign-up')
-  }
-  profile = (event) => {
-    this.props.push('/profile')
-  }
+  
   dropDown = () => {
     let profile = this.props.profile
     let email = this.props.email
