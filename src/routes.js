@@ -14,6 +14,7 @@ import {
   About
 } from './pages'
 import ShowMessage from './components/Messages/showMessage'
+import ShowOtherProfile from './components/Profiles/showOtherProfile'
 // import Overview from './containers/Overview'
 // import Article from './containers/Article'
 // import SignIn from './containers/SignIn'
@@ -28,7 +29,7 @@ export default class Routes extends Component {
         <Route path='/sign-in' component={SignIn} />
         <Route path='/sign-up' component={SignUp} />
         <Route exact path='/profile' component={Profile} />
-        <Route path='/profile/:profileId' component={Profile}/>
+        <Route path='/profile/:profileId' component={ShowOtherProfile}/>
         <Route exact path='/articles' component={Article} />
         <Route path='/articles/:category' component={Article} />
         <Route exact path='/contact' component={Contact} />

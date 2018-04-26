@@ -30,7 +30,8 @@ button.selected_button{
 .profile{
   position: relative;
   /* top:  -30% !important; */
-  left: 10% !important;
+  left: 30% !important;
+  width: 50%;
 }
 
 .odd{

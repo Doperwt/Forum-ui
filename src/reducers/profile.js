@@ -5,17 +5,24 @@ import { CLEAR_PROFILE } from '../actions/user/sign-out'
 export default ( state = [], { type , payload } = { } ) => {
   switch (type) {
     case GOT_PROFILE :
-      return [payload]
+      return [...state,payload]
 
     case UPDATED_PROFILE :
-      return [payload]  
+      let updatedState = state.map((profile)=>{
+        if(profile._id===payload._id){
+          return payload
+        } else {
+          return profile
+        }
+      })
+      return updatedState
 
     case CLEAR_PROFILE :
       return []
     // case 'PROFILE_CREATED' :
     //   return [ ...payload ]
     case NO_PROFILE :
-      return []
+      return state
 
     default :
       return state

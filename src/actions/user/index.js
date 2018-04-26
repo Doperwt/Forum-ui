@@ -1,4 +1,4 @@
-import getProfile from './get-profile'
+import getProfile,{specificProfile} from './get-profile'
 import signIn from './sign-in'
 import signOut from './sign-out'
 import signUp from './sign-up'
@@ -9,5 +9,6 @@ export {
   signIn,
   signOut,
   signUp,
-  updateProfile
+  updateProfile,
+  specificProfile
 }

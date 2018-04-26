@@ -19,7 +19,8 @@ class About extends PureComponent {
 
         <p>You can currently make a User account/profile without e-mail verification, password is encrypted and handled by passport and JWT package</p>
 
-        <p>Current features are, sidebar with all article categories, Article CRUD, Reply CRUD, profile creation/updating, message creation, dynamic sizing</p>
+        <p>Current features are, sidebar with all article categories, Article CRUD, Reply CRUD, profile creation/updating, message creation, dynamic sizing<br/>
+        the site is not currently mobile friendly and not all bugs have been squashed</p>
       </div>
     )
   }

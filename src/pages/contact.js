@@ -24,7 +24,7 @@ class Contact extends PureComponent {
         You can send me a message at r.f.denouden@gmail.com<br/>
         On <a href='https://www.linkedin.com/in/robert-den-ouden-3747a125/'>LinkedIn</a><br/>
         Look at my projects on <a href='https://github.com/Doperwt' >Github</a><br/>
-        Or on this site with a simple message <a onClick={this.goRoute.bind(this,myProfile)}>from the Profile page</a>
+        Or on this site with a simple message from the <a className='anchor' onClick={this.goRoute.bind(this,myProfile)}>Profile page</a>
         </p>
       </div>
     )

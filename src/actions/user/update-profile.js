@@ -7,7 +7,7 @@ const api = new API()
 
 export default (userId,profile) => {
   return dispatch => {
-    api.post(`/profile/${userId}`,profile)
+    api.post(`/profile`,profile)
     .then((result) => {
       dispatch({ type: LOAD_SUCCESS })
       dispatch({type:UPDATED_PROFILE,payload:result.body})
