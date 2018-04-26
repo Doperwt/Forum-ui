@@ -4,6 +4,7 @@ import profile from './profile'
 import categories from './categories'
 import replies from './replies'
 import messages from './messages'
+import names from './names'
 
 export default {
   currentUser,
@@ -11,5 +12,6 @@ export default {
   profile,
   categories,
   replies,
-  messages
+  messages,
+  names
 }

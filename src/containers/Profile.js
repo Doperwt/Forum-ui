@@ -22,10 +22,8 @@ class Profile extends PureComponent {
       getProfile(userId)
     } else {
       console.log('wat',!!userId,!!profile)
-      console.log(profile,userId)
     }
     console.log('wat',!profile , !!userId)
-    console.log(profile,userId)
     this.setState({
       editHidden:true,
     })
@@ -47,7 +45,6 @@ class Profile extends PureComponent {
   render(){
     const { profile,userId } = this.props
     let hidden = this.state.editHidden
-    console.log(profile)
     let ownProfile
     if(!profile){ ownProfile=true} else { ownProfile = profile.userId===userId }
     if(!profile){hidden=false}

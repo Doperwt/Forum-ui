@@ -1,0 +1,8 @@
+.nameBox{
+  border: 1px dotted lightgrey;
+  width: 30%;
+  position: relative;
+  left:35%;
+  text-align: center;
+  align-self: center;
+}

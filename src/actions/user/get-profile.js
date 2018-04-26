@@ -10,7 +10,6 @@ const api = new API()
 export default (userId) => {
   return dispatch => {
     dispatch({ type: APP_LOADING })
-    console.log(userId)
     api.get(`/profile/${userId}`)
     .then((result) => {
       if(result.body==='not found'){
