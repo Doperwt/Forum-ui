@@ -5,17 +5,17 @@ import { CLEAR_PROFILE } from '../actions/user/sign-out'
 export default ( state = [], { type , payload } = { } ) => {
   switch (type) {
     case GOT_PROFILE :
-      return payload
+      return [payload]
 
     case UPDATED_PROFILE :
-      return payload
+      return [payload]  
 
     case CLEAR_PROFILE :
-      return null
+      return []
     // case 'PROFILE_CREATED' :
     //   return [ ...payload ]
     case NO_PROFILE :
-      return null
+      return []
 
     default :
       return state

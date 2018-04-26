@@ -13,7 +13,7 @@ class ShowArticle extends PureComponent {
   static propTypes = {
     replies: PropTypes.array,
     deleteArticle: PropTypes.func.isRequired,
-    getReplies: PropTypes.func.isRequired,  
+    getReplies: PropTypes.func.isRequired,
     }
   constructor(){
     super()
@@ -54,12 +54,12 @@ class ShowArticle extends PureComponent {
   render() {
     const { signedIn,replies,article,userId } = this.props
     const repliesHidden = this.state.repliesHidden
-    let editArticleHidden = this.state.editArticleHidden
+    const editArticleHidden = this.state.editArticleHidden
     const articleReplies = replies.filter((r) => r.articleId === article._id)
-    let day = article.createdAt.slice(0,10)
-    let time = article.createdAt.slice(11,16)
-    let updated
     let { createdAt,updatedAt,authorName,author,_id } = article
+    const day = createdAt.slice(0,10)
+    const time = createdAt.slice(11,16)
+    let updated
     if(createdAt!==updatedAt){
       updated = `  Edited on ${updatedAt.slice(0,10)}, ${updatedAt.slice(11,16)}`
     }
@@ -85,7 +85,7 @@ class ShowArticle extends PureComponent {
           {signedIn?<NewReply ArticleId={_id}/>:null}
         </div>
         <button className='button' onClick={this.toggleReplies.bind(this)}>
-          {repliesHidden?'show replies':'hide replies'}
+          {repliesHidden?`show ${ articleReplies.length } replies`:'hide replies'}
         </button>
       </div>
     )

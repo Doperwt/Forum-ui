@@ -42,7 +42,7 @@ const mapStateToProps = ({ currentUser, profile }) => {
   return {
     signedIn: (!!currentUser && !!currentUser._id),
     userId: currentUser._id,
-    profile: profile
+    profile: profile[0]
   }
 }
 

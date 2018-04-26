@@ -14,14 +14,15 @@ class Nav extends PureComponent {
     signOut: PropTypes.func.isRequired,
     getProfile: PropTypes.func.isRequired,
   }
-  // componentWillMount() {
-  //   const { userId,getProfile } = this.props
-  //   if(!!userId){
-  //     getProfile(userId)
-  //   } else {
-  //     console.log('wat')
-  //   }
-  // }
+
+  componentWillMount() {
+    const { userId,getProfile,profile } = this.props
+    if(!!userId&&!profile){
+      getProfile(userId)
+    } else {
+    }
+    console.log('wat',!!userId, !profile)
+  }
   // componentWillReceiveProps(){
   //   const { userId,getProfile } = this.props
   //   if(!!userId){
@@ -39,7 +40,7 @@ class Nav extends PureComponent {
   event.preventDefault()
   this.props.signOut()
   }
-  
+
   dropDown = () => {
     let profile = this.props.profile
     let email = this.props.email
@@ -91,7 +92,7 @@ class Nav extends PureComponent {
 const mapStateToProps = ({ currentUser,profile,messages }) => ({
   signedIn: (!!currentUser && !!currentUser._id),
   userId: (!currentUser? null:currentUser._id),
-  profile: profile,
+  profile: profile[0],
   email: (!currentUser? null:currentUser.email),
 })
 

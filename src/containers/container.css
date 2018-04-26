@@ -29,6 +29,13 @@ button.selected_button{
 
 .profile{
   position: relative;
-  top:  -20% !important;
+  /* top:  -30% !important; */
   left: 10% !important;
+}
+
+.odd{
+  background-color: lightgrey;
+}
+.even{
+  background-color: white;
 }

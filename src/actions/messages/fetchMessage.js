@@ -9,7 +9,7 @@ const api = new API()
 
 export default (userId) => {
   return (dispatch) => {
-    console.log('gonnagetsomemessagesmkay')
+    // console.log('gonnagetsomemessagesmkay',userId)
     api.get(`/messages/${userId}`)
       .then((result) => {
         dispatch({

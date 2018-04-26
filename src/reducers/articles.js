@@ -34,7 +34,6 @@ export default ( state = [], { type , payload } = { } ) => {
 
     case ARTICLE_DELETED :
       let filterredState = state.filter(article => article._id!==payload._id )
-      console.log(payload)
       return filterredState
 
     default :
