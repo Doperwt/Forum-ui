@@ -1,6 +1,7 @@
 import { FETCHED_ARTICLES, FETCHED_ONE_ARTICLE } from '../actions/articles/fetchArticles'
 import { NEW_ARTICLE } from '../actions/articles/newArticle'
 import { ARTICLE_UPDATED } from '../actions/articles/editArticle'
+import { ARTICLE_DELETED } from '../actions/articles/deleteArticle'
 export default ( state = [], { type , payload } = { } ) => {
   switch (type) {
     case FETCHED_ARTICLES :
@@ -30,6 +31,11 @@ export default ( state = [], { type , payload } = { } ) => {
         }
       })
       return updatedState
+
+    case ARTICLE_DELETED :
+      let filterredState = state.filter(article => article._id!==payload._id )
+      console.log(payload)
+      return filterredState
 
     default :
       return state

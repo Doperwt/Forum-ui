@@ -129,14 +129,17 @@
   height: auto;
   background-color: lightgrey;
   color: black;
-  border: 1px solid black;
+  border: 5px solid grey;
   margin: 0px;
   padding: 10px;
   border-radius: 5px;
   box-shadow: 5px 5px 5px 1px lightgrey;
   z-index: 1;
-  /* border-right: 30px solid lightgrey;
-  border-top: 50px solid lightgrey; */
+  border-top-width: 50px;
+  border-bottom-width: 50px;
+  box-shadow: 5px 5px 5px 1px lightgrey;
+  clip-path: polygon(0% 45px, 100% 0, 100% calc(100% - 45px), 0 100%);
+  -webkit-clip-path: polygon(0% 45px, 100% 0, 100% calc(100% - 45px), 0 100%);
 }
 
 .single_article:hover{
