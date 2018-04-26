@@ -5,15 +5,19 @@ import NewReply from './Replies/NewReply'
 import Reply from './Replies/Replies'
 import getReplies from '../../actions/articles/fetchReplies'
 import EditArticle from './editArticle'
+import deleteArticle from '../../actions/articles/deleteArticle'
+
 import './articles.css'
 
 class ShowArticle extends PureComponent {
   static propTypes = {
-    replies: PropTypes.array
+    replies: PropTypes.array,
+    deleteArticle: PropTypes.func.isRequired,
+    getReplies: PropTypes.func.isRequired,  
     }
   constructor(){
     super()
-    this.state = { repliesHidden: true,editArticleHidden:true }
+    this.state = { repliesHidden: true,editArticleHidden:true,deleteVerification:false }
   }
 
   componentWillMount(){
@@ -26,6 +30,15 @@ class ShowArticle extends PureComponent {
   }
   toggleEditArticle(){
     this.setState({editArticleHidden:!this.state.editArticleHidden})
+  }
+  setDelete(){
+    this.setState({deleteVerification:!this.state.deleteVerification})
+  }
+  deleteArticle(){
+    const articleId = this.props.article._id
+    const { deleteArticle } = this.props
+    deleteArticle(articleId)
+    console.log(articleId)
   }
   showArticle(article){
     return(
@@ -50,14 +63,22 @@ class ShowArticle extends PureComponent {
     if(createdAt!==updatedAt){
       updated = `  Edited on ${updatedAt.slice(0,10)}, ${updatedAt.slice(11,16)}`
     }
+    let deleteVerification = this.state.deleteVerification
     let isAuthor = userId===author
     return(
       <div className='article'>
-      <span className='article_header'><span onClick={this.redirectProfile.bind(this)}>{authorName} </span><span>posted on { day } at {time}</span><span>{updated}</span></span>
+      <span className='article_header'>
+        <span onClick={this.redirectProfile.bind(this)}>{authorName} </span>
+        <span>posted on { day } at {time}</span><span>{updated}</span>
+      </span>
         {editArticleHidden?this.showArticle(article):<EditArticle article={article} />  }
 
         <button className='button' onClick={this.toggleEditArticle.bind(this)} hidden={!isAuthor}>
           {editArticleHidden?'Edit article':'Cancel'}
+        </button>
+        <button hidden={!isAuthor}
+          onClick={deleteVerification?this.deleteArticle.bind(this):this.setDelete.bind(this)}>
+          {deleteVerification?'are you sure?':'delete'}
         </button>
         <div hidden={repliesHidden}>
           <Reply replies={articleReplies} userId={userId}/>
@@ -78,8 +99,8 @@ const mapStateToProps = ({ currentUser,replies,profile },match) => {
     signedIn: (!!currentUser && !!currentUser._id),
     userId: (!!currentUser?currentUser._id:null),
     replies: replies,
-    authorId: (!!currentUser?(!!profile.fullName?profile.fullName:currentUser.email.split('@')[0]):null)
+    authorId: (!!currentUser?(!!profile?profile.fullName:currentUser.email.split('@')[0]):null)
   }
 }
 
-export default connect(mapStateToProps,{getReplies})(ShowArticle)
+export default connect(mapStateToProps,{getReplies,deleteArticle})(ShowArticle)

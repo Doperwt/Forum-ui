@@ -18,10 +18,14 @@ class Profile extends PureComponent {
   componentWillMount() {
     const { push, signedIn,profile,userId,getProfile } = this.props
     if (!signedIn) push('/sign-in')
-    if(!!profile){
+    if(!profile[0] && !!userId){
       getProfile(userId)
     } else {
+      console.log('wat',!!userId,!!profile)
+      console.log(profile,userId)
     }
+    console.log('wat',!profile[0] , !!userId)
+    console.log(profile[0],userId)
     this.setState({
       editHidden:true,
     })

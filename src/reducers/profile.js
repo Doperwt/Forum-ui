@@ -1,5 +1,6 @@
-import { GOT_PROFILE,COLLECTED_PROFILES,NO_PROFILE } from '../actions/user/get-profile'
+import { GOT_PROFILE,NO_PROFILE } from '../actions/user/get-profile'
 import { UPDATED_PROFILE } from '../actions/user/update-profile'
+import { CLEAR_PROFILE } from '../actions/user/sign-out'
 
 export default ( state = [], { type , payload } = { } ) => {
   switch (type) {
@@ -9,8 +10,8 @@ export default ( state = [], { type , payload } = { } ) => {
     case UPDATED_PROFILE :
       return payload
 
-    case COLLECTED_PROFILES :
-      return payload
+    case CLEAR_PROFILE :
+      return null
     // case 'PROFILE_CREATED' :
     //   return [ ...payload ]
     case NO_PROFILE :

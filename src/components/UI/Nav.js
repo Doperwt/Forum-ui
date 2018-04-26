@@ -14,16 +14,22 @@ class Nav extends PureComponent {
     signOut: PropTypes.func.isRequired,
     getProfile: PropTypes.func.isRequired,
   }
-  componentWillMount() {
-    const { userId,getProfile } = this.props
-    if(userId!==null){
-      getProfile(userId)
-    } else {
-      console.log('wat')
-    }
-  }
-
-
+  // componentWillMount() {
+  //   const { userId,getProfile } = this.props
+  //   if(!!userId){
+  //     getProfile(userId)
+  //   } else {
+  //     console.log('wat')
+  //   }
+  // }
+  // componentWillReceiveProps(){
+  //   const { userId,getProfile } = this.props
+  //   if(!!userId){
+  //     getProfile(userId)
+  //   } else {
+  //     console.log('wat')
+  //   }
+  // }
   goRoute = (route,event) => {
     event.preventDefault()
     this.props.push(route)
@@ -33,19 +39,7 @@ class Nav extends PureComponent {
   event.preventDefault()
   this.props.signOut()
   }
-
-  signIn = (event) => {
-    event.preventDefault()
-    this.props.push('/sign-in')
-  }
-
-  signUp = (event) => {
-    event.preventDefault()
-    this.props.push('/sign-up')
-  }
-  profile = (event) => {
-    this.props.push('/profile')
-  }
+  
   dropDown = () => {
     let profile = this.props.profile
     let email = this.props.email
@@ -54,13 +48,13 @@ class Nav extends PureComponent {
     if (!!email) {
       displayName = email
     }
-    if(profile!==null){
+    if(!!profile){
       displayName = profile.fullName
     }
     if(!this.props.signedIn){
       return(
         <span className='dropdown'>
-          <button className='dropbtn'>Sign in/up</button>
+          <button className='dropbtn topbtn'>Sign in/up</button>
           <div className='dropdown-content'>
             <button className='dropbtn' onClick={this.goRoute.bind(this,'/sign-in')}>Sign in</button><hr />
             <button className='dropbtn' onClick={this.goRoute.bind(this,'/sign-up')}>Sign up</button>

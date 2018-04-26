@@ -9,17 +9,19 @@
     margin:5px;
     cursor: pointer;
 }
+
 .topbtn{
   border:1px black solid !important;
-
 }
+
 .dropbtn:hover{
   animation: dropbtnhover;
   animation-duration:  1s;
   background-color: lightgrey;
 }
+
 @keyframes dropbtnhover {
-  from { background-color: inherit;
+  from { background-color: grey;
   }
   to {
     background-color: lightgrey;
@@ -58,11 +60,12 @@
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
     display: block;
-    animation: droppingdown 1s  ;
+    /* animation: droppingdown 1s  ; */
 }
+
 @keyframes droppingdown {
-  from { height: 0%; }
-  to  { height:auto; }
+  from { height: 0px; }
+  to  { height:200px; }
 }
 /* Change the background color of the dropdown button when the dropdown content is shown */
 
@@ -88,9 +91,11 @@
   cursor: pointer;
   left: 25%;
 }
+
 .navText:hover{
   color:darkgrey;
 }
+
 .logo{
   position: absolute;
   width:10%;
@@ -98,6 +103,7 @@
   cursor: pointer;
   max-height: 100%;
 }
+
 .navTitle{
   left: 10%;
   font-size: 250%;
@@ -123,12 +129,17 @@
   height: auto;
   background-color: lightgrey;
   color: black;
-  border: 1px solid black;
+  border: 5px solid grey;
   margin: 0px;
   padding: 10px;
   border-radius: 5px;
   box-shadow: 5px 5px 5px 1px lightgrey;
   z-index: 1;
+  border-top-width: 50px;
+  border-bottom-width: 50px;
+  box-shadow: 5px 5px 5px 1px lightgrey;
+  clip-path: polygon(0% 45px, 100% 0, 100% calc(100% - 45px), 0 100%);
+  -webkit-clip-path: polygon(0% 45px, 100% 0, 100% calc(100% - 45px), 0 100%);
 }
 
 .single_article:hover{
@@ -155,9 +166,6 @@
   border-radius: 5px;
   box-shadow: 5px 5px 5px 1px lightgrey;
 }
-
-
-
 
 @keyframes onhover {
   from { background-color: inherit;

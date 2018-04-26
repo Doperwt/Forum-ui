@@ -1,7 +1,7 @@
 import { replace } from 'react-router-redux'
 import API from '../../api/client'
 import { LOAD_ERROR, LOAD_SUCCESS, APP_DONE_LOADING } from '../loading'
-
+import getProfile from './get-profile'
 import websocket from '../websocket'
 
 export const USER_SIGNED_IN = 'USER_SIGNED_IN'
@@ -30,6 +30,7 @@ export default ({ email, password}) => {
           type: USER_SIGNED_IN,
           payload: res.body
         })
+        dispatch(getProfile(res.body._id))
       })
       .catch((error) => {
         dispatch({ type: APP_DONE_LOADING })

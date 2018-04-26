@@ -9,6 +9,7 @@ const api = new API()
 
 export default (userId) => {
   return (dispatch) => {
+    console.log('gonnagetsomemessagesmkay')
     api.get(`/messages/${userId}`)
       .then((result) => {
         dispatch({
@@ -24,7 +25,17 @@ export default (userId) => {
       })
   }
 }
-
+export const getSingleMessage = (messageId) => {
+  return dispatch => {
+    api.get(`/message/${messageId}`)
+      .then((result) => {
+        dispatch({
+          type: FETCHED_ONE_MESSAGE,
+          payload: result.body
+        })
+      })
+  }
+}
 export const clearMessages = () => {
   return dispatch => {
     dispatch({

@@ -14,33 +14,41 @@ class Message extends PureComponent {
   }
 
   componentWillMount() {
-    const {  getMessages,clearMessages,userId } = this.props
+    const {  getMessages,clearMessages,userId,messages } = this.props
+    console.log('mount',userId,messages)
     clearMessages()
-    console.log(userId)
     getMessages(userId)
     subscribeToWebsocket()
   }
 
   showMessage(message) {
-    const clicky = (id) => {
-      this.push(`/messages/${id}`)
+    let messageReciever = `from ${message.authorName}`
+    const day = message.createdAt.slice(0,10)
+    const time = message.createdAt.slice(11,16)
+    const clicky = (id,event) => {
+      this.props.push(`/message/${id}`)
+    }
+    const isAuthor = message.author===this.props.userId
+    if(isAuthor){
+      messageReciever = `to ${message.recieverName}`
     }
     return(
-      <div><p onClick={clicky(message.id)}>From {message.author} on {message.createdAt.slice(0,10)},{message.createdAt.slice(11,16)}</p></div>
+      <div key={message._id}>
+        <p onClick={clicky.bind(this,message._id)}>{messageReciever} on {day},{time}</p>
+      </div>
     )
   }
 
   render(){
-    const signedIn = this.props.signedIn
     const {recievedMessages,sentMessages} = this.props
 
     return(
-      <div className='main'>
+      <div className='profile'>
         <p>Messages sent to you:</p>
-        {recievedMessages.map(this.showMessage)}
+        {recievedMessages.map(this.showMessage.bind(this))}
         <p>Messages sent by you</p>
-        {sentMessages.map(this.showMessage)}
-        {signedIn?<SendMessage />:null}
+        {sentMessages.map(this.showMessage.bind(this))}
+        <SendMessage />
       </div>
     )
   }
