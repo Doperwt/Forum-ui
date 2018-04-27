@@ -9,22 +9,21 @@ import noPic from '../../lib/GenericImages/118781.png'
 class ShowOtherProfile extends PureComponent {
   static propTypes = {
     push: PropTypes.func.isRequired,
-    getProfile: PropTypes.func.isRequired,
+    specificProfile: PropTypes.func.isRequired,
     signedIn: PropTypes.bool
   }
   componentWillMount() {
-    const { push,profile,profileId,specificProfile } = this.props
-    console.log(profile,profileId)
-    if(!profile){
+    const { filteredProfile,profileId,specificProfile } = this.props
+    if(!filteredProfile){
       specificProfile(profileId)
     }
     subscribeToWebsocket()
   }
 
   render(){
-    const profile = this.props.profile
+    const profile = this.props.filteredProfile
     return(
-      <div className='profile main'>
+      <div className='profile main' >
         <img className='profile_pic' src={!!profile? (!!profile.picture?profile.picture:noPic):noPic} alt={!!profile?profile.fullName:'no name'} />
         <div className='input'>
           <p>{!!profile ? profile.fullName:'Profile not found'}</p>
@@ -41,11 +40,10 @@ class ShowOtherProfile extends PureComponent {
 const mapStateToProps = ({ currentUser, profile },match) => {
   const profileId = match.match.params.profileId
   let filteredProfile = profile.filter(p => p._id===profileId)[0]
-  console.log(profile,profileId,filteredProfile)
   return {
     signedIn: (!!currentUser && !!currentUser._id),
     userId: currentUser._id,
-    profile: filteredProfile,
+    filteredProfile: filteredProfile,
     profileId:profileId
   }
 }

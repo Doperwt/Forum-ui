@@ -33,10 +33,14 @@ export const specificProfile = (id) => {
     dispatch({ type: APP_LOADING })
     api.get(`/profile/${id}`)
       .then((result) => {
-        dispatch({
-          type:GOT_PROFILE,
-          payload:result.body
-        })
+        if(!!result.body){
+          dispatch({
+            type:GOT_PROFILE,
+            payload:result.body
+          })
+        }else {
+          dispatch({ type:NO_PROFILE })
+        }
       })
       .catch((err) => {
         dispatch({
