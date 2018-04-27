@@ -21,29 +21,32 @@ class Message extends PureComponent {
     subscribeToWebsocket()
   }
 
-  showMessage(message) {
+  showMessage(message,index) {
     let messageReciever = `from ${message.authorName}`
     const day = message.createdAt.slice(0,10)
     const time = message.createdAt.slice(11,16)
     const clicky = (id,event) => {
       this.props.push(`/message/${id}`)
     }
+    const odd = (index%2===0?false:true)
+    // this.setState({odd:odd})
+    console.log(index,odd)
     const isAuthor = message.author===this.props.userId
     if(isAuthor){
       messageReciever = `to ${message.recieverName}`
     }
     return(
-      <div key={message._id}>
+      <div key={message._id} className={odd?'odd':'even'}>
         <p onClick={clicky.bind(this,message._id)}>{messageReciever} on {day},{time}</p>
       </div>
     )
   }
 
   render(){
-    const {recievedMessages,sentMessages} = this.props
+    const { recievedMessages,sentMessages } = this.props
 
     return(
-      <div className='profile'>
+      <div className='profile main'>
         <p>Messages sent to you:</p>
         {recievedMessages.map(this.showMessage.bind(this))}
         <p>Messages sent by you</p>

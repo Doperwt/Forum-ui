@@ -4,12 +4,11 @@ import { LOAD_ERROR } from '../loading'
 export const FETCHED_MESSAGES = 'FETCHED_MESSAGES'
 export const FETCHED_ONE_MESSAGE = 'FETCHED_ONE_MESSAGE'
 export const CLEAR_MESSAGE = 'CLEAR_MESSAGE'
-
 const api = new API()
 
 export default (userId) => {
   return (dispatch) => {
-    console.log('gonnagetsomemessagesmkay')
+    // console.log('gonnagetsomemessagesmkay',userId)
     api.get(`/messages/${userId}`)
       .then((result) => {
         dispatch({

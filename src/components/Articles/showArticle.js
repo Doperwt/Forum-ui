@@ -6,14 +6,15 @@ import Reply from './Replies/Replies'
 import getReplies from '../../actions/articles/fetchReplies'
 import EditArticle from './editArticle'
 import deleteArticle from '../../actions/articles/deleteArticle'
-
+import { push } from 'react-router-redux'
+import { specificProfile } from '../../actions/user/get-profile'
 import './articles.css'
 
 class ShowArticle extends PureComponent {
   static propTypes = {
     replies: PropTypes.array,
     deleteArticle: PropTypes.func.isRequired,
-    getReplies: PropTypes.func.isRequired,  
+    getReplies: PropTypes.func.isRequired,
     }
   constructor(){
     super()
@@ -21,7 +22,8 @@ class ShowArticle extends PureComponent {
   }
 
   componentWillMount(){
-    const { article,getReplies } = this.props
+    const { article,getReplies,specificProfile } = this.props
+    specificProfile(article.author)
     getReplies(article._id)
   }
 
@@ -38,7 +40,6 @@ class ShowArticle extends PureComponent {
     const articleId = this.props.article._id
     const { deleteArticle } = this.props
     deleteArticle(articleId)
-    console.log(articleId)
   }
   showArticle(article){
     return(
@@ -48,27 +49,30 @@ class ShowArticle extends PureComponent {
       </div>
     )
   }
-  redirectProfile(){
-
+  redirectProfile(event){
+    const profile = event.props.filteredProfile
+    const { push } = event.props
+    push(`/profile/${profile._id}`)
   }
   render() {
-    const { signedIn,replies,article,userId } = this.props
+    const { signedIn,replies,article,userId,filteredProfile } = this.props
     const repliesHidden = this.state.repliesHidden
-    let editArticleHidden = this.state.editArticleHidden
+    const editArticleHidden = this.state.editArticleHidden
     const articleReplies = replies.filter((r) => r.articleId === article._id)
-    let day = article.createdAt.slice(0,10)
-    let time = article.createdAt.slice(11,16)
-    let updated
     let { createdAt,updatedAt,authorName,author,_id } = article
+    const day = createdAt.slice(0,10)
+    const time = createdAt.slice(11,16)
+    let updated
     if(createdAt!==updatedAt){
       updated = `  Edited on ${updatedAt.slice(0,10)}, ${updatedAt.slice(11,16)}`
     }
+
     let deleteVerification = this.state.deleteVerification
     let isAuthor = userId===author
     return(
       <div className='article'>
       <span className='article_header'>
-        <span onClick={this.redirectProfile.bind(this)}>{authorName} </span>
+        <span onClick={!!filteredProfile?this.redirectProfile.bind(filteredProfile._id,this):null}>{authorName} </span>
         <span>posted on { day } at {time}</span><span>{updated}</span>
       </span>
         {editArticleHidden?this.showArticle(article):<EditArticle article={article} />  }
@@ -85,7 +89,7 @@ class ShowArticle extends PureComponent {
           {signedIn?<NewReply ArticleId={_id}/>:null}
         </div>
         <button className='button' onClick={this.toggleReplies.bind(this)}>
-          {repliesHidden?'show replies':'hide replies'}
+          {repliesHidden?`show ${ articleReplies.length } replies`:'hide replies'}
         </button>
       </div>
     )
@@ -95,12 +99,14 @@ class ShowArticle extends PureComponent {
 const mapStateToProps = ({ currentUser,replies,profile },match) => {
   const article = match.article
   getReplies(article._id)
+  let filteredProfile = profile.filter(p => p.userId === article.author)[0]
   return {
     signedIn: (!!currentUser && !!currentUser._id),
     userId: (!!currentUser?currentUser._id:null),
     replies: replies,
+    filteredProfile:filteredProfile,
     authorId: (!!currentUser?(!!profile?profile.fullName:currentUser.email.split('@')[0]):null)
   }
 }
 
-export default connect(mapStateToProps,{getReplies,deleteArticle})(ShowArticle)
+export default connect(mapStateToProps,{ getReplies,deleteArticle,push,specificProfile })(ShowArticle)

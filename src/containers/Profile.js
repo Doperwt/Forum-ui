@@ -18,14 +18,12 @@ class Profile extends PureComponent {
   componentWillMount() {
     const { push, signedIn,profile,userId,getProfile } = this.props
     if (!signedIn) push('/sign-in')
-    if(!profile[0] && !!userId){
+    if(!profile && !!userId){
       getProfile(userId)
     } else {
       console.log('wat',!!userId,!!profile)
-      console.log(profile,userId)
     }
-    console.log('wat',!profile[0] , !!userId)
-    console.log(profile[0],userId)
+    console.log('wat',!profile , !!userId)
     this.setState({
       editHidden:true,
     })
@@ -48,10 +46,10 @@ class Profile extends PureComponent {
     const { profile,userId } = this.props
     let hidden = this.state.editHidden
     let ownProfile
-    if(profile === null){ ownProfile=true} else { ownProfile = profile.userId===userId }
+    if(!profile){ ownProfile=true} else { ownProfile = profile.userId===userId }
     if(!profile){hidden=false}
     return(
-      <div className='profile'>
+      <div className='profile main'>
         <Title content='Profile' level={2} />
         {hidden?<ShowProfile profile={profile}/>:<EditProfile profile={profile} />}
         <button onClick={ this.toggleEdit.bind(this)} hidden={!ownProfile}>{hidden? 'Edit profile':'Cancel'}</button>
@@ -64,7 +62,7 @@ const mapStateToProps = ({ currentUser, profile }) => {
   return {
     signedIn: (!!currentUser && !!currentUser._id),
     userId: currentUser._id,
-    profile: profile
+    profile: profile[0]
   }
 }
 

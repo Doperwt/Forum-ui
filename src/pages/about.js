@@ -15,7 +15,12 @@ class About extends PureComponent {
     return(
       <div className='article main'>
         <Title content='About' level={2} />
-        <p>Overview</p>
+        <p>The forum site uses a React-Redux front end and a Express.js back end with MongoDB.</p>
+
+        <p>You can currently make a User account/profile without e-mail verification, password is encrypted and handled by passport and JWT package</p>
+
+        <p>Current features are, sidebar with all article categories, Article CRUD, Reply CRUD, profile creation/updating, message creation, dynamic sizing<br/>
+        the site is not currently mobile friendly and not all bugs have been squashed</p>
       </div>
     )
   }

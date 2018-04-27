@@ -10,8 +10,7 @@ const api = new API()
 export default (userId) => {
   return dispatch => {
     dispatch({ type: APP_LOADING })
-    console.log(userId)
-    api.get(`/profile/${userId}`)
+    api.get(`/profile`)
     .then((result) => {
       if(result.body==='not found'){
         dispatch({type: NO_PROFILE })
@@ -29,15 +28,19 @@ export default (userId) => {
   }
 }
 
-export const specificProfiles = (ids) => {
+export const specificProfile = (id) => {
   return dispatch => {
     dispatch({ type: APP_LOADING })
-    api.get(`/profiles`,ids)
+    api.get(`/profile/${id}`)
       .then((result) => {
-        dispatch({
-          type:COLLECTED_PROFILES,
-          payload:result
-        })
+        if(!!result.body){
+          dispatch({
+            type:GOT_PROFILE,
+            payload:result.body
+          })
+        }else {
+          dispatch({ type:NO_PROFILE })
+        }
       })
       .catch((err) => {
         dispatch({

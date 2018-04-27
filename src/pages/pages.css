@@ -6,3 +6,21 @@
   background-color: white;
   margin:5px;
 }
+.anchor{
+  background-color: lightgrey;
+}
+.anchor:hover{
+  animation: anchorize 1s;
+  background-color: black;
+  color: white;
+}
+@keyframes anchorize {
+  from {
+    background-color: lightgrey;
+    color: inherit;
+      }
+  to {
+    background-color: black;
+    color: white;
+  }
+}
