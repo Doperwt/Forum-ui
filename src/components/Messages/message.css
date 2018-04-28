@@ -6,3 +6,7 @@
   text-align: center;
   align-self: center;
 }
+.message{
+  left:20%;
+  top:-200px; 
+}

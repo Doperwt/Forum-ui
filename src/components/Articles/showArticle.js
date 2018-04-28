@@ -8,6 +8,7 @@ import EditArticle from './editArticle'
 import deleteArticle from '../../actions/articles/deleteArticle'
 import { push } from 'react-router-redux'
 import { specificProfile } from '../../actions/user/get-profile'
+import ShowPostTime from '../UI/showPostTime'
 import './articles.css'
 
 class ShowArticle extends PureComponent {
@@ -60,11 +61,11 @@ class ShowArticle extends PureComponent {
     const editArticleHidden = this.state.editArticleHidden
     const articleReplies = replies.filter((r) => r.articleId === article._id)
     let { createdAt,updatedAt,authorName,author,_id } = article
-    const day = createdAt.slice(0,10)
-    const time = createdAt.slice(11,16)
-    let updated
+    // const day = createdAt.slice(0,10)
+    // const time = createdAt.slice(11,16)
+    let updated = false
     if(createdAt!==updatedAt){
-      updated = `  Edited on ${updatedAt.slice(0,10)}, ${updatedAt.slice(11,16)}`
+      updated = true
     }
 
     let deleteVerification = this.state.deleteVerification
@@ -72,8 +73,8 @@ class ShowArticle extends PureComponent {
     return(
       <div className='article'>
       <span className='article_header'>
-        <span onClick={!!filteredProfile?this.redirectProfile.bind(filteredProfile._id,this):null}>{authorName} </span>
-        <span>posted on { day } at {time}</span><span>{updated}</span>
+        <span onClick={!!filteredProfile?this.redirectProfile.bind(filteredProfile.userId,this):null}>{authorName} </span>
+        {ShowPostTime(createdAt,'posted ')}<span>{updated?ShowPostTime(updatedAt,' edited '):null}</span>
       </span>
         {editArticleHidden?this.showArticle(article):<EditArticle article={article} />  }
 

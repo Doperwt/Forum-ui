@@ -15,10 +15,6 @@ import {
 } from './pages'
 import ShowMessage from './components/Messages/showMessage'
 import ShowOtherProfile from './components/Profiles/showOtherProfile'
-// import Overview from './containers/Overview'
-// import Article from './containers/Article'
-// import SignIn from './containers/SignIn'
-// import SignUp from './containers/SignUp'
 
 export default class Routes extends Component {
   render() {

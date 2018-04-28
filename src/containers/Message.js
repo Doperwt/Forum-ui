@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import SendMessage from '../components/Messages/sendMessage'
 import { connect as subscribeToWebsocket } from '../actions/websocket'
 import getMessages,{ clearMessages } from '../actions/messages/fetchMessage'
+import ShowPostTime from '../components/UI/showPostTime'
 import './container.css'
 
 class Message extends PureComponent {
@@ -23,8 +24,6 @@ class Message extends PureComponent {
 
   showMessage(message,index) {
     let messageReciever = `from ${message.authorName}`
-    const day = message.createdAt.slice(0,10)
-    const time = message.createdAt.slice(11,16)
     const clicky = (id,event) => {
       this.props.push(`/message/${id}`)
     }
@@ -37,7 +36,7 @@ class Message extends PureComponent {
     }
     return(
       <div key={message._id} className={odd?'odd':'even'}>
-        <p onClick={clicky.bind(this,message._id)}>{messageReciever} on {day},{time}</p>
+        <p onClick={clicky.bind(this,message._id)}>{messageReciever} {ShowPostTime(message.createdAt,' sent ')}</p>
       </div>
     )
   }
