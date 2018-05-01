@@ -5,7 +5,19 @@ import { UNREAD_MESSAGE_COUNT } from '../actions/messages/fetchMessage'
 export default ( state = [], { type , payload } = { } ) => {
   switch (type) {
     case GOT_PROFILE :
-      return [...state,payload]
+      let hasProfile = state.filter(profile => profile._id === payload._id)[0]
+      if(!!hasProfile){
+        const updatedState = state.map((profile) => {
+          if(profile._id===payload._id) {
+            return payload
+          } else {
+            return profile
+          }
+        })
+        return updatedState
+      } else {
+        return [...state,payload]
+      }
 
     case UPDATED_PROFILE :
       let updatedState = state.map((profile)=>{
