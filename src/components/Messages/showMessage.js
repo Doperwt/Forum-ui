@@ -3,6 +3,10 @@ import { push } from 'react-router-redux'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { getSingleMessage } from '../../actions/messages/fetchMessage'
+import SendMessage from './sendMessage'
+import ShowPostTime from '../UI/showPostTime'
+import './message.css'
+
 class ShowMessage extends PureComponent {
   static propTypes = {
     push: PropTypes.func.isRequired,
@@ -17,8 +21,15 @@ class ShowMessage extends PureComponent {
     if(!message){
       message = {content:'placeholder'}
     }
+    console.log(message)
     return(
-      <div>{message.content}</div>
+      <div className='message'><h4>{message.authorName}</h4>
+        <div>
+          <p>{!!message.createdAt?ShowPostTime(message.createdAt,'Send '):null}</p>
+          {message.content}
+        </div>
+        <SendMessage replyTo={message._id} recieverId={message.author} />
+      </div>
     )
   }
 }

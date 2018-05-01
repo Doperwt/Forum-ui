@@ -7,6 +7,7 @@ import './UI.css'
 import logo from '../../logo.svg'
 import getProfile from '../../actions/user/get-profile'
 
+
 class Nav extends PureComponent {
   static propTypes = {
     signedIn: PropTypes.bool.isRequired,
@@ -45,13 +46,16 @@ class Nav extends PureComponent {
     let profile = this.props.profile
     let email = this.props.email
     let displayName = 'Welcome'
+    let count = 0
     // console.log(!!profile)
     if (!!email) {
       displayName = email
     }
     if(!!profile){
       displayName = profile.fullName
+      count = profile.count
     }
+    console.log(count)
     if(!this.props.signedIn){
       return(
         <span className='dropdown'>
@@ -65,10 +69,10 @@ class Nav extends PureComponent {
     } else {
       return(
         <span className='dropdown'>
-          <button className='dropbtn topbtn'>{displayName}</button>
+          <button className='dropbtn topbtn'>{displayName} </button>
           <div className='dropdown-content'>
             <button className='dropbtn' onClick={this.goRoute.bind(this,'/profile')}>Profile</button>
-            <button className='dropbtn' onClick={this.goRoute.bind(this,'/messages')}>Messages</button>
+            <button className='dropbtn' onClick={this.goRoute.bind(this,'/messages')}>Messages{!(count===0)?`|${count}|`:null}</button>
             <button className='dropbtn' onClick={this.signOut}>Sign out</button>
           </div>
         </span>

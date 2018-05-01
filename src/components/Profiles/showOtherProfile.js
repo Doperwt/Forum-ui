@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { specificProfile } from '../../actions/user'
 import { connect as subscribeToWebsocket } from '../../actions/websocket'
 import noPic from '../../lib/GenericImages/118781.png'
+import  SendMessage from '../Messages/sendMessage'
 
 class ShowOtherProfile extends PureComponent {
   static propTypes = {
@@ -13,9 +14,9 @@ class ShowOtherProfile extends PureComponent {
     signedIn: PropTypes.bool
   }
   componentWillMount() {
-    const { filteredProfile,profileId,specificProfile } = this.props
+    const { filteredProfile,profileUserId,specificProfile } = this.props
     if(!filteredProfile){
-      specificProfile(profileId)
+      specificProfile(profileUserId)
     }
     subscribeToWebsocket()
   }
@@ -32,19 +33,20 @@ class ShowOtherProfile extends PureComponent {
           <hr />
           <p>{!!profile ? profile.bio:'this.state.bio'}</p>
         </div>
+        <SendMessage replyTo='user' recieverId={!!profile?profile.userId:null}/>
     </div>
     )
   }
 }
 
 const mapStateToProps = ({ currentUser, profile },match) => {
-  const profileId = match.match.params.profileId
-  let filteredProfile = profile.filter(p => p._id===profileId)[0]
+  const profileUserId = match.match.params.profileId
+  let filteredProfile = profile.filter(p => p.userId===profileUserId)[0]
   return {
     signedIn: (!!currentUser && !!currentUser._id),
     userId: currentUser._id,
     filteredProfile: filteredProfile,
-    profileId:profileId
+    profileUserId:profileUserId
   }
 }
 
