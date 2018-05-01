@@ -14,9 +14,9 @@ class ShowOtherProfile extends PureComponent {
     signedIn: PropTypes.bool
   }
   componentWillMount() {
-    const { filteredProfile,profileId,specificProfile } = this.props
+    const { filteredProfile,profileUserId,specificProfile } = this.props
     if(!filteredProfile){
-      specificProfile(profileId)
+      specificProfile(profileUserId)
     }
     subscribeToWebsocket()
   }
@@ -40,13 +40,13 @@ class ShowOtherProfile extends PureComponent {
 }
 
 const mapStateToProps = ({ currentUser, profile },match) => {
-  const profileId = match.match.params.profileId
-  let filteredProfile = profile.filter(p => p.userId===profileId)[0]
+  const profileUserId = match.match.params.profileId
+  let filteredProfile = profile.filter(p => p.userId===profileUserId)[0]
   return {
     signedIn: (!!currentUser && !!currentUser._id),
     userId: currentUser._id,
     filteredProfile: filteredProfile,
-    profileId:profileId
+    profileUserId:profileUserId
   }
 }
 

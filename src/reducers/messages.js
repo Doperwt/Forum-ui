@@ -28,7 +28,6 @@ export default ( state = [], { type , payload } = { } ) => {
       return [...state].concat(payload)
 
 
-
     case CLEAR_MESSAGE :
       return [payload]
 

@@ -38,7 +38,7 @@ export const specificProfile = (id) => {
             type:GOT_PROFILE,
             payload:result.body
           })
-        }else {
+        } else {
           dispatch({ type:NO_PROFILE })
         }
       })
