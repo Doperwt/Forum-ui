@@ -45,5 +45,10 @@ button.selected_button{
 }
 .unread{
   background-color:yellow;
-  
+}
+.message{
+  border:1px solid white;
+}
+.message:hover{
+  border:1px dotted blue;
 }

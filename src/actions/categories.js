@@ -1,13 +1,14 @@
-import API from '../../api/client'
-import { LOAD_ERROR } from '../loading'
+import API from '../api/client'
+import { LOAD_ERROR } from './loading'
 export const GOT_CATEGORIES = 'GOT_CATEGORIES'
-
+export const CLEAR_CATEGORIES = 'CLEAR_CATEGORIES'
 const api = new API()
 
-export default () => {
+export default (route) => {
   return (dispatch) => {
-    api.get('/categories')
+    api.get(`/categories/${route}`)
       .then((result) => {
+        console.log(result.body)
         dispatch({
           type: GOT_CATEGORIES,
           payload: result.body
@@ -19,5 +20,10 @@ export default () => {
           payload: error.message
         })
       })
+  }
+}
+export const clearCategories = () => {
+  return (dispatch) => {
+    dispatch({type:CLEAR_CATEGORIES})
   }
 }

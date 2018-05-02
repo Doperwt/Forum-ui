@@ -55,7 +55,6 @@ class Nav extends PureComponent {
       displayName = profile.fullName
       count = profile.count
     }
-    console.log(count)
     if(!this.props.signedIn){
       return(
         <span className='dropdown'>

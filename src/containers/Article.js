@@ -7,6 +7,8 @@ import getArticles from '../actions/articles/fetchArticles'
 import { connect as subscribeToWebsocket } from '../actions/websocket'
 import ShowArticle from '../components/Articles/showArticle'
 import { clearReplies } from '../actions/articles/fetchReplies'
+import Categories, {clearCategories} from '../actions/categories'
+
 import './container.css'
 
 class Article extends PureComponent {
@@ -16,10 +18,12 @@ class Article extends PureComponent {
   }
 
   componentWillMount() {
-    const {  getArticles,clearReplies } = this.props
+    const {  getArticles,clearReplies, Categories, route,clearCategories } = this.props
     clearReplies()
+    clearCategories()
     getArticles()
     subscribeToWebsocket()
+    Categories(route)
   }
 
   showArticle(article) {
@@ -40,8 +44,9 @@ class Article extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ currentUser, articles }, match ) => {
+const mapStateToProps = ({ currentUser, articles, router }, match ) => {
   const category = match.match.params.category
+  const route = router.location.pathname.split('/')[1]
   let filteredArticles
   if(category!=='all'){
      filteredArticles = articles.filter(article => article.category===category )
@@ -49,7 +54,8 @@ const mapStateToProps = ({ currentUser, articles }, match ) => {
   return {
     signedIn: (!!currentUser && !!currentUser._id),
     articles:filteredArticles,
+    route:route
   }
 }
 
-export default connect(mapStateToProps, { push, getArticles,clearReplies })(Article)
+export default connect(mapStateToProps, { push, getArticles,clearReplies, Categories,clearCategories })(Article)

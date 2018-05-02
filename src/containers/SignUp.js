@@ -21,7 +21,6 @@ export class SignUp extends PureComponent {
 
   submitForm(event) {
     event.preventDefault()
-    console.log(this.state)
     if (this.validateAll()) {
       const user = {
         // name: this.state.name,
