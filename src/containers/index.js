@@ -4,11 +4,13 @@ import SignIn from './SignIn'
 import SignUp from './SignUp'
 import Profile from './Profile'
 import Messages from './Message'
+import Room from './Room'
 export {
   Overview,
   Article,
   SignIn,
   SignUp,
   Profile,
-  Messages
+  Messages,
+  Room
 }

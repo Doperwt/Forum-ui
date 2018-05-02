@@ -8,6 +8,7 @@ import {
   SignUp,
   Profile,
   Messages,
+  Room
 } from './containers'
 import {
   Contact,
@@ -32,7 +33,8 @@ export default class Routes extends Component {
         <Route exact path='/about' component={About} />
         <Route exact path='/messages' component={Messages} />
         <Route path='/message/:messageId' component={ShowMessage} />
-      </div>
+        <Route exact path='/rooms' component={Room} />
+      </div>  
     )
   }
 }

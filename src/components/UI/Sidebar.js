@@ -4,16 +4,18 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import './UI.css'
 import { connect as subscribeToWebsocket } from '../../actions/websocket'
-import Categories from '../../actions/articles/categories'
+import Categories from '../../actions/categories'
 
 
 class Sidebar extends PureComponent {
   static propTypes = {
-    push: PropTypes.func.isRequired
+    push: PropTypes.func.isRequired,
+    Categories: PropTypes.func.isRequired
   }
   componentWillMount() {
-    const { Categories,subscribeToWebsocket } = this.props
-    Categories()
+    const { Categories,subscribeToWebsocket,route } = this.props
+    console.log(route)
+    Categories(route)
     subscribeToWebsocket()
   }
 
@@ -28,20 +30,31 @@ class Sidebar extends PureComponent {
   }
 
   render(){
-    const categories = this.props.categories.map(category =>  {
+    const { route } = this.props
+    let categories = this.props.categories.map(category =>  {
       let item = {title:category , _id:category}
       return item
     })
-    const array = [{title:'all articles',_id:'all'}].concat(...categories)
+    if(route==='articles'){
+      categories = [{title:'all articles',_id:'all'}].concat(...categories)
+    }
+    let noCategories = false
+    if(categories.length===0){
+      noCategories = true
+    }
     return(
-      <div className='sidebar'><hr />{array.map(element => this.showElement(element,this.props.push))}</div>
+      <div className='sidebar' hidden={noCategories} ><hr />{categories.map(element => this.showElement(element,this.props.push))}</div>
     )
   }
 }
 
-const mapStateToProps = ({ currentUser,categories }) => ({
+const mapStateToProps = ({ currentUser,categories,router }) => {
+  const route = router.location.pathname.split('/')[1]
+  return{
   signedIn: (!!currentUser && !!currentUser._id),
   categories: categories,
-})
+  route: route
+  }
+}
 
 export default connect(mapStateToProps, { push, subscribeToWebsocket, Categories })(Sidebar)

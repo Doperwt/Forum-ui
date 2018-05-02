@@ -53,7 +53,7 @@ class ShowArticle extends PureComponent {
   redirectProfile(event){
     const profile = event.props.filteredProfile
     const { push } = event.props
-    push(`/profile/${profile._id}`)
+    push(`/profile/${profile.userId}`)
   }
   render() {
     const { signedIn,replies,article,userId,filteredProfile } = this.props

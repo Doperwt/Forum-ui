@@ -73,7 +73,7 @@ class SendMessage extends PureComponent {
           <h4>{!isReply?'New message':'Send Reply'}</h4>
           <div>
             <p hidden={!messageSent} >message sent </p>
-            <input type='text' name='reciever' placeholder='Reciever' hidden={!!replyTo} onChange={this.handleReciever.bind(this)}/><br/>
+            <input type='text' name='reciever' placeholder='Reciever' autoComplete='off'  hidden={!!replyTo} onChange={this.handleReciever.bind(this)}/><br/>
             <div className='nameBox' hidden={!!replyTo} >{ names.map(this.showNames.bind(this))} </div>
             <p>{recieverName?`reciever is ${recieverName}`:null}</p>
             <textarea type='text'  name='content' rows='5' cols='60' placeholder='Content'

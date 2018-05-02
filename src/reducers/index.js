@@ -5,7 +5,7 @@ import categories from './categories'
 import replies from './replies'
 import messages from './messages'
 import names from './names'
-
+import rooms from './rooms'
 export default {
   currentUser,
   articles,
@@ -13,5 +13,6 @@ export default {
   categories,
   replies,
   messages,
-  names
+  names,
+  rooms
 }

@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import getProfile from '../actions/user/get-profile'
 import Title from '../components/UI/Title'
+import Categories, {clearCategories} from '../actions/categories'
+import './container.css'
 
 class Overview extends PureComponent {
   static propTypes = {
@@ -18,11 +20,17 @@ class Overview extends PureComponent {
       console.log('wat')
     }
   }
+  clickThrough(route,event){
+    clearCategories()
+    Categories(route.split('/')[0])
+    this.props.push(route)
+  }
   render(){
     return(
       <div className='article main'>
         <Title content='Overview' level={2} />
-        <p></p>
+        <div className='item' onClick={this.clickThrough.bind(this,'/articles/all')}>Articles</div>
+        <div className='item' onClick={this.clickThrough.bind(this,'/rooms')} >Rooms</div>
       </div>
     )
   }
