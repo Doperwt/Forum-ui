@@ -61,13 +61,10 @@ class ShowArticle extends PureComponent {
     const editArticleHidden = this.state.editArticleHidden
     const articleReplies = replies.filter((r) => r.articleId === article._id)
     let { createdAt,updatedAt,authorName,author,_id } = article
-    // const day = createdAt.slice(0,10)
-    // const time = createdAt.slice(11,16)
     let updated = false
     if(createdAt!==updatedAt){
       updated = true
     }
-
     let deleteVerification = this.state.deleteVerification
     let isAuthor = userId===author
     return(

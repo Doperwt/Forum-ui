@@ -5,8 +5,8 @@ import { connect } from 'react-redux'
 import Title from '../components/UI/Title'
 import { connect as subscribeToWebsocket } from '../actions/websocket'
 import Categories, {clearCategories} from '../actions/categories'
-
-
+import NewRoom from '../components/Rooms/newRoom'
+import getRooms from '../actions/rooms/getRooms'
 import './container.css'
 
 class Room extends PureComponent {
@@ -14,9 +14,10 @@ class Room extends PureComponent {
     push: PropTypes.func.isRequired,
   }
   componentWillMount(){
-    const { route, Categories,clearCategories,subscribeToWebsocket } = this.props
+    const { route, Categories,clearCategories,subscribeToWebsocket,getRooms } = this.props
     clearCategories()
     Categories(route)
+    getRooms()
     subscribeToWebsocket()
   }
   showRoom(room){
@@ -28,9 +29,10 @@ class Room extends PureComponent {
     const { rooms } = this.props
 
     return(
-      <div className='main'>
+      <div className='article main'>
         <Title content='Current Rooms' level={2} />
         {rooms.map(this.showRoom)}
+        <NewRoom />
       </div>
     )
   }
@@ -45,4 +47,4 @@ const mapStateToProps = ({ currentUser, rooms, router }, match ) => {
   }
 }
 
-export default connect(mapStateToProps, { push,Categories,clearCategories,subscribeToWebsocket })(Room)
+export default connect(mapStateToProps, { push,Categories,clearCategories,subscribeToWebsocket,getRooms })(Room)

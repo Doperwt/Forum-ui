@@ -5,13 +5,7 @@ import { UPDATED_ROOM } from '../actions/rooms/updateRoom'
 export default ( state = [], { type , payload } = { } ) => {
   switch (type) {
     case FOUND_ROOMS :
-      let uniqueReplies
-      uniqueReplies = payload.filter(r => !state.filter(a=> a._id===r._id)[0])
-      if( state.length!==0){
-        return [ ...state ].concat(uniqueReplies)
-      } else {
-        return [ ...uniqueReplies ]
-      }
+      return payload
 
     case FOUND_ROOM :
       const replyIds = state.map(g => g._id)

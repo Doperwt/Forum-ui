@@ -8,8 +8,8 @@ export default (room) => {
   return dispatch => {
     api.patch('/room',room)
       .then((result) => {
-        dispatch({type:UPDATED_ROOM,payload:result})
+        dispatch({type:UPDATED_ROOM,payload:result.body})
       })
-      .catch((err)=>{dispatch({type:LOAD_ERROR})})
+      .catch((err)=>{dispatch({type:LOAD_ERROR,payload:err.message})})
   }
 }

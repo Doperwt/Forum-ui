@@ -10,6 +10,6 @@ export default (room) => {
       .then((result) => {
         dispatch({type:CREATED_ROOM,payload:result})
       })
-      .catch((err)=>{dispatch({type:LOAD_ERROR})})
+      .catch((err)=>{dispatch({type:LOAD_ERROR,payload:err.message})})
   }
 }
