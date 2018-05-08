@@ -16,7 +16,7 @@ import {
 } from './pages'
 import ShowMessage from './components/Messages/showMessage'
 import ShowOtherProfile from './components/Profiles/showOtherProfile'
-
+import showRoom from './components/Rooms/showRoom'
 export default class Routes extends Component {
   render() {
     return (
@@ -34,7 +34,9 @@ export default class Routes extends Component {
         <Route exact path='/messages' component={Messages} />
         <Route path='/message/:messageId' component={ShowMessage} />
         <Route exact path='/rooms' component={Room} />
-      </div>  
+        <Route path='/rooms/:roomId' component={showRoom} />
+
+      </div>
     )
   }
 }

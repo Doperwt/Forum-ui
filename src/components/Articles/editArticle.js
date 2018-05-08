@@ -43,7 +43,7 @@ class EditArticle extends PureComponent {
       }
     }
     this.setState({
-      titleError: 'Please provide your first name'
+      titleError: 'Please provide an article title'
     })
     return false
   }
@@ -60,7 +60,7 @@ class EditArticle extends PureComponent {
       }
     }
     this.setState({
-      contentError: 'Please provide your first name'
+      contentError: 'Article needs content'
     })
     return false
   }

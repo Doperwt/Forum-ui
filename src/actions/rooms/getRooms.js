@@ -10,9 +10,9 @@ export default () => {
   return dispatch => {
     api.get('/rooms')
       .then((result) => {
-        dispatch({type:FOUND_ROOMS,payload:result})
+        dispatch({type:FOUND_ROOMS,payload:result.body})
       })
-      .catch((err)=>{dispatch({type:LOAD_ERROR})})
+      .catch((err)=>{dispatch({type:LOAD_ERROR,payload:err.message})})
   }
 }
 
@@ -20,9 +20,14 @@ export const getRoom = (roomId) => {
   return dispatch => {
     api.get(`/room/${roomId}`)
       .then((result) => {
-        dispatch({type:FOUND_ROOM,payload:result})
+        if(!!result.body._id){
+        dispatch({type:FOUND_ROOM,payload:result.body})
+      } else {
+        dispatch({type:LOAD_ERROR,payload:'room not found'})
+      }
+
       })
-      .catch((err) => { dispatch({type:LOAD_ERROR})})
+      .catch((err) => { dispatch({type:LOAD_ERROR,payload:err.message})})
   }
 }
 

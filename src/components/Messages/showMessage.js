@@ -21,7 +21,6 @@ class ShowMessage extends PureComponent {
     if(!message){
       message = {content:'placeholder'}
     }
-    console.log(message)
     return(
       <div className='message'><h4>{message.authorName}</h4>
         <div>

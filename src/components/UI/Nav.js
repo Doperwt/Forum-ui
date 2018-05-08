@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import './UI.css'
 import logo from '../../logo.svg'
 import getProfile from '../../actions/user/get-profile'
-
+import { clearCategories } from '../../actions/categories'
 
 class Nav extends PureComponent {
   static propTypes = {
@@ -22,7 +22,7 @@ class Nav extends PureComponent {
       getProfile(userId)
     } else {
     }
-    console.log('wat',!!userId, !profile)
+    // console.log('wat',!!userId, !profile)
   }
   // componentWillReceiveProps(){
   //   const { userId,getProfile } = this.props
@@ -34,6 +34,7 @@ class Nav extends PureComponent {
   // }
   goRoute = (route,event) => {
     event.preventDefault()
+    this.props.clearCategories()
     this.props.push(route)
   }
 
@@ -84,8 +85,10 @@ class Nav extends PureComponent {
       <div className='navi'>
         <img src={logo} className='logo' onClick={this.goRoute.bind(this,'/')} alt='somealt'/>
         <div className='navText navTitle' onClick={this.goRoute.bind(this,'/')} >The Forum Site </div>
-        <a className='navText' onClick={ this.goRoute.bind(this,'/about') }>about </a>
-        <a className='navText' onClick={ this.goRoute.bind(this,'/contact') }>contact </a>
+        <a className='navText staticLink' onClick={ this.goRoute.bind(this,'/about') }>about </a>
+        <a className='navText staticLink' onClick={ this.goRoute.bind(this,'/contact') }>contact </a>
+        <a className='navText staticLink' onClick={ this.goRoute.bind(this,'/articles/all') }>articles </a>
+        <a className='navText staticLink' onClick={ this.goRoute.bind(this,'/rooms') }>rooms </a>
         {this.dropDown()}
       </div>
     )
@@ -99,4 +102,4 @@ const mapStateToProps = ({ currentUser,profile,messages }) => ({
   email: (!currentUser? null:currentUser.email),
 })
 
-export default connect(mapStateToProps, { push, signOut, getProfile })(Nav)
+export default connect(mapStateToProps, { push, signOut, getProfile, clearCategories })(Nav)

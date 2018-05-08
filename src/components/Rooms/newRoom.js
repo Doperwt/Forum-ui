@@ -2,13 +2,12 @@ import React, { PureComponent } from 'react'
 import { push } from 'react-router-redux'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import newArticle from '../../actions/articles/newArticle'
-import Title from '../../components/UI/Title'
+import newRoom from '../../actions/rooms/newRoom'
 
-class NewArticle extends PureComponent {
+class NewRoom extends PureComponent {
   static propTypes = {
     push: PropTypes.func.isRequired,
-    newArticle: PropTypes.func.isRequired
+    newRoom: PropTypes.func.isRequired
   }
   constructor(props) {
     super(props)
@@ -19,86 +18,53 @@ class NewArticle extends PureComponent {
     }
   }
   submitForm(event) {
-    const {newArticle} = this.props
+    const { newRoom } = this.props
+    console.log(newRoom)
     event.preventDefault()
-    const article = {
-      content: this.state.content,
-      title: this.state.title,
-      category: this.state.category,
-      author: this.props.userId,
+    const room = {
+      name: this.state.name,
+      game: this.state.game,
     }
-    newArticle(article)
+    newRoom(room)
   }
-  handleTitle(event){
-    this.setState({title: event.target.value})
-    const title  = this.state.title
-    if(!!title){
-      if (title.length > 1) {
+
+  handleName(event){
+    this.setState({name: event.target.value})
+    const name  = this.state.name
+    if(!!name){
+      if (name.length > 1) {
         this.setState({
-          titleError: null
+          nameError: null
         })
         return true
       }
     }
     this.setState({
-      titleError: 'Please provide your first name'
+      nameError: 'Please provide a room name'
     })
     return false
   }
 
-  handleContent(event){
-    this.setState({content: event.target.value})
-    const content  = this.state.content
-    if(!!content){
-      if (content.length > 1) {
-        this.setState({
-          contentError: null
-        })
-        return true
-      }
-    }
-    this.setState({
-      contentError: 'Please provide your first name'
-    })
-    return false
+  handleGame(event){
+    console.log(event.target.value)
+    this.setState({game: event.target.value})
   }
 
-  handleCategory(event){
-    this.setState({category: event.target.value})
-    const category  = this.state.category
-    if(!!category){
-      if (category.length > 1) {
-        this.setState({
-          categoryError: null
-        })
-        return true
-      }
-    }
-    this.setState({
-      categoryError: 'Please provide your first name'
-    })
-    return false
-  }
 
   render(){
     return(
       <div className='new_article article'>
-        <Title content='New Article' level={4} />
+        <h3>New Room</h3>
         <form onSubmit={this.submitForm.bind(this)}>
           <div className='input'>
-          <input type='text'  name='title' placeholder='Title'
-            onChange={this.handleTitle.bind(this)} />
-            <p>{ this.state.titleError}</p>
+          <input type='text'  name='name' placeholder='Title'
+            onChange={this.handleName.bind(this)} />
+            <p>{ this.state.nameError}</p>
           </div>
           <div className='input'>
-          <textarea type='textarea'  name='content' placeholder='Content' rows='6' cols='50'
-            onChange={this.handleContent.bind(this)} />
-            <p>{ this.state.contentError}</p>
-          </div>
-          <div className='input'>
-          <input type='text'  name='category' placeholder='Category'
-            onChange={this.handleCategory.bind(this)} />
-            <p>{ this.state.categoryError}</p>
+          <p>Game type, can be changed later</p>
+          <input type='radio'  name='game' id='none' value='none'
+            onChange={this.handleGame.bind(this)} /><label>None</label>
           </div>
         </form>
         <button
@@ -115,4 +81,4 @@ const mapStateToProps = ({ currentUser }) => ({
   userId: (!!currentUser?currentUser._id:null)
 })
 
-export default connect(mapStateToProps,{ push,newArticle })(NewArticle)
+export default connect(mapStateToProps,{ push,newRoom })(NewRoom)
