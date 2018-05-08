@@ -14,28 +14,35 @@ class Sidebar extends PureComponent {
   }
   componentWillMount() {
     const { Categories,subscribeToWebsocket,route } = this.props
-    console.log(route)
     Categories(route)
     subscribeToWebsocket()
   }
 
-  showElement(element,push){
-    const clickRedirect = (id,push) => event => {
+  showElement(element,route,push){
+    const clickRedirect = (id,route,push) => event => {
       event.preventDefault()
-      push(`/articles/${element._id}`)
+      push(`/${route}/${element._id}`)
     }
+    if(route==='articles'){
     return(
-      <div className='single_article' key={element._id}><a onClick={clickRedirect(element._id,push)}>{element.title}</a><hr /></div>
+      <div className='single_article' key={element._id}><a onClick={clickRedirect(element._id,route,push)}>{element.title}</a><hr /></div>
     )
+  } else {
+    return(
+      <div className='single_article' key={element._id}><a onClick={clickRedirect(element._id,route,push)}>{element.name}</a><hr /></div>
+    )
+  }
+
   }
 
   render(){
     const { route } = this.props
-    let categories = this.props.categories.map(category =>  {
-      let item = {title:category , _id:category}
-      return item
-    })
+    let categories = this.props.categories
     if(route==='articles'){
+      categories = categories.map(category =>  {
+        let item = {title:category , _id:category}
+        return item
+      })
       categories = [{title:'all articles',_id:'all'}].concat(...categories)
     }
     let noCategories = false
@@ -43,7 +50,7 @@ class Sidebar extends PureComponent {
       noCategories = true
     }
     return(
-      <div className='sidebar' hidden={noCategories} ><hr />{categories.map(element => this.showElement(element,this.props.push))}</div>
+      <div className='sidebar' hidden={noCategories} ><hr />{categories.map(element => this.showElement(element,route,this.props.push))}</div>
     )
   }
 }

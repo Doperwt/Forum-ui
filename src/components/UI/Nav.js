@@ -22,7 +22,7 @@ class Nav extends PureComponent {
       getProfile(userId)
     } else {
     }
-    console.log('wat',!!userId, !profile)
+    // console.log('wat',!!userId, !profile)
   }
   // componentWillReceiveProps(){
   //   const { userId,getProfile } = this.props
@@ -84,8 +84,10 @@ class Nav extends PureComponent {
       <div className='navi'>
         <img src={logo} className='logo' onClick={this.goRoute.bind(this,'/')} alt='somealt'/>
         <div className='navText navTitle' onClick={this.goRoute.bind(this,'/')} >The Forum Site </div>
-        <a className='navText' onClick={ this.goRoute.bind(this,'/about') }>about </a>
-        <a className='navText' onClick={ this.goRoute.bind(this,'/contact') }>contact </a>
+        <a className='navText staticLink' onClick={ this.goRoute.bind(this,'/about') }>about </a>
+        <a className='navText staticLink' onClick={ this.goRoute.bind(this,'/contact') }>contact </a>
+        <a className='navText staticLink' onClick={ this.goRoute.bind(this,'/articles/all') }>articles </a>
+        <a className='navText staticLink' onClick={ this.goRoute.bind(this,'/rooms') }>rooms </a>
         {this.dropDown()}
       </div>
     )

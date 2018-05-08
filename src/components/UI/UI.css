@@ -175,3 +175,16 @@
     color: black;
   }
 }
+.staticLink{
+  /* width: 0;
+  height: 0; */
+  position:relative;
+  display: inline-block;
+  padding: 10px ;
+  top:5px;
+  left:100px;
+  border: 1px solid black;
+  -ms-transform: skewX(-20deg); /* IE 9 */
+  -webkit-transform: skewX(-20deg); /* Safari 3-8 */
+  transform: skewX(-20deg);
+}
