@@ -12,26 +12,31 @@ class SendMessage extends PureComponent {
     signedIn: PropTypes.bool
   }
   componentWillMount() {
-    const { push, signedIn } = this.props
+    // const { push, signedIn } = this.props
     // if (!signedIn) push('/sign-in')
     subscribeToWebsocket()
   }
-  sendMessage(event,message,roomId,userId){
+  sendMessage(event){
+    const { updateRoom,room,userName } = this.props
     event.preventDefault()
-    const { updateRoom,room } = this.props
+    let { message } = this.state
     let updatedRoom = room
-    updatedRoom.messages = room.messages.concat(message)
-    console.log(message,roomId,userId,event)
-    // updateRoom(updatedRoom)
+    let line = {content:message,userName:userName}
+    updatedRoom.messages = room.messages.concat(line)
+    console.log(updatedRoom)
+    updateRoom(updatedRoom)
+  }
+  writeMessage(event){
+    let message = event.target.value
+    this.setState({message:message})
   }
 
   render(){
-    const { roomId,userId } = this.props
-    console.log(this.props)
+    // const { roomId,userId } = this.props
     return(
       <div>
-        <form className='input'>
-          <input type='text' onSubmit={this.sendMessage.bind(this,roomId,userId)} placeholder='type here'/>
+        <form className='input chatLine' onSubmit={this.sendMessage.bind(this)}>
+          <input type='text' name='message' autoComplete='off' onChange={this.writeMessage.bind(this)} placeholder='type here'/>
         </form>
     </div>
     )

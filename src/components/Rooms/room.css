@@ -1,0 +1,13 @@
+.chatline{
+  bottom:0px;
+}
+.chatWindow{
+  position: relative;
+  min-height: 80%;
+  width:70%;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  text-align: left;
+  left:20%;
+  display: block;
+}

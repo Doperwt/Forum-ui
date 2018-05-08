@@ -18,29 +18,42 @@ class ShowRoom extends PureComponent {
     getRoom(roomId)
     subscribeToWebsocket()
   }
-
+  showLines(line,indexOf){
+    return( <span key={indexOf}>{ line.userName } : {line.content}<br/></span>)
+  }
   render(){
-    const { room,userId } = this.props
+    const { room,userName } = this.props
     console.log(this.props)
     return(
       <div>
-        <div className='input'>
+        <div className='chatTitle'>
           <p>{!!room ? room.name:'Room name'}</p>
         </div>
-        <div className='input' >
+        <div className='chatWindow' >
           <hr />
-          <SendMessage roomId={!!room?room._id:null} userId={userId}/>
+          <p>{!!room?room.messages.map(this.showLines):null}</p>
+          <div className='input' >
+          <hr />
+          <SendMessage room={room} userName={userName}/>
+          </div>
+          <hr />
         </div>
     </div>
     )
   }
 }
 
-const mapStateToProps = ({ currentUser, rooms },match) => {
+const mapStateToProps = ({ currentUser, rooms,profile },match) => {
   const roomId = match.match.params.roomId
   console.log(roomId)
+  let userName = currentUser.email.split('@')[0]
+  const userProfile = profile.filter(p => p.userId===currentUser._id)[0]
+  if(!!userProfile){
+    userName = userProfile.fullName
+  }
   let specificRoom
   if(rooms.length!==0){
+    console.log(rooms.length)
     specificRoom = rooms.filter(r => r._id===roomId)[0]
     console.log(specificRoom)
   }
@@ -48,7 +61,8 @@ const mapStateToProps = ({ currentUser, rooms },match) => {
     signedIn: (!!currentUser && !!currentUser._id),
     userId: currentUser._id,
     room: specificRoom,
-    roomId:roomId
+    roomId:roomId,
+    userName:userName
   }
 }
 
