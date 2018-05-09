@@ -27,7 +27,7 @@ class Sidebar extends PureComponent {
       return(
         <div className='single_article' key={element._id}><a onClick={clickRedirect(element._id,route,push)}>{element.title}</a><hr /></div>
       )
-    } else {
+    } else if (route==='rooms'){
       return(
         <div className='single_article' key={element._id}><a onClick={clickRedirect(element._id,route,push)}>{element.name}</a><hr /></div>
       )
