@@ -20,8 +20,17 @@ class ShowRoom extends PureComponent {
     getRoom(roomId)
     subscribeToWebsocket()
   }
+  componentDidMount(){
+  }
+  componentWillReceiveProps(){
 
-
+    const { room,userId,push } = this.props
+    console.log(!!room?room.participants:'noroom',userId)
+    if( !!room && !!userId && (!!room?(room.participants.indexOf(userId)===-1):true)){
+      console.log('goAway')
+      push('/rooms')
+    }
+  }
   showLines(line,indexOf){
     return( <span key={indexOf}>{ line.userName } : {line.content}<br/></span>)
   }

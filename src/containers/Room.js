@@ -28,6 +28,7 @@ class Room extends PureComponent {
     let participants = room.participants
     let index = participants.indexOf(userId)
     if(room.ownerId===userId){
+      console.log('the delete code would go here, if i had any')
       // delete room stuff
     } else {
       if(index === -1){
