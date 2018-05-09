@@ -8,7 +8,6 @@ export default (route) => {
   return (dispatch) => {
     api.get(`/categories/${route}`)
       .then((result) => {
-        console.log(result.body)
         dispatch({
           type: GOT_CATEGORIES,
           payload: result.body

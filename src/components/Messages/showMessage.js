@@ -13,11 +13,11 @@ class ShowMessage extends PureComponent {
     getSingleMessage: PropTypes.func.isRequired,
   }
   componentWillMount(){
-    const {messageId,getSingleMessage } = this.props
+    const { messageId,getSingleMessage } = this.props
     getSingleMessage(messageId)
   }
   render(){
-    let message = this.props.message
+    let { message } = this.props
     if(!message){
       message = {content:'placeholder'}
     }
