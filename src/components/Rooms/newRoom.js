@@ -12,9 +12,7 @@ class NewRoom extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      content: '',
-      title:'',
-      category:'',
+      name: ''
     }
   }
   submitForm(event) {
@@ -26,6 +24,7 @@ class NewRoom extends PureComponent {
       game: this.state.game,
     }
     newRoom(room)
+    this.setState({name:''})
   }
 
   handleName(event){
@@ -57,7 +56,7 @@ class NewRoom extends PureComponent {
         <h3>New Room</h3>
         <form onSubmit={this.submitForm.bind(this)}>
           <div className='input'>
-          <input type='text'  name='name' placeholder='Title'
+          <input type='text' value={this.state.name} name='name' placeholder='Title'
             onChange={this.handleName.bind(this)} />
             <p>{ this.state.nameError}</p>
           </div>
