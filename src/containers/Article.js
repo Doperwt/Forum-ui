@@ -18,9 +18,8 @@ class Article extends PureComponent {
   }
 
   componentWillMount() {
-    const {  getArticles,clearReplies, Categories, route,clearCategories } = this.props
+    const {  getArticles,clearReplies, Categories, route } = this.props
     clearReplies()
-    clearCategories()
     getArticles()
     subscribeToWebsocket()
     Categories(route)

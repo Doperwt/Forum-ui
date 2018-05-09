@@ -24,15 +24,14 @@ class Sidebar extends PureComponent {
       push(`/${route}/${element._id}`)
     }
     if(route==='articles'){
-    return(
-      <div className='single_article' key={element._id}><a onClick={clickRedirect(element._id,route,push)}>{element.title}</a><hr /></div>
-    )
-  } else {
-    return(
-      <div className='single_article' key={element._id}><a onClick={clickRedirect(element._id,route,push)}>{element.name}</a><hr /></div>
-    )
-  }
-
+      return(
+        <div className='single_article' key={element._id}><a onClick={clickRedirect(element._id,route,push)}>{element.title}</a><hr /></div>
+      )
+    } else if (route==='rooms'){
+      return(
+        <div className='single_article' key={element._id}><a onClick={clickRedirect(element._id,route,push)}>{element.name}</a><hr /></div>
+      )
+    }
   }
 
   render(){
@@ -57,9 +56,16 @@ class Sidebar extends PureComponent {
 
 const mapStateToProps = ({ currentUser,categories,router }) => {
   const route = router.location.pathname.split('/')[1]
+  let selectedCategories = categories
+  const userId = (!!currentUser?currentUser._id:null)
+  if(route==='rooms'){
+    selectedCategories = categories.filter((category) => {
+      return (category.participants.indexOf(userId) > -1)
+    })
+  }
   return{
   signedIn: (!!currentUser && !!currentUser._id),
-  categories: categories,
+  categories: selectedCategories,
   route: route
   }
 }

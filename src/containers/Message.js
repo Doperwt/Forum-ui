@@ -29,20 +29,21 @@ class Message extends PureComponent {
     }
     const odd = (index%2===0?false:true)
     const isAuthor = message.author===this.props.userId
-    // console.log(isAuthor?(message.read?'read':'unread'):'notAuthor')
     if(isAuthor){
       messageReciever = `to ${message.recieverName}`
     }
     return(
       <div key={message._id} className={odd?'odd message':'even message'}>
-        <p onClick={clicky.bind(this,message._id)} className={!isAuthor?(message.read?'read':'unread'):'notAuthor'}>{messageReciever} {ShowPostTime(message.createdAt,' sent ')}</p>
+        <p onClick={clicky.bind(this,message._id)}
+          className={!isAuthor?(message.read?'read':'unread'):'notAuthor'}>
+            {messageReciever} {ShowPostTime(message.createdAt,' sent ')}
+        </p>
       </div>
     )
   }
 
   render(){
     const { recievedMessages,sentMessages } = this.props
-
     return(
       <div className='profile main'>
         <p>Messages sent to you:</p>

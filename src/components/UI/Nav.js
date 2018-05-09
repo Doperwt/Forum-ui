@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import './UI.css'
 import logo from '../../logo.svg'
 import getProfile from '../../actions/user/get-profile'
-import { clearCategories } from '../../actions/categories'
+import getCategories,{ clearCategories } from '../../actions/categories'
 
 class Nav extends PureComponent {
   static propTypes = {
@@ -22,20 +22,14 @@ class Nav extends PureComponent {
       getProfile(userId)
     } else {
     }
-    // console.log('wat',!!userId, !profile)
   }
-  // componentWillReceiveProps(){
-  //   const { userId,getProfile } = this.props
-  //   if(!!userId){
-  //     getProfile(userId)
-  //   } else {
-  //     console.log('wat')
-  //   }
-  // }
+
   goRoute = (route,event) => {
+    const { clearCategories, push,getCategories } = this.props
     event.preventDefault()
-    this.props.clearCategories()
-    this.props.push(route)
+    clearCategories()
+    getCategories(route.split('/')[1])
+    push(route)
   }
 
   signOut = (event) => {
@@ -48,7 +42,6 @@ class Nav extends PureComponent {
     let email = this.props.email
     let displayName = 'Welcome'
     let count = 0
-    // console.log(!!profile)
     if (!!email) {
       displayName = email
     }
@@ -102,4 +95,4 @@ const mapStateToProps = ({ currentUser,profile,messages }) => ({
   email: (!currentUser? null:currentUser.email),
 })
 
-export default connect(mapStateToProps, { push, signOut, getProfile, clearCategories })(Nav)
+export default connect(mapStateToProps, { push, signOut, getProfile, clearCategories, getCategories })(Nav)

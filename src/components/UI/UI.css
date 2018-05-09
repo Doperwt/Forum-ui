@@ -182,7 +182,7 @@
   display: inline-block;
   padding: 10px ;
   top:5px;
-  left:100px;
+  left:200px;
   border: 1px solid black;
   -ms-transform: skewX(-20deg); /* IE 9 */
   -webkit-transform: skewX(-20deg); /* Safari 3-8 */

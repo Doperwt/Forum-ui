@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import { getRoom } from '../../actions/rooms/getRooms'
 import { connect as subscribeToWebsocket } from '../../actions/websocket'
 import SendMessage from './sendMessage'
+import { addUser,removeUser } from '../../actions/rooms/changeParticipants'
+import './room.css'
 
 class ShowRoom extends PureComponent {
   static propTypes = {
@@ -18,12 +20,22 @@ class ShowRoom extends PureComponent {
     getRoom(roomId)
     subscribeToWebsocket()
   }
+  componentDidMount(){
+  }
+  componentWillReceiveProps(){
+
+    const { room,userId,push } = this.props
+    console.log(!!room?room.participants:'noroom',userId)
+    if( !!room && !!userId && (!!room?(room.participants.indexOf(userId)===-1):true)){
+      console.log('goAway')
+      push('/rooms')
+    }
+  }
   showLines(line,indexOf){
     return( <span key={indexOf}>{ line.userName } : {line.content}<br/></span>)
   }
   render(){
     const { room,userName } = this.props
-    console.log(this.props)
     return(
       <div>
         <div className='chatTitle'>
@@ -45,18 +57,12 @@ class ShowRoom extends PureComponent {
 
 const mapStateToProps = ({ currentUser, rooms,profile },match) => {
   const roomId = match.match.params.roomId
-  console.log(roomId)
   let userName = currentUser.email.split('@')[0]
   const userProfile = profile.filter(p => p.userId===currentUser._id)[0]
   if(!!userProfile){
     userName = userProfile.fullName
   }
-  let specificRoom
-  if(rooms.length!==0){
-    console.log(rooms.length)
-    specificRoom = rooms.filter(r => r._id===roomId)[0]
-    console.log(specificRoom)
-  }
+  let specificRoom = ((rooms.length!==0)?rooms.filter(r => r._id===roomId)[0]:null)
   return {
     signedIn: (!!currentUser && !!currentUser._id),
     userId: currentUser._id,
@@ -66,4 +72,4 @@ const mapStateToProps = ({ currentUser, rooms,profile },match) => {
   }
 }
 
-export default connect(mapStateToProps, { push,getRoom })(ShowRoom)
+export default connect(mapStateToProps, { push,getRoom,addUser,removeUser })(ShowRoom)
