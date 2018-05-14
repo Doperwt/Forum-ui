@@ -11,7 +11,6 @@ class EditArticle extends PureComponent {
     editArticle: PropTypes.func.isRequired
   }
   constructor(props) {
-    console.log('constructor')
     super(props)
     this.state = {
       content: '',

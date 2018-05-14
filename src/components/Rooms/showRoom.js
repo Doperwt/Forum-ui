@@ -25,9 +25,7 @@ class ShowRoom extends PureComponent {
   componentWillReceiveProps(){
 
     const { room,userId,push } = this.props
-    console.log(!!room?room.participants:'noroom',userId)
     if( !!room && !!userId && (!!room?(room.participants.indexOf(userId)===-1):true)){
-      console.log('goAway')
       push('/rooms')
     }
   }

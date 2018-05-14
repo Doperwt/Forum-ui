@@ -23,7 +23,6 @@ class Profile extends PureComponent {
     } else {
       console.log('wat',!!userId,!!profile)
     }
-    console.log('wat',!profile , !!userId)
     this.setState({
       editHidden:true,
     })

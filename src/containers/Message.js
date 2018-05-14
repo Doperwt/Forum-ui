@@ -16,7 +16,6 @@ class Message extends PureComponent {
 
   componentWillMount() {
     const {  getMessages,clearMessages,userId,messages } = this.props
-    console.log('mount',userId,messages)
     clearMessages()
     getMessages(userId)
     subscribeToWebsocket()

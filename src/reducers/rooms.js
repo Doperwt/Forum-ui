@@ -9,7 +9,6 @@ export default ( state = [], { type , payload } = { } ) => {
 
     case FOUND_ROOM :
       const replyIds = state.map(g => g._id)
-      console.log(replyIds.indexOf(payload._id))
         if (replyIds.indexOf(payload._id) !== 0) {
           return [{ ...payload }].concat(state)
         }

@@ -137,8 +137,6 @@ class EditProfile extends PureComponent {
     // this.setState({picture: event.target.value})
     const picture  = event.target.files[0]
     const fileType = picture.name.split('.').splice(1)[0]
-    console.log(event)
-    console.log(picture)
     if(!!picture){
       if (picture.name.length > 1 && (fileType==='jpg'||fileType==='png'||fileType==='bmp') ) {
         this.setState({
@@ -146,7 +144,6 @@ class EditProfile extends PureComponent {
         })
         this.fileUpload(picture)
           .then((result) => {
-            console.log(result,'URL=',result.data.url)
             this.setState({picture:result.data.url})
             return true
           })
