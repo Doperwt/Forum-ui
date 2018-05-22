@@ -3,7 +3,6 @@ import { push } from 'react-router-redux'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { updateProfile,getProfile } from '../../actions/user'
-import { connect as subscribeToWebsocket } from '../../actions/websocket'
 import  { post } from 'axios'
 
 class EditProfile extends PureComponent {
@@ -26,7 +25,6 @@ class EditProfile extends PureComponent {
         picture:profile.picture,
       })
     }
-    subscribeToWebsocket()
   }
 
   constructor(props) {
