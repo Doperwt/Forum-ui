@@ -3,7 +3,7 @@ import { push } from 'react-router-redux'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { connect as subscribeToWebsocket } from '../../actions/websocket'
-import updateRoom from '../../actions/rooms/updateRoom'
+import sendLine from '../../actions/rooms/sendLine'
 import './room.css'
 
 class SendMessage extends PureComponent {
@@ -19,13 +19,11 @@ class SendMessage extends PureComponent {
     this.state = { line:''}
   }
   sendMessage(event){
-    const { updateRoom,room,userName } = this.props
+    const { sendLine,room,userName } = this.props
     event.preventDefault()
     let { line } = this.state
-    let updatedRoom = room
     let newLine = {content:line,userName:userName}
-    updatedRoom.messages = room.messages.concat(newLine)
-    updateRoom(updatedRoom)
+    sendLine(newLine,room._id)
     this.setState({line:''})
   }
   writeMessage(event){
@@ -47,4 +45,4 @@ class SendMessage extends PureComponent {
 
 
 
-export default connect(null, { push,updateRoom })(SendMessage)
+export default connect(null, { push,sendLine })(SendMessage)
