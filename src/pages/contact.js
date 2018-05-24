@@ -10,7 +10,6 @@ class Contact extends PureComponent {
     push: PropTypes.func.isRequired
   }
   goRoute(route,event){
-    console.log(route,event)
     const { push } = this.props
     push(route)
   }

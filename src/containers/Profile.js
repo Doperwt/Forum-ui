@@ -3,7 +3,6 @@ import { push } from 'react-router-redux'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Title from '../components/UI/Title'
-import { connect as subscribeToWebsocket } from '../actions/websocket'
 import EditProfile from '../components/Profiles/editProfile'
 import ShowProfile from '../components/Profiles/showProfile'
 import { getProfile } from '../actions/user'
@@ -23,11 +22,9 @@ class Profile extends PureComponent {
     } else {
       console.log('wat',!!userId,!!profile)
     }
-    console.log('wat',!profile , !!userId)
     this.setState({
       editHidden:true,
     })
-    subscribeToWebsocket()
   }
 
   constructor(props) {

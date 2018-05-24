@@ -9,7 +9,6 @@ const api = new API()
 
 export default (userId) => {
   return (dispatch) => {
-    // console.log('gonnagetsomemessagesmkay',userId)
     api.get(`/messages/${userId}`)
       .then((result) => {
         dispatch({
@@ -40,7 +39,6 @@ export const unreadMessageCount = () => {
   return dispatch => {
     api.get(`/messages`)
       .then((result) => {
-        console.log(result.body)
         dispatch({
           type:UNREAD_MESSAGE_COUNT,
           payload: result.body

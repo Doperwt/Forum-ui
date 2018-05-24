@@ -10,10 +10,9 @@ const api = new API()
 
 let socket = null
 
-export const connect = () => {
+export const connect = ( nameSpace ) => {
   return dispatch => {
     if (socket) { return }
-
     if (!api.isAuthenticated()) {
       dispatch({ type: AUTH_ERROR })
       dispatch(push('/sign-in'))
@@ -26,8 +25,9 @@ export const connect = () => {
       }
     })
 
+    socket.on(`${nameSpace}`,dispatch)
     socket.on('action', dispatch)
-    dispatch({ type: CONNECTED_TO_WEBSOCKET })
+    dispatch({ type: CONNECTED_TO_WEBSOCKET, payload:(!!nameSpace?nameSpace:'action') })
   }
 }
 

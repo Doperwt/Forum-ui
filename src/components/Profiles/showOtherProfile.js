@@ -3,7 +3,6 @@ import { push } from 'react-router-redux'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { specificProfile } from '../../actions/user'
-import { connect as subscribeToWebsocket } from '../../actions/websocket'
 import noPic from '../../lib/GenericImages/118781.png'
 import  SendMessage from '../Messages/sendMessage'
 
@@ -18,7 +17,6 @@ class ShowOtherProfile extends PureComponent {
     if(!filteredProfile){
       specificProfile(profileUserId)
     }
-    subscribeToWebsocket()
   }
 
   render(){

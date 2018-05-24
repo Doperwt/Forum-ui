@@ -3,7 +3,6 @@ import { push } from 'react-router-redux'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import './UI.css'
-import { connect as subscribeToWebsocket } from '../../actions/websocket'
 import Categories from '../../actions/categories'
 
 
@@ -13,9 +12,8 @@ class Sidebar extends PureComponent {
     Categories: PropTypes.func.isRequired
   }
   componentWillMount() {
-    const { Categories,subscribeToWebsocket,route } = this.props
+    const { Categories,route } = this.props
     Categories(route)
-    subscribeToWebsocket()
   }
 
   showElement(element,route,push){
@@ -39,8 +37,7 @@ class Sidebar extends PureComponent {
     let categories = this.props.categories
     if(route==='articles'){
       categories = categories.map(category =>  {
-        let item = {title:category , _id:category}
-        return item
+        return {title:category , _id:category}
       })
       categories = [{title:'all articles',_id:'all'}].concat(...categories)
     }
@@ -70,4 +67,4 @@ const mapStateToProps = ({ currentUser,categories,router }) => {
   }
 }
 
-export default connect(mapStateToProps, { push, subscribeToWebsocket, Categories })(Sidebar)
+export default connect(mapStateToProps, { push, Categories })(Sidebar)

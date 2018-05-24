@@ -15,9 +15,7 @@ class SendMessage extends PureComponent {
     super(props)
     this.state = { messageSent:false }
   }
-  componentDidMount(){
-    // console.log(this.props)
-  }
+
   handleContent(event){
     this.setState({content: event.target.value})
   }
@@ -25,7 +23,6 @@ class SendMessage extends PureComponent {
   handleReciever(event){
     const { getNames } = this.props
     getNames(event.target.value)
-    console.log(event.target.value)
     this.setState({reciever: event.target.value})
   }
 
@@ -54,7 +51,6 @@ class SendMessage extends PureComponent {
 
   render(){
     const { names,replyTo,recieverId,signedIn } = this.props
-    // console.log(!!replyTo)
     let recieverName
     let { messageSent } = this.state
     if(!!this.state){
@@ -73,7 +69,9 @@ class SendMessage extends PureComponent {
           <h4>{!isReply?'New message':'Send Reply'}</h4>
           <div>
             <p hidden={!messageSent} >message sent </p>
-            <input type='text' name='reciever' placeholder='Reciever' autoComplete='off'  hidden={!!replyTo} onChange={this.handleReciever.bind(this)}/><br/>
+            <input type='text' name='reciever'
+              placeholder='Reciever' autoComplete='off'
+              hidden={!!replyTo} onChange={this.handleReciever.bind(this)}/><br/>
             <div className='nameBox' hidden={!!replyTo} >{ names.map(this.showNames.bind(this))} </div>
             <p>{recieverName?`reciever is ${recieverName}`:null}</p>
             <textarea type='text'  name='content' rows='5' cols='60' placeholder='Content'
@@ -91,13 +89,11 @@ class SendMessage extends PureComponent {
 
 const mapStateToProps = ({ currentUser,names },match) => {
   let filteredNames = names.filter(name=> name._id!==currentUser._id)
-  // console.log(match)
   return{
     signedIn: (!!currentUser && !!currentUser._id),
     userId: (!!currentUser?currentUser._id:null),
     names: filteredNames,
     }
-
 }
 
 export default connect(mapStateToProps,{ push,newMessage,getNames })(SendMessage)

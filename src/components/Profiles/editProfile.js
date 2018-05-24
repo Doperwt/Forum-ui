@@ -3,7 +3,6 @@ import { push } from 'react-router-redux'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { updateProfile,getProfile } from '../../actions/user'
-import { connect as subscribeToWebsocket } from '../../actions/websocket'
 import  { post } from 'axios'
 
 class EditProfile extends PureComponent {
@@ -26,7 +25,6 @@ class EditProfile extends PureComponent {
         picture:profile.picture,
       })
     }
-    subscribeToWebsocket()
   }
 
   constructor(props) {
@@ -137,8 +135,6 @@ class EditProfile extends PureComponent {
     // this.setState({picture: event.target.value})
     const picture  = event.target.files[0]
     const fileType = picture.name.split('.').splice(1)[0]
-    console.log(event)
-    console.log(picture)
     if(!!picture){
       if (picture.name.length > 1 && (fileType==='jpg'||fileType==='png'||fileType==='bmp') ) {
         this.setState({
@@ -146,7 +142,6 @@ class EditProfile extends PureComponent {
         })
         this.fileUpload(picture)
           .then((result) => {
-            console.log(result,'URL=',result.data.url)
             this.setState({picture:result.data.url})
             return true
           })

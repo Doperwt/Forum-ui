@@ -15,19 +15,17 @@ class ShowRoom extends PureComponent {
     signedIn: PropTypes.bool
   }
   componentWillMount() {
-    const { push, signedIn,roomId,getRoom } = this.props
+    const { push, signedIn,roomId,getRoom,subscribeToWebsocket } = this.props
     if (!signedIn) push('/sign-in')
     getRoom(roomId)
-    subscribeToWebsocket()
+    subscribeToWebsocket(roomId)
   }
   componentDidMount(){
   }
   componentWillReceiveProps(){
 
     const { room,userId,push } = this.props
-    console.log(!!room?room.participants:'noroom',userId)
     if( !!room && !!userId && (!!room?(room.participants.indexOf(userId)===-1):true)){
-      console.log('goAway')
       push('/rooms')
     }
   }
@@ -72,4 +70,4 @@ const mapStateToProps = ({ currentUser, rooms,profile },match) => {
   }
 }
 
-export default connect(mapStateToProps, { push,getRoom,addUser,removeUser })(ShowRoom)
+export default connect(mapStateToProps, { push,getRoom,addUser,removeUser,subscribeToWebsocket })(ShowRoom)
